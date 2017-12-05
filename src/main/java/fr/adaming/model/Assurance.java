@@ -70,17 +70,17 @@ public class Assurance {
 		this.type = type;
 	}
 
-	public Voyage getVoyage() {
-		return voyage;
+	public Dossier getDossier() {
+		return dossier;
 	}
 
-	public void setVoyage(Voyage voyage) {
-		this.voyage = voyage;
+	public void setDossier(Dossier dossier) {
+		this.dossier = dossier;
 	}
 
 	@Override
 	public String toString() {
-		return "Assurance [id=" + id + ", prix=" + prix + ", voyage=" + voyage + "]";
+		return "Assurance [id=" + id + ", prix=" + prix + ", dossier=" + dossier + "]";
 	}
 	
 	

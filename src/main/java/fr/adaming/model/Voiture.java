@@ -106,18 +106,19 @@ public class Voiture {
 		this.prixJour = prixJour;
 	}
 
-	public Voyage getVoyage() {
-		return voyage;
+
+	public Dossier getDossier() {
+		return dossier;
 	}
 
-	public void setVoyage(Voyage voyage) {
-		this.voyage = voyage;
+	public void setDossier(Dossier dossier) {
+		this.dossier = dossier;
 	}
 
 	@Override
 	public String toString() {
 		return "Voiture [id=" + id + ", modele=" + modele + ", nbPlace=" + nbPlace + ", prixJour=" + prixJour
-				+ ", voyage=" + voyage + "]";
+				+ ", dossier=" + dossier + "]";
 	}
 	
 	
