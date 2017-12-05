@@ -2,13 +2,36 @@ package fr.adaming.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
+@Table(name="voyages")
 public class Voyage {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_voy")
 	private int id;
 	
+	@Temporal(TemporalType.DATE)
 	private Date dateDepart;
 	
+	@Temporal(TemporalType.TIME)
+	private Date heureDepart;
+	
+	@Temporal(TemporalType.DATE)
 	private Date dateRetour;
+	
+	@Temporal(TemporalType.TIME)
+	private Date heureRetour;
 	
 	private Hebergement hebergement;
 	
@@ -25,24 +48,21 @@ public class Voyage {
 	private int places;
 	
 	//Liaison UML en JAVA
-	
+	@OneToOne(mappedBy="voyage")
 	private Dossier dossier;
-	
-	private Voiture voiture;
-	
-	private Assurance assurance;
-	
 
 	//Constructeurs
 	public Voyage() {
 		super();
 	}
-
-	public Voyage(Date dateDepart, Date dateRetour, Hebergement hebergement, Formule formule, String continent,
-			String pays, String description, double prixBase, int places) {
+	
+	public Voyage(Date dateDepart, Date heureDepart, Date dateRetour, Date heureRetour, Hebergement hebergement,
+			Formule formule, String continent, String pays, String description, double prixBase, int places) {
 		super();
 		this.dateDepart = dateDepart;
+		this.heureDepart = heureDepart;
 		this.dateRetour = dateRetour;
+		this.heureRetour = heureRetour;
 		this.hebergement = hebergement;
 		this.formule = formule;
 		this.continent = continent;
@@ -52,12 +72,14 @@ public class Voyage {
 		this.places = places;
 	}
 
-	public Voyage(int id, Date dateDepart, Date dateRetour, Hebergement hebergement, Formule formule, String continent,
-			String pays, String description, double prixBase, int places) {
+	public Voyage(int id, Date dateDepart, Date heureDepart, Date dateRetour, Date heureRetour, Hebergement hebergement,
+			Formule formule, String continent, String pays, String description, double prixBase, int places) {
 		super();
 		this.id = id;
 		this.dateDepart = dateDepart;
+		this.heureDepart = heureDepart;
 		this.dateRetour = dateRetour;
+		this.heureRetour = heureRetour;
 		this.hebergement = hebergement;
 		this.formule = formule;
 		this.continent = continent;
@@ -67,7 +89,6 @@ public class Voyage {
 		this.places = places;
 	}
 
-	
 	//Getters et setters
 	public int getId() {
 		return id;
@@ -149,22 +170,6 @@ public class Voyage {
 		this.dossier = dossier;
 	}
 
-	public Voiture getVoiture() {
-		return voiture;
-	}
-
-	public void setVoiture(Voiture voiture) {
-		this.voiture = voiture;
-	}
-
-	public Assurance getAssurance() {
-		return assurance;
-	}
-
-	public void setAssurance(Assurance assurance) {
-		this.assurance = assurance;
-	}
-
 	public int getPlaces() {
 		return places;
 	}
@@ -178,7 +183,7 @@ public class Voyage {
 		return "Voyage [id=" + id + ", dateDepart=" + dateDepart + ", dateRetour=" + dateRetour + ", hebergement="
 				+ hebergement + ", formule=" + formule + ", continent=" + continent + ", pays=" + pays
 				+ ", description=" + description + ", prixBase=" + prixBase + ", places=" + places + ", dossier="
-				+ dossier + ", voiture=" + voiture + ", assurance=" + assurance + "]";
+				+ dossier + "]";
 	}
 
 	
