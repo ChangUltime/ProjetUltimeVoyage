@@ -29,7 +29,7 @@
 		<property name="defaultDataSource" ref="dataSourceBean"></property>
 		<property name="persistenceXmlLocations">
 			<list>
-				<value>classpath*:META-INF/persistence.xml</value>
+				<value>classpath:META-INF/persistence.xml</value>
 			</list>
 		</property>
 	</bean>
