@@ -86,6 +86,7 @@ public class VoitureTest {
 		assertEquals(listeVoitures.size(), listeVoitures2.size()+1 );
 	}
 	
+	@Ignore
 	@Rollback
 	@Test
 	@Transactional
@@ -101,6 +102,7 @@ public class VoitureTest {
 		assertEquals(2, vModif.getNbPlace());
 	}
 	
+	@Ignore
 	@Test
 	@Transactional
 	public void testFindVoiture() {
