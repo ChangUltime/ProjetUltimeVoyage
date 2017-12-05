@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Marque;
 import fr.adaming.model.Voiture;
+import fr.adaming.model.Voyage;
 import fr.adaming.service.IVoitureService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -83,6 +84,32 @@ public class VoitureTest {
 		System.out.println(listeVoitures2);
 		
 		assertEquals(listeVoitures.size(), listeVoitures2.size()+1 );
+	}
+	
+	@Rollback
+	@Test
+	@Transactional
+	public void testUpdateVoyage(){
+		System.out.println("------- Voyage modifié : attribut pays");
+		
+		Voiture vOut = voitureService.getVoituretById(2);
+		
+		vOut.setNbPlace(2);
+		
+		Voiture vModif = voitureService.updateVoiture(vOut);
+		
+		assertEquals(2, vModif.getNbPlace());
+	}
+	
+	@Test
+	@Transactional
+	public void testFindVoiture() {
+		System.out.println("------- Voiture trouvée : attribut modele");
+
+		Voiture voitureFind = voitureService.getVoituretById(2);
+		System.out.println(voitureFind);
+
+		assertEquals("Y789", voitureFind.getModele());
 	}
 
 }

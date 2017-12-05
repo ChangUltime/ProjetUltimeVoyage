@@ -31,9 +31,8 @@ public class VoitureServiceImpl implements IVoitureService {
 	}
 
 	@Override
-	public int updateVoiture(Voiture v) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Voiture updateVoiture(Voiture v) {
+		return voitureDao.updateVoiture(v);
 	}
 
 	@Override
@@ -43,8 +42,7 @@ public class VoitureServiceImpl implements IVoitureService {
 
 	@Override
 	public Voiture getVoituretById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return voitureDao.getVoituretById(id);
 	}
 	
 	

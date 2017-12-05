@@ -10,7 +10,7 @@ public interface IVoitureService {
 
 	public Voiture addVoiture(Voiture v);
 	
-	public int updateVoiture(Voiture v);
+	public Voiture updateVoiture(Voiture v);
 	
 	public int deleteVoiture(int id);
 	
