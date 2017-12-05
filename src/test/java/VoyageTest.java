@@ -86,7 +86,7 @@ public class VoyageTest {
 		assertEquals("France", voyageFind.getPays());
 	}
 
-	//@Ignore
+	@Ignore
 	@Test
 	@Transactional
 	@Rollback
