@@ -1,7 +1,12 @@
 package fr.adaming.model;
 
+@Entity
+@Table(name="voitures")
 public class Voiture {
 	
+	@Id
+	@GeneratedValue(strategy=GernerationType.IDENTITY)
+	@Column(name="id_voit")
 	private int id;
 	
 	private Categorie categorie;
@@ -15,7 +20,8 @@ public class Voiture {
 	private double prixJour;
 
 	//Liaison UML en JAVA
-	private Voyage voyage;
+	
+	private Dossier dossier;
 
 	//Constructeurs
 	public Voiture() {
