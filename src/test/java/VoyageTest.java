@@ -1,5 +1,7 @@
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,7 +34,10 @@ public class VoyageTest {
 		this.voyageService = voyageService;
 	}
 	
-	//@Ignore
+	/**
+	 * Test du voyage ajouté par la méthode addVoyage()
+	 */
+	@Ignore
 	@Test
 	@Rollback
 	@Transactional
@@ -45,6 +50,37 @@ public class VoyageTest {
 		Voyage voyageOut = voyageService.addVoyage(voyageAjout);
 		System.out.println(voyageOut);
 		assertEquals(voyageOut.getContinent(), "Afrique");
+	}
+	
+	/**
+	 * Test de la récupération de la liste des voyages
+	 */
+	@Ignore
+	@Test
+	@Transactional
+	public void testGetAllVoyages(){
+		System.out.println("------- Liste des voyages : taille de la liste");
+		
+		int tailleListeAttendu = 1;
+		
+		List<Voyage> liste = voyageService.getAllVoyages();
+		int tailleListeRec = liste.size();
+		
+		System.out.println(liste);
+		
+		assertEquals(tailleListeAttendu, tailleListeRec);
+	}
+	
+	@Ignore
+	@Test
+	@Transactional
+	public void testFindVoyage(){
+		System.out.println("------- Voyage trouvé : attribut pays");
+		
+		Voyage voyageFind = voyageService.findVoyage(3);
+		System.out.println(voyageFind);
+		
+		assertEquals("France", voyageFind.getPays());
 	}
 
 }
