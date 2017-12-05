@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import fr.adaming.model.Client;
 import fr.adaming.service.IClientService;
@@ -22,12 +23,15 @@ public class ClientControllers {
 		this.clientService = clientService;
 	}
 	
+	// ================= Ajout client =======================================
+	@RequestMapping(name="/formAddClient", method=RequestMethod.GET)
 	public String formAddClient(Model model){
 		model.addAttribute("clientAdd", new Client());
 		
 		return "addClient";
 	}
 	
+	@RequestMapping(name="/addClient", method=RequestMethod.GET)
 	public String submitFormAddClient(Model model, @ModelAttribute("clientAdd") Client client){
 		
 		// On appelle la méthode service
@@ -42,5 +46,7 @@ public class ClientControllers {
 			return "redirect:addClient";
 		}
 	}
+	
+	// ================= liste client =======================================
 	
 }
