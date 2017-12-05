@@ -178,6 +178,22 @@ public class Voyage {
 		this.places = places;
 	}
 
+	public Date getHeureDepart() {
+		return heureDepart;
+	}
+
+	public void setHeureDepart(Date heureDepart) {
+		this.heureDepart = heureDepart;
+	}
+
+	public Date getHeureRetour() {
+		return heureRetour;
+	}
+
+	public void setHeureRetour(Date heureRetour) {
+		this.heureRetour = heureRetour;
+	}
+
 	@Override
 	public String toString() {
 		return "Voyage [id=" + id + ", dateDepart=" + dateDepart + ", dateRetour=" + dateRetour + ", hebergement="
