@@ -1,7 +1,21 @@
 package fr.adaming.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "accompagnants")
 public class Accompagnant {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id_acc")
 	private int id;
 	
 	private Civilite civilite;
@@ -13,6 +27,8 @@ public class Accompagnant {
 	private String tel;
 	
 	//Liaison UML en JAVA
+	@ManyToOne
+	@JoinColumn(name = "id_client", referencedColumnName = "id_cl")
 	private Client client;
 
 	//Constructeurs

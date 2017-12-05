@@ -2,8 +2,21 @@ package fr.adaming.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="agents")
 public class Agent {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id_ag")
 	private int id;
 	
 	private String identifiant;
@@ -11,6 +24,7 @@ public class Agent {
 	private String mdp;
 	
 	//Liaison UML en JAVA
+	@OneToMany(mappedBy="agent")
 	private List<Dossier> listeDossiers;
 
 	//Constructeurs
