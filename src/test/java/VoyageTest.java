@@ -33,7 +33,7 @@ public class VoyageTest {
 	public void setVoyageService(IVoyageService voyageService) {
 		this.voyageService = voyageService;
 	}
-	
+
 	/**
 	 * Test du voyage ajouté par la méthode addVoyage()
 	 */
@@ -41,46 +41,89 @@ public class VoyageTest {
 	@Test
 	@Rollback
 	@Transactional
-	public void testAddVoyageAjout(){
+	public void testAddVoyageAjout() {
 		System.out.println("------- Ajouter un voyage : voyage ajouté");
 		Voyage voyageAjout = new Voyage();
 		voyageAjout.setContinent("Afrique");
 		voyageAjout.setPays("Angola");
-		
+
 		Voyage voyageOut = voyageService.addVoyage(voyageAjout);
 		System.out.println(voyageOut);
 		assertEquals(voyageOut.getContinent(), "Afrique");
 	}
-	
+
 	/**
 	 * Test de la récupération de la liste des voyages
 	 */
 	@Ignore
 	@Test
 	@Transactional
-	public void testGetAllVoyages(){
+	public void testGetAllVoyages() {
 		System.out.println("------- Liste des voyages : taille de la liste");
-		
+
 		int tailleListeAttendu = 1;
-		
+
 		List<Voyage> liste = voyageService.getAllVoyages();
 		int tailleListeRec = liste.size();
-		
+
 		System.out.println(liste);
-		
+
 		assertEquals(tailleListeAttendu, tailleListeRec);
 	}
-	
+
+	/**
+	 * Test de récupération d'un voyage par son id
+	 */
 	@Ignore
 	@Test
 	@Transactional
-	public void testFindVoyage(){
+	public void testFindVoyage() {
 		System.out.println("------- Voyage trouvé : attribut pays");
-		
+
 		Voyage voyageFind = voyageService.findVoyage(3);
 		System.out.println(voyageFind);
-		
+
 		assertEquals("France", voyageFind.getPays());
 	}
+
+	/**
+	 * Test de suppression d'un voyage par son id
+	 */
+	@Ignore
+	@Test
+	@Transactional
+	@Rollback
+	public void testDeleteVoyage() {
+		System.out.println("------- Voyage supprimé : taille de la liste");
+
+		List<Voyage> liste = voyageService.getAllVoyages();
+		int tailleListeAttendu = liste.size();
+
+		Voyage vOut = voyageService.deleteVoyage(3);
+		System.out.println(vOut);
+
+		assertEquals(tailleListeAttendu - 1, voyageService.getAllVoyages().size());
+	}
+	
+	/**
+	 * Test de modification d'un voyage
+	 */
+	//@Ignore
+	@Test
+	@Transactional
+	@Rollback
+	public void testUpdateVoyage(){
+		System.out.println("------- Voyage modifié : attribut pays");
+		
+		Voyage vUp = voyageService.findVoyage(3);
+		
+		vUp.setPays("Allemagne");
+		
+		Voyage vModif = voyageService.updateVoyage(vUp);
+		
+		assertEquals("Allemagne", vModif.getPays());
+	}
+	
+	
 
 }

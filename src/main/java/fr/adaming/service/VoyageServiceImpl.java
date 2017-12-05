@@ -62,4 +62,20 @@ public class VoyageServiceImpl implements IVoyageService {
 		return voyageDao.findVoyage(id);
 	}
 
+	/**
+	 * Supprimer un voyage par son id avec la couche Dao
+	 */
+	@Override
+	public Voyage deleteVoyage(int id) {
+		return voyageDao.deleteVoyage(id);
+	}
+
+	/**
+	 * Modifie un voyage avec la couche Dao
+	 */
+	@Override
+	public Voyage updateVoyage(Voyage v) {
+		return voyageDao.updateVoyage(v);
+	}
+
 }
