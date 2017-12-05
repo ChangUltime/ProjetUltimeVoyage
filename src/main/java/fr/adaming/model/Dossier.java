@@ -2,8 +2,23 @@ package fr.adaming.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="dossiers")
 public class Dossier {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_do")
 	private int id;
 	
 	private Etat etat;
@@ -15,10 +30,16 @@ public class Dossier {
 	private int nbAccompagnants;
 
 	//Liaison UML en JAVA
+	@OneToOne
+	@JoinColumn(name="voy_id", referencedColumnName="id_voy")
 	private Voyage voyage;
 	
+	@ManyToOne
+	@JoinColumn(name="cl_id", referencedColumnName="id_cl")
 	private Client client;
 	
+	@ManyToOne
+	@JoinColumn(name="ag_id", referencedColumnName="id_ag")
 	private Agent agent;
 	
 	
