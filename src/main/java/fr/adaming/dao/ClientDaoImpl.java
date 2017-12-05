@@ -56,14 +56,26 @@ public class ClientDaoImpl implements IClientDao {
 
 	@Override
 	public Client updateClient(Client client) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Client clientUpdate = em.find(Client.class, client.getId());
+		
+		clientUpdate.setIdentifiant(client.getIdentifiant());
+		clientUpdate.setMdp(client.getMdp());
+		clientUpdate.setCivilite(client.getCivilite());
+		clientUpdate.setNom(client.getNom());
+		clientUpdate.setAdresse(client.getAdresse());
+		clientUpdate.setTel(client.getTel());
+		
+		em.merge(clientUpdate);
+		
+		return clientUpdate;
 	}
 
 	@Override
 	public void deleteClient(int id) {
-		// TODO Auto-generated method stub
-
+		Client clientDel = em.find(Client.class, id);
+		
+		em.remove(clientDel);
 	}
 
 }

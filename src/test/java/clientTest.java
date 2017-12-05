@@ -1,4 +1,7 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -62,5 +65,33 @@ public class clientTest {
 
 		assertEquals("1" , clientGet.getIdentifiant());
 
+	}
+	
+	@Ignore
+	@Test
+	@Rollback
+	@Transactional
+	public void testUpdateClient() {
+		Client clientGet = clientService.getClientById(4);
+
+		clientGet.setIdentifiant("test");
+		
+		clientService.updateClient(clientGet);
+		
+		assertEquals("test" , clientGet.getIdentifiant());
+	}
+	
+	@Ignore
+	@Test
+	@Rollback
+	@Transactional
+	public void testDeleteClient() {
+		int sizeList = clientService.getAllClients().size();
+		
+		clientService.deleteClient(4);
+		
+		int sizeListAfterDel = clientService.getAllClients().size();
+		
+		assertEquals(sizeList-1, sizeListAfterDel);
 	}
 }
