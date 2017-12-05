@@ -24,13 +24,6 @@
 		<property name="password" value="${jdbc.mdp}"></property>
 	</bean>
 
-	<bean id="hibernatePropsBean"
-		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-		<property name="generateDdl" value="${hb.hbm2ddl}"></property>
-		<property name="databasePlatform" value="${hb.dialect}"></property>
-		<property name="showSql" value="${hb.sql}"></property>
-	</bean>
-
 	<bean id="persistanceUnitManagerBean"
 		class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
 		<property name="defaultDataSource" ref="dataSourceBean"></property>
@@ -47,7 +40,13 @@
 		<property name="persistenceUnitManager" ref="persistanceUnitManagerBean"></property>
 		<property name="persistenceUnitName" value="AgenceBoVayage"></property>
 		<property name="packagesToScan" value="fr.adaming.model"></property>
-		<property name="jpaVendorAdapter" ref="hibernatePropsBean"></property>
+		<property name="jpaProperties">
+            <props>
+				<prop key="hibernate.dialect">${hb.dialect}</prop>
+				<prop key="hibernate.show_sql">${hb.sql}</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hb.hbm2ddl}</prop>
+			</props>
+    </property>
 	</bean>
 
 	<bean id="transactionManagerBean" class="org.springframework.orm.jpa.JpaTransactionManager">
