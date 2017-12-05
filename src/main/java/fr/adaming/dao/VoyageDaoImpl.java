@@ -19,6 +19,16 @@ public class VoyageDaoImpl implements IVoyageDao {
 	@PersistenceContext
 	private EntityManager em;
 
+	/**
+	 * Setter pour l'EntityManager
+	 * 
+	 * @param em
+	 *            EntityManager
+	 */
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
+
 	// ==============================================================
 	// ================== Méthodes
 	// ==============================================================
@@ -45,11 +55,11 @@ public class VoyageDaoImpl implements IVoyageDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Voyage> getAllVoyages() {
-		
+
 		String req = "SELECT v FROM Voyage v";
 		Query query = em.createQuery(req);
-		
-		return query.getResultList();		
+
+		return query.getResultList();
 	}
 
 	/**
