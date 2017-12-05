@@ -13,5 +13,7 @@ public interface IVoyageService {
 	public Voyage findVoyage(int id);
 	
 	public Voyage deleteVoyage(int id);
+	
+	public Voyage updateVoyage(Voyage v);
 
 }

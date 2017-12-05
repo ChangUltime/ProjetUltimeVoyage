@@ -86,6 +86,9 @@ public class VoyageTest {
 		assertEquals("France", voyageFind.getPays());
 	}
 
+	/**
+	 * Test de suppression d'un voyage par son id
+	 */
 	@Ignore
 	@Test
 	@Transactional
@@ -101,5 +104,26 @@ public class VoyageTest {
 
 		assertEquals(tailleListeAttendu - 1, voyageService.getAllVoyages().size());
 	}
+	
+	/**
+	 * Test de modification d'un voyage
+	 */
+	//@Ignore
+	@Test
+	@Transactional
+	@Rollback
+	public void testUpdateVoyage(){
+		System.out.println("------- Voyage modifié : attribut pays");
+		
+		Voyage vUp = voyageService.findVoyage(3);
+		
+		vUp.setPays("Allemagne");
+		
+		Voyage vModif = voyageService.updateVoyage(vUp);
+		
+		assertEquals("Allemagne", vModif.getPays());
+	}
+	
+	
 
 }
