@@ -108,7 +108,7 @@ public class VoyageTest {
 	/**
 	 * Test de modification d'un voyage
 	 */
-	//@Ignore
+	@Ignore
 	@Test
 	@Transactional
 	@Rollback
