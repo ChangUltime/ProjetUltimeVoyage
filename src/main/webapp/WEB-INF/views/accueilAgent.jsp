@@ -66,7 +66,7 @@
 					<td>${voyage.prixBase}</td>
 					<td>${voyage.places}</td>
 					<td>${voyage.description}</td>
-					<td>Supprimer / Modifier</td>
+					<td><a href="${pageContext.request.contextPath}/admin/supprimVoyageLien/${voyage.id}">Supprimer</a> / Modifier</td>
 				</tr>
 			</c:forEach>
 		</table>
