@@ -29,6 +29,10 @@ public class VoyageServiceImpl implements IVoyageService {
 		this.voyageDao = voyageDao;
 	}
 
+	// ==============================================================
+	// ================== Méthodes
+	// ==============================================================
+
 	/**
 	 * Ajouter un voyage en utilisant la couche Dao voyage
 	 * 
