@@ -1,5 +1,9 @@
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +37,7 @@ public class VoitureTest {
 		this.voitureService = voitureService;
 	}
 	
-	//@Ignore
+	@Ignore
 	@Test
 	@Rollback
 	@Transactional
@@ -49,6 +53,36 @@ public class VoitureTest {
 		System.out.println(voitureOut);
 		assertEquals(voitureOut.getModele(), "X900");
 	}
+	
+	@Ignore
+	@Test
+	@Transactional
+	public void testListeVoiture(){
+		System.out.println("------- Liste de voitures");
+		List<Voiture> listeVoitures = new ArrayList<Voiture>();
+			
+		listeVoitures = voitureService.getAllVoitures();
+		
+		System.out.println(listeVoitures);
+		assertEquals(listeVoitures.size(), 2);
+	}
 
+	@Ignore
+	@Test
+	@Transactional
+	public void testDeleteVoiture(){
+		System.out.println("------- Liste de voitures avant supression");
+		List<Voiture> listeVoitures = new ArrayList<Voiture>();
+		listeVoitures = voitureService.getAllVoitures();
+		System.out.println(listeVoitures);
+		voitureService.deleteVoiture(2);
+		
+		System.out.println("------- Liste de voitures apres supression");
+		List<Voiture> listeVoitures2 = new ArrayList<Voiture>();
+		listeVoitures2 = voitureService.getAllVoitures();
+		System.out.println(listeVoitures2);
+		
+		assertEquals(listeVoitures.size(), listeVoitures2.size()+1 );
+	}
 
 }

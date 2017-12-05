@@ -38,8 +38,7 @@ public class VoitureServiceImpl implements IVoitureService {
 
 	@Override
 	public int deleteVoiture(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		return voitureDao.deleteVoiture(id);
 	}
 
 	@Override

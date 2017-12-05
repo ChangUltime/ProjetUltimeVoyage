@@ -18,6 +18,10 @@ public class VoitureDaoImpl implements IVoitureDao {
 														// injecter une
 														// entityManager
 	EntityManager em;
+	
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
 
 	@Override
 	public List<Voiture> getAllVoitures() {
@@ -27,7 +31,7 @@ public class VoitureDaoImpl implements IVoitureDao {
 		Query query = em.createQuery(req);
 
 		List<Voiture> liste = query.getResultList();
-		
+
 		return liste;
 	}
 
@@ -45,8 +49,15 @@ public class VoitureDaoImpl implements IVoitureDao {
 
 	@Override
 	public int deleteVoiture(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		// Redaction de la requete
+		String req = "DELETE FROM Voiture v WHERE v.id=:pId";
+
+		Query query = em.createQuery(req);
+
+		// Passage des paramètres
+		query.setParameter("pId", id);
+		
+		return query.executeUpdate();
 	}
 
 	@Override
