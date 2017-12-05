@@ -12,40 +12,38 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="clients")
+@Table(name = "clients")
 public class Client {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_cl")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_cl")
 	private int id;
-	
+
 	private String identifiant;
-	
+
 	private String mdp;
-	
+
 	private Civilite civilite;
-	
+
 	private String nom;
-	
+
 	private String adresse;
-	
+
 	private String tel;
-	
-	//Liaison UML en JAVA
-	@OneToMany(mappedBy="client")
+
+	// Liaison UML en JAVA
+	@OneToMany(mappedBy = "client")
 	private List<Dossier> listeDossiers;
-	
-	@OneToMany(mappedBy="client")
+
+	@OneToMany(mappedBy = "client")
 	private List<Accompagnant> listeAccompagnants;
 
-	//Constructeur
+	// Constructeur
 	public Client() {
 		super();
 	}
 
-	
-	
 	public Client(String identifiant, String mdp, Civilite civilite, String nom, String adresse, String tel) {
 		super();
 		this.identifiant = identifiant;
@@ -55,8 +53,6 @@ public class Client {
 		this.adresse = adresse;
 		this.tel = tel;
 	}
-
-
 
 	public Client(int id, String identifiant, String mdp, Civilite civilite, String nom, String adresse, String tel) {
 		super();
@@ -69,9 +65,7 @@ public class Client {
 		this.tel = tel;
 	}
 
-
-
-	//Getters et Setters
+	// Getters et Setters
 	public int getId() {
 		return id;
 	}
@@ -128,19 +122,13 @@ public class Client {
 		this.tel = tel;
 	}
 
-	
-	
 	public List<Dossier> getListeDossiers() {
 		return listeDossiers;
 	}
 
-
-
 	public void setListeDossiers(List<Dossier> listeDossiers) {
 		this.listeDossiers = listeDossiers;
 	}
-
-
 
 	public List<Accompagnant> getListeAccompagnants() {
 		return listeAccompagnants;
@@ -150,8 +138,6 @@ public class Client {
 		this.listeAccompagnants = listeAccompagnants;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "Client [id=" + id + ", identifiant=" + identifiant + ", mdp=" + mdp + ", civilite=" + civilite
@@ -159,7 +145,4 @@ public class Client {
 				+ ", listeAccompagnants=" + listeAccompagnants + "]";
 	}
 
-	
-	
-	
 }
