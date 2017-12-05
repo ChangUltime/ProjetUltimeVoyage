@@ -1,7 +1,21 @@
 package fr.adaming.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="assurances")
 public class Assurance {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_assu")
 	private int id;
 	
 	private double prix;
@@ -9,7 +23,9 @@ public class Assurance {
 	private typeA type;
 	
 	//Liaison UML en JAVA
-	private Voyage voyage;
+	@OneToOne
+	@JoinColumn(name="dossier_id",referencedColumnName="id_do")
+	private Dossier dossier;
 
 	//Constructeurs
 	public Assurance() {
