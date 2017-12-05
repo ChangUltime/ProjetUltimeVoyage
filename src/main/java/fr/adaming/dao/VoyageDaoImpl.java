@@ -65,11 +65,27 @@ public class VoyageDaoImpl implements IVoyageDao {
 	/**
 	 * Chercher un voyage dans la base de données par son id
 	 * 
+	 * @param id L'id du voyage à chercher
+	 * 
 	 * @return Le voyage trouvé
 	 */
 	@Override
 	public Voyage findVoyage(int id) {
 		return em.find(Voyage.class, id);
+	}
+
+	/**
+	 * Supprime un voyage de la base de données à partir de son id
+	 * 
+	 * @param id L'id du voyage à supprimer
+	 * 
+	 * @return Le voyage supprimé
+	 */
+	@Override
+	public Voyage deleteVoyage(int id) {
+		Voyage vOut = em.find(Voyage.class, id);
+		em.remove(vOut);
+		return vOut;
 	}
 
 }

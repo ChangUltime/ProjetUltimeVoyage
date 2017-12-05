@@ -11,5 +11,7 @@ public interface IVoyageDao {
 	public List<Voyage> getAllVoyages();
 	
 	public Voyage findVoyage(int id);
+	
+	public Voyage deleteVoyage(int id);
 
 }
