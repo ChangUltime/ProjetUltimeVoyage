@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import fr.adaming.model.Client;
 import fr.adaming.model.Voiture;
+import fr.adaming.model.Voyage;
 
 @Repository
 public class VoitureDaoImpl implements IVoitureDao {
@@ -18,7 +19,7 @@ public class VoitureDaoImpl implements IVoitureDao {
 														// injecter une
 														// entityManager
 	EntityManager em;
-	
+
 	public void setEm(EntityManager em) {
 		this.em = em;
 	}
@@ -42,9 +43,18 @@ public class VoitureDaoImpl implements IVoitureDao {
 	}
 
 	@Override
-	public int updateVoiture(Voiture v) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Voiture updateVoiture(Voiture v) {
+		
+		Voiture vModif = em.find(Voiture.class, v.getId());
+
+		vModif.setCategorie(v.getCategorie());
+		vModif.setMarque(v.getMarque());
+		vModif.setModele(v.getModele());
+		vModif.setNbPlace(v.getNbPlace());
+		vModif.setPrixJour(v.getPrixJour());
+
+		em.merge(vModif);
+		return vModif;
 	}
 
 	@Override
@@ -56,14 +66,13 @@ public class VoitureDaoImpl implements IVoitureDao {
 
 		// Passage des paramètres
 		query.setParameter("pId", id);
-		
+
 		return query.executeUpdate();
 	}
 
 	@Override
 	public Voiture getVoituretById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.find(Voiture.class, id);
 	}
 
 }

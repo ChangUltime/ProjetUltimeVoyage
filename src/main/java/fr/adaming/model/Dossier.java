@@ -53,7 +53,7 @@ public class Dossier {
 		this.etat = etat;
 		this.prixFinal = prixFinal;
 		this.datePaiement = datePaiement;
-		this.nbAccompagnants = nbAccompagnants;
+		this.setNbAccompagnants(nbAccompagnants);
 	}
 
 	public Dossier(int id, Etat etat, double prixFinal, Date datePaiement, int nbAccompagnants) {
@@ -62,7 +62,7 @@ public class Dossier {
 		this.etat = etat;
 		this.prixFinal = prixFinal;
 		this.datePaiement = datePaiement;
-		this.nbAccompagnants = nbAccompagnants;
+		this.setNbAccompagnants(nbAccompagnants);
 	}
 
 	//Getters et setters
@@ -122,14 +122,19 @@ public class Dossier {
 		this.agent = agent;
 	}
 
+	public int getNbAccompagnants() {
+		return nbAccompagnants;
+	}
+
+	public void setNbAccompagnants(int nbAccompagnants) {
+		this.nbAccompagnants = nbAccompagnants;
+	}
+
 	@Override
 	public String toString() {
 		return "Dossier [id=" + id + ", prixFinal=" + prixFinal + ", datePaiement=" + datePaiement + ", voyage="
 				+ voyage + "]";
 	}
-	
-	
-	
 	
 
 }
