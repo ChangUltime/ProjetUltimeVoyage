@@ -1,5 +1,6 @@
 package fr.adaming.model;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -47,7 +48,7 @@ public class Voyage {
 	
 	private int places;
 	
-	private 
+	private byte[] image;
 	
 	//Liaison UML en JAVA
 	@OneToOne(mappedBy="voyage")
@@ -58,8 +59,10 @@ public class Voyage {
 		super();
 	}
 	
+	
 	public Voyage(Date dateDepart, Date heureDepart, Date dateRetour, Date heureRetour, Hebergement hebergement,
-			Formule formule, String continent, String pays, String description, double prixBase, int places) {
+			Formule formule, String continent, String pays, String description, double prixBase, int places,
+			byte[] image) {
 		super();
 		this.dateDepart = dateDepart;
 		this.heureDepart = heureDepart;
@@ -72,10 +75,13 @@ public class Voyage {
 		this.description = description;
 		this.prixBase = prixBase;
 		this.places = places;
+		this.image = image;
 	}
 
+
 	public Voyage(int id, Date dateDepart, Date heureDepart, Date dateRetour, Date heureRetour, Hebergement hebergement,
-			Formule formule, String continent, String pays, String description, double prixBase, int places) {
+			Formule formule, String continent, String pays, String description, double prixBase, int places,
+			byte[] image) {
 		super();
 		this.id = id;
 		this.dateDepart = dateDepart;
@@ -89,7 +95,9 @@ public class Voyage {
 		this.description = description;
 		this.prixBase = prixBase;
 		this.places = places;
+		this.image = image;
 	}
+
 
 	//Getters et setters
 	public int getId() {
@@ -196,15 +204,25 @@ public class Voyage {
 		this.heureRetour = heureRetour;
 	}
 
+	
+	
+	public byte[] getImage() {
+		return image;
+	}
+
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Voyage [id=" + id + ", dateDepart=" + dateDepart + ", dateRetour=" + dateRetour + ", hebergement="
-				+ hebergement + ", formule=" + formule + ", continent=" + continent + ", pays=" + pays
-				+ ", description=" + description + ", prixBase=" + prixBase + ", places=" + places + ", dossier="
-				+ dossier + "]";
+		return "Voyage [id=" + id + ", dateDepart=" + dateDepart + ", heureDepart=" + heureDepart + ", dateRetour="
+				+ dateRetour + ", heureRetour=" + heureRetour + ", hebergement=" + hebergement + ", formule=" + formule
+				+ ", continent=" + continent + ", pays=" + pays + ", description=" + description + ", prixBase="
+				+ prixBase + ", places=" + places + ", image=" + Arrays.toString(image) + ", dossier=" + dossier + "]";
 	}
 
 	
-	
-
 }
