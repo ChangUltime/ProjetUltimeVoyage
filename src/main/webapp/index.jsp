@@ -9,8 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	<%response.sendRedirect("agent/home"); %>
+	<a href="client/home">Vers Client</a>
+	<a href="agent/home">Vers Agent</a>
 
 </body>
 </html>
