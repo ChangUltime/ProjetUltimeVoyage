@@ -88,7 +88,7 @@ public class VoyageController {
 	 */
 	@RequestMapping(value = "/listeVoyage", method = RequestMethod.GET)
 	public String afficherListeVoyagePublic(Model model) {
-
+	    
 		List<Voyage> listeVoyages = voyageService.getAllVoyages();
 
 		model.addAttribute("listeVoyages", listeVoyages);
