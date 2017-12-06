@@ -20,6 +20,9 @@
 		
 		<h1>Liste clients</h1>
 		
+		<a href="${pageContext.request.contextPath}/agent/updateFormClient">Modif</a>
+		<a href="${pageContext.request.contextPath}/agent/addFormClient">Ajouter</a>
+		
 		<table class="table table-bordered">
 			<thead>
 				<tr>

@@ -1,8 +1,10 @@
 package fr.adaming.controllers;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,12 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import fr.adaming.model.Civilite;
 import fr.adaming.model.Client;
 import fr.adaming.model.Voyage;
 import fr.adaming.service.IClientService;
 
 @Controller
 @RequestMapping("/agent")
+@Scope("")
 public class ClientControllers {
 
 	@Autowired
@@ -45,7 +49,7 @@ public class ClientControllers {
 			// Actualiser la liste
 			List<Client> liste = clientService.getAllClients();
 			model.addAttribute("clientList", liste);
-			return "listClient";
+			return "clientsAgent";
 		}else{
 			redirectAttribute.addFlashAttribute("message", "Le client n'a pas été ajouté");
 			return "redirect:addClient";
@@ -73,8 +77,11 @@ public class ClientControllers {
 
 	@RequestMapping(value = "/updateClient", method = RequestMethod.POST)
 	public String submitUpdateFormClient(RedirectAttributes redirectAttribute, Model model,
-			@ModelAttribute("clientUpadte") Client client) {
+			@ModelAttribute("clientUpdate") Client client) {
 
+		List<Civilite> civilite = Arrays.asList(Civilite.values());
+		model.addAttribute("civilite", civilite);
+		
 		// Appel de la méthode service
 		Client clientOut = clientService.updateClient(client);
 
@@ -82,7 +89,7 @@ public class ClientControllers {
 			List<Client> liste = clientService.getAllClients();
 			model.addAttribute("clientList", liste);
 
-			return "accueilAgent";
+			return "clientsAgent";
 		} else {
 			// Message d'erreur si le client n'a pas été modifié
 			redirectAttribute.addFlashAttribute("message", "Le client n'a pas été modifié");

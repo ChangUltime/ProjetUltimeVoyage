@@ -16,7 +16,7 @@
 	<h1 style="color: red; text-align: center">Formulaire d'ajout</h1>
 
 	<form:form class="form-horizontal" method="POST"
-		modelAttribute="clientAdd" action="submitAddFormClient">
+		modelAttribute="clientAdd" action="addClient">
 		<div class="form-group">
 			<form:label path="identifiant" class="col-sm-2 control-label">Identifiant</form:label>
 			<div class="col-sm-10">
