@@ -14,7 +14,7 @@
 	<a href="agent/home">Vers Agent</a>
 
 	<div class="row">
-		<div class="col-sm-6 col-md-4">
+		<div class="col-sm-6 col-md-4" style="display:flex; justify-content:space-around;">
 			<c:forEach var="voyage" items="${listeVoyages}">
 				<div class="thumbnail">
 					<img src="..." alt="...">
