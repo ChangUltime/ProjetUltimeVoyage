@@ -16,9 +16,11 @@
 	<div id="agentHeader">
 		<%@ include file="headerAgent.jsp"%>
 	</div>
-	<div id="agentContent">
-		Des Clients
-		<table>
+	<div id="agentContent" align="center">
+		
+		<h1>Liste clients</h1>
+		
+		<table class="table table-bordered">
 			<thead>
 				<tr>
 					<th>ID</th>
@@ -39,6 +41,7 @@
 						<td>${client.nom}</td>
 						<td>${client.adresse}</td>
 						<td>${client.tel}</td>
+						<td><a href="${pageContext.request.contextPath}/agent/delClientByLink/${client.id}">Supprimer</a>
 					</tr>
 				</c:forEach>
 			</tbody>

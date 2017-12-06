@@ -19,7 +19,7 @@
 	<li><a href="home">Home</a></li>
 	<li><a href="voyages">Voyages</a></li>
 	<li><a href="dossiers">Dossiers</a></li>
-	<li><a href="clients">Voyageurs</a></li>
+	<li><a href="${pageContext.request.contextPath}/agent/listeClients">Voyageurs</a></li>
 </ul>
 
 </html>

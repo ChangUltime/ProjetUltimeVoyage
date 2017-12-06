@@ -17,7 +17,7 @@ import fr.adaming.model.Voyage;
 import fr.adaming.service.IClientService;
 
 @Controller
-@RequestMapping("/client")
+@RequestMapping("/agent")
 public class ClientControllers {
 
 	@Autowired
@@ -59,7 +59,7 @@ public class ClientControllers {
 		List<Client> liste = clientService.getAllClients();
 		model.addAttribute("clientList", liste);
 
-		return "listClients";
+		return "clientsAgent";
 
 	}
 	
@@ -110,14 +110,14 @@ public class ClientControllers {
 		}
 	}
 	
-	@RequestMapping(value = "/admin/delClientByLink/{pId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/delClientByLink/{pId}", method = RequestMethod.GET)
 	public String supprimVoyageLien(Model model, @PathVariable("pId") int id) {
 		
 		clientService.deleteClient(id);
 
 		// Actualiser la liste
 		List<Client> liste = clientService.getAllClients();
-		model.addAttribute("ClientList", liste);
+		model.addAttribute("clientList", liste);
 		
 		return "clientsAgent";
 	}

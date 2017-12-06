@@ -59,7 +59,7 @@ public class AgentController {
 		if(sessionAgent!= null){
 			List<Client> listeClients = clientService.getAllClients();
 			// TODO RAJOUTER UNE METHODE GETCLIENTSBYAGENT
-			modelView.addObject("listeClients", listeClients);
+			modelView.addObject("clientList", listeClients);
 		}
 		
 		modelView.setViewName("clientsAgent");
