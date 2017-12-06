@@ -14,13 +14,14 @@
 	<a href="agent/home">Vers Agent</a>
 
 	<div class="row">
-		<div class="col-sm-6 col-md-4" style="display:flex; justify-content:space-around;">
+		<div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:space-around; ">
 			<c:forEach var="voyage" items="${listeVoyages}">
-				<div class="thumbnail">
+				<div class="thumbnail" style="flex-basis:30%">
 					<img src="..." alt="...">
 					<div class="caption">
 						<h3>${voyage.pays}</h3>
 						<p>${voyage.description}</p>
+						<h4>A PARTIR DE ${voyage.prixBase} EUROS</h4>
 						<p>
 							<a href="#" class="btn btn-warning" role="button">Reserver</a> <a
 								href="#" class="btn btn-default" role="button">Infos</a>
