@@ -17,7 +17,7 @@
 	<%@ include file="headerClient.jsp" %>
 </div>
 <div id="clientContent">
-	<table>
+	<table class="table table-bordered">
 		<thead>
 			<tr>
 				<th>ID</th>
