@@ -1,8 +1,8 @@
 package fr.adaming.controllers;
 
 import java.io.ByteArrayInputStream;
-import java.io.Console;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import fr.adaming.model.Formule;
+import fr.adaming.model.Hebergement;
 import fr.adaming.model.Voyage;
 import fr.adaming.service.IVoyageService;
 
@@ -113,18 +115,38 @@ public class VoyageController {
 		return new ModelAndView("updateVoyageAgent", "voyageUpdate", new Voyage());
 	}
 
+	/**
+	 * Modifier un voyage
+	 * @param model
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/agent/modifViaLien", method = RequestMethod.GET)
 	public String modifVoyageLien(Model model, @RequestParam("pId") int id) {
 
+		List<Formule> formule = Arrays.asList(Formule.values());
+	    model.addAttribute("formule", formule);
+	    
+	    List<Hebergement> hebergement = Arrays.asList(Hebergement.values());
+	    model.addAttribute("hebergement", hebergement);
+	    
 		Voyage vOut = voyageService.findVoyage(id);
 		model.addAttribute("voyageUpdate", vOut);
 
 		return "updateVoyageAgent";
 	}
 
+	/**
+	 * Modifie le voyage avec les informations fournies
+	 * @param model
+	 * @param v
+	 * @param ra
+	 * @return
+	 */
 	@RequestMapping(value = "/agent/modifVoyage", method = RequestMethod.POST)
 	public String soumettreVoyageUpdate(Model model, @ModelAttribute("voyageUpdate") Voyage v, RedirectAttributes ra) {
 
+		System.out.println(v);
 		// Appel de la méthode Service
 		voyageService.updateVoyage(v);
 		
@@ -154,6 +176,29 @@ public class VoyageController {
 			return new byte[0];
 		else
 			return IOUtils.toByteArray(new ByteArrayInputStream(voy.getImage()));
+	}
+	
+	@RequestMapping(value = "/agent/formVoyageAdd", method = RequestMethod.GET)
+	public ModelAndView formVoyageAdd(){
+		return new ModelAndView("addVoyageAgent", "voyageAdd", new Voyage());
+	}
+	
+	@RequestMapping(value = "/agent/ajouteVoyage", method = RequestMethod.POST)
+	public String soumettreVoyageAdd(Model model, @ModelAttribute("voyageAdd") Voyage v, RedirectAttributes ra) {
+
+		// Appel de la méthode Service
+		Voyage vOut = voyageService.addVoyage(v);
+		
+		if (vOut != null) {
+			// Actualiser la liste
+			List<Voyage> listeVoyages = voyageService.getAllVoyages();
+			model.addAttribute("listeVoyages", listeVoyages);
+
+			return "voyagesAgent";
+		} else {
+			ra.addFlashAttribute("message", "Le voyage n'a pas été modifié");
+			return "addVoyageAgent";
+		}
 	}
 
 }

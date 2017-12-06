@@ -20,6 +20,7 @@
 La Base quoi.
 
 <a href="${pageContext.request.contextPath}/agent/formVoyageUpdate">Modifier Voyage</a></li>
+<a href="${pageContext.request.contextPath}/agent/formVoyageAdd">Ajouter Voyage</a></li>
 
 	<table>
 		<thead>
