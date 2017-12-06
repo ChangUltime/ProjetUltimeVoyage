@@ -2,64 +2,67 @@ package fr.adaming.model;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity
-@Table(name="voyages")
-public class Voyage {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_voy")
-	private int id;
-	
-	@Temporal(TemporalType.DATE)
-	private Date dateDepart;
-	
-	@Temporal(TemporalType.TIME)
-	private Date heureDepart;
-	
-	@Temporal(TemporalType.DATE)
-	private Date dateRetour;
-	
-	@Temporal(TemporalType.TIME)
-	private Date heureRetour;
-	
-	private Hebergement hebergement;
-	
-	private Formule formule;
-	
-	private String continent;
-	
-	private String pays;
-	
-	private String description;
-	
-	private double prixBase;
-	
-	private int places;
-	
-	private byte[] image;
-	
-	//Liaison UML en JAVA
-	@OneToOne(mappedBy="voyage")
-	private Dossier dossier;
+import org.springframework.format.annotation.DateTimeFormat;
 
-	//Constructeurs
+@Entity
+@Table(name = "voyages")
+public class Voyage {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_voy")
+	private int id;
+
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date dateDepart;
+
+	@DateTimeFormat(pattern = "HH:mm")
+	private Date heureDepart;
+
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date dateRetour;
+
+	@DateTimeFormat(pattern = "HH:mm")
+	private Date heureRetour;
+
+	private Hebergement hebergement;
+
+	private Formule formule;
+
+	private String continent;
+
+	private String pays;
+
+	private String description;
+
+	private double prixBase;
+
+	private int places;
+
+	private byte[] image;
+
+	// Liaison UML en JAVA
+	@OneToMany(mappedBy = "voyage")
+	private List<Dossier> dossier;
+
+	// Constructeurs
 	public Voyage() {
 		super();
 	}
-	
-	
+
 	public Voyage(Date dateDepart, Date heureDepart, Date dateRetour, Date heureRetour, Hebergement hebergement,
 			Formule formule, String continent, String pays, String description, double prixBase, int places,
 			byte[] image) {
@@ -77,7 +80,6 @@ public class Voyage {
 		this.places = places;
 		this.image = image;
 	}
-
 
 	public Voyage(int id, Date dateDepart, Date heureDepart, Date dateRetour, Date heureRetour, Hebergement hebergement,
 			Formule formule, String continent, String pays, String description, double prixBase, int places,
@@ -98,8 +100,7 @@ public class Voyage {
 		this.image = image;
 	}
 
-
-	//Getters et setters
+	// Getters et setters
 	public int getId() {
 		return id;
 	}
@@ -172,11 +173,11 @@ public class Voyage {
 		this.prixBase = prixBase;
 	}
 
-	public Dossier getDossier() {
+	public List<Dossier> getDossier() {
 		return dossier;
 	}
 
-	public void setDossier(Dossier dossier) {
+	public void setDossier(List<Dossier> dossier) {
 		this.dossier = dossier;
 	}
 
@@ -204,25 +205,20 @@ public class Voyage {
 		this.heureRetour = heureRetour;
 	}
 
-	
-	
 	public byte[] getImage() {
 		return image;
 	}
 
-
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
-
 
 	@Override
 	public String toString() {
 		return "Voyage [id=" + id + ", dateDepart=" + dateDepart + ", heureDepart=" + heureDepart + ", dateRetour="
 				+ dateRetour + ", heureRetour=" + heureRetour + ", hebergement=" + hebergement + ", formule=" + formule
 				+ ", continent=" + continent + ", pays=" + pays + ", description=" + description + ", prixBase="
-				+ prixBase + ", places=" + places + ", image=" + Arrays.toString(image) + ", dossier=" + dossier + "]";
+				+ prixBase + ", places=" + places + ", image=" + Arrays.toString(image) + "]";
 	}
 
-	
 }

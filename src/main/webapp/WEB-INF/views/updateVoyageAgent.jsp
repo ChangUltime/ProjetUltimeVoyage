@@ -19,8 +19,6 @@
 		<%@ include file="headerAgent.jsp"%>
 	</div>
 
-	<div>${voyageUpdate}</div>
-
 	<form:form class="form-horizontal" method="POST"
 		modelAttribute="voyageUpdate"
 		action="${pageContext.request.contextPath}/agent/modifVoyage">
@@ -52,50 +50,59 @@
 			</div>
 		</div>
 
-<!-- 		<div class="form-group"> -->
-<!-- 			<label for="inputDateD" class="col-sm-2 control-label">Date -->
-<!-- 				de départ</label> -->
-<!-- 			<div class="col-sm-7"> -->
-<%-- 				<form:input type="date" path="dateDepart" class="form-control" --%>
-<%-- 					id="inputDateD" placeholder="Date de départ" /> --%>
-<%-- 				<form:errors path="dateDepart" cssStyle="color: red" /> --%>
-<!-- 			</div> -->
-<!-- 		</div> -->
+				<div class="form-group">
+					<label for="inputDateD" class="col-sm-2 control-label">Date
+						de départ</label>
+					<div class="col-sm-7">
+						<fmt:formatDate value="${voyageUpdate.dateDepart}"
+		 					pattern="dd/MM/yyyy" var="myDate" /> 
+		 				<form:input type="text" path="dateDepart" class="form-control" 
+							id="inputDateD" placeholder="Date de départ" value="${myDate}" />
+		 				<form:errors path="dateDepart" cssStyle="color: red" /> 
+					</div>
+				</div>
 
-<!-- 		<div class="form-group"> -->
-<!-- 			<label for="inputHeureD" class="col-sm-2 control-label">Heure -->
-<!-- 				de départ</label> -->
-<!-- 			<div class="col-sm-7"> -->
-<%-- 				<form:input type="time" path="heureDepart" class="form-control" --%>
-<%-- 					id="inputHeureD" placeholder="Heure de départ" /> --%>
-<%-- 				<form:errors path="heureDepart" cssStyle="color: red" /> --%>
-<!-- 			</div> -->
-<!-- 		</div> -->
+		<div class="form-group">
+			<label for="inputHeureD" class="col-sm-2 control-label">Heure
+				de départ</label>
+			<div class="col-sm-7">
+				<fmt:formatDate type="time" value="${voyageUpdate.heureDepart}"
+ 					pattern="HH:mm" var="myTime" /> 
+ 				<form:input type="time" path="heureDepart" class="form-control" 
+ 					id="inputHeureD" placeholder="Heure de départ" value="${myTime}" /> 
+ 				<form:errors path="heureDepart" cssStyle="color: red" /> 
+			</div>
+		</div>
 
-<!-- 		<div class="form-group"> -->
-<!-- 			<label for="inputDateR" class="col-sm-2 control-label">Date -->
-<!-- 				de retour</label> -->
-<!-- 			<div class="col-sm-7"> -->
-<%-- 					<form:input type="date" path="dateRetour" class="form-control" --%>
-<%-- 						id="inputDateR" placeholder="Date de retour" /> --%>
-<!-- 			</div> -->
-<!-- 		</div> -->
+				<div class="form-group">
+					<label for="inputDateR" class="col-sm-2 control-label">Date
+						de retour</label>
+					<div class="col-sm-7">
+							<fmt:formatDate value="${voyageUpdate.dateRetour}"
+		 					pattern="dd/MM/yyyy" var="myDate" /> 
+		 				<form:input type="text" path="dateRetour" class="form-control" 
+							id="inputDateD" placeholder="Date de Retour" value="${myDate}" />
+		 				<form:errors path="dateRetour" cssStyle="color: red" /> 
+					</div>
+				</div>
 
-<!-- 		<div class="form-group"> -->
-<!-- 			<label for="inputHeureR" class="col-sm-2 control-label">Heure -->
-<!-- 				de retour</label> -->
-<!-- 			<div class="col-sm-7"> -->
-<%-- 				<form:input type="time" path="heureRetour" class="form-control" --%>
-<%-- 					id="inputHeureR" placeholder="Heure de retour" /> --%>
-<%-- 				<form:errors path="heureRetour" cssStyle="color: red" /> --%>
-<!-- 			</div> -->
-<!-- 		</div> -->
+				<div class="form-group">
+					<label for="inputHeureR" class="col-sm-2 control-label">Heure
+						de retour</label>
+					<div class="col-sm-7">
+						<fmt:formatDate type="time" value="${voyageUpdate.heureRetour}"
+ 					pattern="HH:mm" var="myTime" /> 
+ 				<form:input type="time" path="heureRetour" class="form-control" 
+ 					id="inputHeureR" placeholder="Heure de retour" value="${myTime}" /> 
+ 				<form:errors path="heureRetour" cssStyle="color: red" />  
+					</div>
+				</div>
 
 		<div class="form-group">
 			<label for="inputFormule" class="col-sm-2 control-label">Formule</label>
 			<div class="col-sm-7">
 				<form:select path="formule">
-					<c:forEach items="${formule} " var="key">
+					<c:forEach items="${formule}" var="key">
 						<form:option value="${key}">${key}</form:option>
 					</c:forEach>
 				</form:select>
@@ -106,8 +113,8 @@
 			<label for="inputHebergement" class="col-sm-2 control-label">Hébergement</label>
 			<div class="col-sm-7">
 				<form:select path="hebergement">
-					<c:forEach items="${hebergement} " var="key">
-						<form:option value="${key}">${key}</form:option>
+					<c:forEach items="${hebergement} " var="heb">
+						<form:option value="${heb}">${heb}</form:option>
 					</c:forEach>
 				</form:select>
 			</div>

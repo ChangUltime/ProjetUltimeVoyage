@@ -2,6 +2,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,10 +44,14 @@
 						<td>${voyage.id}</td>
 						<td>${voyage.continent}</td>
 						<td>${voyage.pays}</td>
-						<td>${voyage.dateDepart}</td>
-						<td>${voyage.heureDepart}</td>
-						<td>${voyage.dateRetour}</td>
-						<td>${voyage.heureRetour}</td>
+						<td><fmt:formatDate type = "time" 
+         value = "${voyage.dateDepart}" pattern="dd/MM/yyyy"/></td>
+						<td><fmt:formatDate type = "time" 
+         value = "${voyage.heureDepart}" pattern="HH:mm"/></td>
+						<td><fmt:formatDate type = "time" 
+         value = "${voyage.dateRetour}" pattern="dd/MM/yyyy"/></td>
+						<td><fmt:formatDate type = "time" 
+         value = "${voyage.heureRetour}" pattern="HH:mm"/></td>
 						<td>${voyage.formule}</td>
 						<td>${voyage.hebergement}</td>
 						<td>${voyage.prixBase}</td>

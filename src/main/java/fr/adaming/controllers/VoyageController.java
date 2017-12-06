@@ -2,15 +2,21 @@ package fr.adaming.controllers;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +51,13 @@ public class VoyageController {
 		this.voyageService = voyageService;
 	}
 
+//	@InitBinder
+//    public void initBinder(WebDataBinder binder) {
+//        SimpleDateFormat sdt = new SimpleDateFormat("HH:mm:ss");
+//        sdt.setLenient(true);
+//        binder.registerCustomEditor(Time.class, new CustomDateEditor(sdt, true));
+//    }
+	
 	// ==============================================================
 	// ================== Méthodes
 	// ==============================================================
@@ -148,18 +161,18 @@ public class VoyageController {
 
 		System.out.println(v);
 		// Appel de la méthode Service
-		voyageService.updateVoyage(v);
+		Voyage vOut = voyageService.updateVoyage(v);
 		
-		//if (vOut != null) {
+		if (vOut != null) {
 			// Actualiser la liste
 			List<Voyage> listeVoyages = voyageService.getAllVoyages();
 			model.addAttribute("listeVoyages", listeVoyages);
 
 			return "voyagesAgent";
-//		} else {
-//			ra.addFlashAttribute("message", "Le voyage n'a pas été modifié");
-//			return "updateVoyageAgent";
-//		}
+		} else {
+			ra.addFlashAttribute("message", "Le voyage n'a pas été modifié");
+			return "updateVoyageAgent";
+		}
 	}
 	
 	/**
@@ -179,13 +192,20 @@ public class VoyageController {
 	}
 	
 	@RequestMapping(value = "/agent/formVoyageAdd", method = RequestMethod.GET)
-	public ModelAndView formVoyageAdd(){
+	public ModelAndView formVoyageAdd(Model model){
+		
+		List<Formule> formule = Arrays.asList(Formule.values());
+	    model.addAttribute("formule", formule);
+	    
+	    List<Hebergement> hebergement = Arrays.asList(Hebergement.values());
+	    model.addAttribute("hebergement", hebergement);
+	    
 		return new ModelAndView("addVoyageAgent", "voyageAdd", new Voyage());
 	}
 	
 	@RequestMapping(value = "/agent/ajouteVoyage", method = RequestMethod.POST)
 	public String soumettreVoyageAdd(Model model, @ModelAttribute("voyageAdd") Voyage v, RedirectAttributes ra) {
-
+	    
 		// Appel de la méthode Service
 		Voyage vOut = voyageService.addVoyage(v);
 		
