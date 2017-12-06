@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.adaming.model.Client;
 import fr.adaming.service.IClientService;
@@ -24,29 +26,85 @@ public class ClientControllers {
 	}
 	
 	// ================= Ajout client =======================================
-	@RequestMapping(name="/formAddClient", method=RequestMethod.GET)
-	public String formAddClient(Model model){
+	@RequestMapping(name="/addFormClient", method=RequestMethod.GET)
+	public String addFormClient(Model model){
 		model.addAttribute("clientAdd", new Client());
 		
 		return "addClient";
 	}
 	
-	@RequestMapping(name="/addClient", method=RequestMethod.GET)
-	public String submitFormAddClient(Model model, @ModelAttribute("clientAdd") Client client){
+	@RequestMapping(name="/addClient", method=RequestMethod.POST)
+	public String submitAddFormClient(RedirectAttributes redirectAttribute, Model model, @ModelAttribute("clientAdd") Client client){
 		
 		// On appelle la méthode service
 		Client clientOut = clientService.addClient(client);
 		
 		if(clientOut.getId() != 0){
 			// Actualiser la liste
-//			List<Client> liste = clientService.getAllClients();
-//			model.addAttribute("clientAdd", liste)
+			List<Client> liste = clientService.getAllClients();
+			model.addAttribute("clientList", liste);
 			return "listClient";
 		}else{
+			redirectAttribute.addFlashAttribute("message", "Le client n'a pas été ajouté");
 			return "redirect:addClient";
 		}
 	}
 	
 	// ================= liste client =======================================
+	@RequestMapping(value = "/listeClients", method = RequestMethod.GET)
+	public String listClients(Model model) {
+
+		List<Client> liste = clientService.getAllClients();
+		model.addAttribute("clientList", liste);
+
+		return "listClients";
+
+	}
 	
+	// ================= Modif client =======================================
+	@RequestMapping(value = "/updateFormClient", method = RequestMethod.GET)
+	public String updateFormClient(Model model) {
+
+		model.addAttribute("clientUpdate", new Client());
+		return "updateClient";
+	}
+
+	@RequestMapping(value = "/updateClient", method = RequestMethod.POST)
+	public String submitUpdateFormClient(RedirectAttributes redirectAttribute, Model model,
+			@ModelAttribute("clientUpadte") Client client) {
+
+		// Appel de la méthode service
+		Client clientOut = clientService.updateClient(client);
+
+		if (clientOut.getId() == client.getId()) {
+			List<Client> liste = clientService.getAllClients();
+			model.addAttribute("clientList", liste);
+
+			return "accueilAgent";
+		} else {
+			// Message d'erreur si le client n'a pas été modifié
+			redirectAttribute.addFlashAttribute("message", "Le client n'a pas été modifié");
+			return "redirect:updateFormClient";
+		}
+	}
+	
+	@RequestMapping(value = "/getClientById", method = RequestMethod.GET)
+	public String formGetById(Model model) {
+		return "getClientById";
+	}
+
+	@RequestMapping(value = "/getClientById", method = RequestMethod.POST)
+	public String submitformGetById(RedirectAttributes redirAttr, Model model,
+			@RequestParam("pId") int id) {
+		Client clientOut = clientService.getClientById(id);
+
+		if (clientOut.getId() == id) {
+			model.addAttribute("client", clientOut);
+			redirAttr.addFlashAttribute("message", "Le client a été trouvé !");
+			return "recherche";
+		} else {
+			redirAttr.addFlashAttribute("message", "Aucun client n'a été trouvé");
+			return "redirect:getClientById";
+		}
+	}
 }

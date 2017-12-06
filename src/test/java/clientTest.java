@@ -90,8 +90,6 @@ public class clientTest {
 		
 		clientService.deleteClient(4);
 		
-		int sizeListAfterDel = clientService.getAllClients().size();
-		
-		assertEquals(sizeList-1, sizeListAfterDel);
+		assertEquals(sizeList-1, clientService.getAllClients().size());
 	}
 }
