@@ -10,12 +10,13 @@
 <title>Insert title here</title>
 <script src='<c:url value="/resources/js/jquery-3.2.1.min.js"/>'></script>
 <script src='<c:url value="/resources/js/bootstrap.js"/>'></script>
+<link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<div style="width: 20%">
+<div id="agentHeader">
 	<%@ include file="headerAgent.jsp" %>
 </div>
-<div>
+<div id="agentContent">
 Des Voyages
 	<table>
 		<thead>
