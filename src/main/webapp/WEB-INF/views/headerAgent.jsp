@@ -10,7 +10,7 @@
 		</div>
 		<ul class="nav navbar-nav">
 			<li class="active"><a
-				href="${pageContext.request.contextPath}/admin/listeVoyage">Accueil</a></li>
+				href="${pageContext.request.contextPath}/listeVoyage">Accueil</a></li>
 		</ul>
 	</div>
 </nav>
