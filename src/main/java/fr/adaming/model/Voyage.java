@@ -47,6 +47,8 @@ public class Voyage {
 	
 	private int places;
 	
+	private 
+	
 	//Liaison UML en JAVA
 	@OneToOne(mappedBy="voyage")
 	private Dossier dossier;
