@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.adaming.model.Client;
+import fr.adaming.model.Voyage;
 import fr.adaming.service.IClientService;
 
 @Controller
@@ -88,10 +90,10 @@ public class ClientControllers {
 		}
 	}
 	
-	@RequestMapping(value = "/getClientById", method = RequestMethod.GET)
-	public String formGetById(Model model) {
-		return "getClientById";
-	}
+//	@RequestMapping(value = "/getClientById", method = RequestMethod.GET)
+//	public String formGetById(Model model) {
+//		return "getClientById";
+//	}
 
 	@RequestMapping(value = "/getClientById", method = RequestMethod.POST)
 	public String submitformGetById(RedirectAttributes redirAttr, Model model,
@@ -101,10 +103,22 @@ public class ClientControllers {
 		if (clientOut.getId() == id) {
 			model.addAttribute("client", clientOut);
 			redirAttr.addFlashAttribute("message", "Le client a été trouvé !");
-			return "recherche";
+			return "clientsAgent";
 		} else {
 			redirAttr.addFlashAttribute("message", "Aucun client n'a été trouvé");
 			return "redirect:getClientById";
 		}
+	}
+	
+	@RequestMapping(value = "/admin/delClientByLink/{pId}", method = RequestMethod.GET)
+	public String supprimVoyageLien(Model model, @PathVariable("pId") int id) {
+		
+		clientService.deleteClient(id);
+
+		// Actualiser la liste
+		List<Client> liste = clientService.getAllClients();
+		model.addAttribute("ClientList", liste);
+		
+		return "clientsAgent";
 	}
 }

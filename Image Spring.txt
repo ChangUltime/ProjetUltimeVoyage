@@ -1,0 +1,51 @@
+1 - Ajouter les liobrairie dans le pom
+a. commons-file upload
+b. commons-io
+
+2 - Dans mvc-servlet.xml, ajouter le bean commons multipart resolver et lui injecter max upload size
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="100000" />
+	</bean>
+
+3 - Dans la page html add produit, ajouter un input de type file avec un nom specifique
+
+	<div class="form-group">
+			<form:label path="imageBytes" class="col-sm-2 control-label">imageBytes</form:label>
+			<div class="col-sm-10">
+				<input type="file" name="nomSpecifique" />
+				<form:errors path="imageBytes" class="col-sm-6"></form:errors>
+			</div>
+		</div>
+
+4 - Dans controller, ajouter dans la methode un argument entrée Multipartfile "nom specfique"
+	Si image pas vide, le stocker dans l'attribut du produit image (nomspe.getBytes())
+	
+	@RequestMapping(value = "produits/insererProduit", method = RequestMethod.POST)
+	public String soumettreFormAjout(Model model, @ModelAttribute("proAddForm") Produit produit, MultipartFile file) {
+
+		try {
+			if (!file.isEmpty()) {
+				produit.setImageBytes(file.getBytes());
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+5 - Dans le controller, ajouter la methode
+
+	@RequestMapping(value = "/photoProd", produces = MediaType.IMAGE_JPEG_VALUE)
+	@ResponseBody
+	public byte[] getPhoto(Produit produit) throws IOException {
+		Produit prod = prodService.getProduitById(produit);
+		if (prod.getImageBytes() == null)
+			return new byte[0];
+		else
+			return IOUtils.toByteArray(new ByteArrayInputStream(prod.getImageBytes()));
+	}
+	
+6 - Pour récuperer l'image dans la page jsp, utiliser la balise
+
+	<img alt="" src="${pageContext.request.contextPath}/admin/photoProd?id_produit=${prod.id_produit}" />

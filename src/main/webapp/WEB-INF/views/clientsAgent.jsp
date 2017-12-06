@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,28 +9,41 @@
 
 <title>Insert title here</title>
 
-<%@ include file="resourceIncludes.jsp" %>
+<%@ include file="resourceIncludes.jsp"%>
 
 </head>
 <body>
-<div id="agentHeader">
-	<%@ include file="headerAgent.jsp" %>
-</div>
-<div id="agentContent">
-Des Clients
-	<table>
-		<thead>
-			<tr>
-				<th></th>
-			</tr>
-		</thead>
-		
-		<tbody>
-		
-		</tbody>
-	</table>
+	<div id="agentHeader">
+		<%@ include file="headerAgent.jsp"%>
+	</div>
+	<div id="agentContent">
+		Des Clients
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Identifiant</th>
+					<th>Civilite</th>
+					<th>Nom</th>
+					<th>Adresse</th>
+					<th>Telephone</th>
+				</tr>
+			</thead>
 
-</div>
+			<tbody>
+				<c:forEach var="client" items="${clientList}">
+					<tr>
+						<td>${client.id}</td>
+						<td>${client.identifiant}</td>
+						<td>${client.civilite}</td>
+						<td>${client.nom}</td>
+						<td>${client.adresse}</td>
+						<td>${client.tel}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 
 </body>
 </html>

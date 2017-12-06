@@ -20,7 +20,7 @@ import fr.adaming.service.IClientService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/application-context.xml" })
-public class clientTest {
+public class ClientTest {
 
 	@Autowired
 	private IClientService clientService;
