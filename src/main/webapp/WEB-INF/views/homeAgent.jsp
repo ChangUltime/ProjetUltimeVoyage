@@ -19,6 +19,8 @@
 <div id="agentContent">
 La Base quoi.
 
+<a href="${pageContext.request.contextPath}/agent/formVoyageUpdate">Modifier Voyage</a></li>
+
 	<table>
 		<thead>
 			<tr>

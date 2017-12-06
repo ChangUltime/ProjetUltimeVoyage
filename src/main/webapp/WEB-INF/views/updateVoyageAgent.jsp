@@ -55,8 +55,8 @@
 				<label for="inputDateD" class="col-sm-2 control-label">Date
 					de départ</label>
 				<div class="col-sm-7">
-					<form:input path="dateDepart" class="form-control" id="inputDateD"
-						placeholder="Date de départ" />
+					<form:input type="date" path="dateDepart" class="form-control" id="inputDateD"
+						placeholder="Date de départ"  />
 					<form:errors path="dateDepart" cssStyle="color: red" />
 				</div>
 			</div>
@@ -65,7 +65,7 @@
 				<label for="inputHeureD" class="col-sm-2 control-label">Heure
 					de départ</label>
 				<div class="col-sm-7">
-					<form:input path="heureDepart" class="form-control"
+					<form:input type="time" path="heureDepart" class="form-control"
 						id="inputHeureD" placeholder="Heure de départ" />
 					<form:errors path="heureDepart" cssStyle="color: red" />
 				</div>
@@ -75,7 +75,7 @@
 				<label for="inputDateR" class="col-sm-2 control-label">Date
 					de retour</label>
 				<div class="col-sm-7">
-					<form:input path="dateRetour" class="form-control" id="inputDateR"
+					<form:input type="date" path="dateRetour" class="form-control" id="inputDateR"
 						placeholder="Date de retour" />
 					<form:errors path="dateRetour" cssStyle="color: red" />
 				</div>
@@ -85,7 +85,7 @@
 				<label for="inputHeureR" class="col-sm-2 control-label">Heure
 					de retour</label>
 				<div class="col-sm-7">
-					<form:input path="heureRetour" class="form-control"
+					<form:input type="time" path="heureRetour" class="form-control"
 						id="inputHeureR" placeholder="Heure de retour" />
 					<form:errors path="heureRetour" cssStyle="color: red" />
 				</div>

@@ -115,7 +115,7 @@ public class VoyageTest {
 	public void testUpdateVoyage(){
 		System.out.println("------- Voyage modifié : attribut pays");
 		
-		Voyage vUp = voyageService.findVoyage(3);
+		Voyage vUp = voyageService.findVoyage(7);
 		
 		vUp.setPays("Allemagne");
 		
