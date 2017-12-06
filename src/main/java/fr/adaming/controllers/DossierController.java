@@ -73,10 +73,15 @@ public class DossierController {
 		return modelView;
 	}
 	
+	@RequestMapping(value="/agent/dossiers/ajout", method=RequestMethod.GET)
 	public ModelAndView showFormDossier(ModelAndView modelView, HttpSession session){
 		
 		Agent sessionAgent = (Agent) session.getAttribute("sessionAgent");
 		
+		
+		
+		modelView.setViewName("agent/dossierForm");
+		return modelView;
 	}
 		
 		
