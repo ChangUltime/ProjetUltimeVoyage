@@ -38,20 +38,6 @@ public class AgentController {
 		return modelView;
 	}
 	
-	@RequestMapping(value="/dossiers", method=RequestMethod.GET)
-	public ModelAndView dossiersPage(ModelAndView modelView, HttpSession session){
-		
-		// TODO separer dossiers par etat, classer par date
-		Agent sessionAgent = (Agent) session.getAttribute("sessionAgent");
-		if(sessionAgent != null){
-			List<Dossier> listeDossiers = dossierService.getAllDossierByAgent(sessionAgent);
-			modelView.addObject("listeDossiers", listeDossiers);
-		}
-		
-		modelView.setViewName("dossiersAgent");
-		return modelView;
-	}
-	
 	@RequestMapping(value="/clients", method=RequestMethod.GET)
 	public ModelAndView clientsPage(ModelAndView modelView, HttpSession session){
 		

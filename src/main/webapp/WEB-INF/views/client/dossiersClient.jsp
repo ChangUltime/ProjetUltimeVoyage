@@ -17,16 +17,27 @@
 	<%@ include file="headerClient.jsp" %>
 </div>
 <div id="clientContent">
-La Base quoi.
 	<table>
 		<thead>
 			<tr>
-				<th></th>
+				<th>ID</th>
+				<th>Etat</th>
+				<th>Prix</th>
+				<th>Paiement</th>
+				<th>Accompagnants</th>
 			</tr>
 		</thead>
 		
 		<tbody>
-		
+			<c:forEach var="dossier" items="${listeDossiers}">
+				<tr>
+					<td>${dossier.id}</td>
+					<td>${dossier.etat}</td>
+					<td>${dossier.prixFinal}</td>
+					<td>${dossier.datePaiement}</td>
+					<td>${dossier.nbAccompagnants}</td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 
