@@ -9,7 +9,7 @@
 
 <title>Insert title here</title>
 
-<%@ include file="resourceIncludes.jsp" %>
+<%@ include file="/views/resourceIncludes.jsp" %>
 
 </head>
 <body>

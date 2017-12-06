@@ -38,17 +38,6 @@ public class AgentController {
 		return modelView;
 	}
 	
-	//page de gestion des voyages (affichage des en cours)
-	@RequestMapping(value="/voyages", method=RequestMethod.GET)
-	public ModelAndView voyagesPage(ModelAndView modelView){
-		// TODO une methode getUpcomingVoyages
-		List<Voyage> listeVoyages = voyageService.getAllVoyages();
-		modelView.addObject("listeVoyages", listeVoyages);
-		
-		modelView.setViewName("voyagesAgent");
-		return modelView;
-	}
-	
 	@RequestMapping(value="/dossiers", method=RequestMethod.GET)
 	public ModelAndView dossiersPage(ModelAndView modelView, HttpSession session){
 		

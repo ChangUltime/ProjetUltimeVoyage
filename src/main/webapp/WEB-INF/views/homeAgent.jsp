@@ -18,6 +18,7 @@
 </div>
 <div id="agentContent">
 La Base quoi.
+
 	<table>
 		<thead>
 			<tr>
@@ -29,7 +30,6 @@ La Base quoi.
 		
 		</tbody>
 	</table>
-
 </div>
 
 </body>

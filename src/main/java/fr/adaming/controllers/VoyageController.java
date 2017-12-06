@@ -44,17 +44,34 @@ public class VoyageController {
 	 *            Contient la liste des voyages
 	 * @return La page d'accueil de l'agent
 	 */
-	@RequestMapping(value = "/admin/listeVoyage", method = RequestMethod.GET)
+	@RequestMapping(value = "/agent/voyages", method = RequestMethod.GET)
 	public String afficherListeVoyage(Model model) {
 
 		List<Voyage> listeVoyages = voyageService.getAllVoyages();
 
 		model.addAttribute("listeVoyages", listeVoyages);
 
-		return "accueilAgent";
+		return "voyagesAgent";
 	}
 	
-	@RequestMapping(value = "/admin/supprimVoyageLien/{pId}", method = RequestMethod.GET)
+	/**
+	 * Accéder à la liste des voyages sur la page d'accueil publique
+	 * 
+	 * @param model
+	 *            Contient la liste des voyages
+	 * @return La page d'accueil publique
+	 */
+	@RequestMapping(value = "/listeVoyage", method = RequestMethod.GET)
+	public String afficherListeVoyagePublic(Model model) {
+
+		List<Voyage> listeVoyages = voyageService.getAllVoyages();
+
+		model.addAttribute("listeVoyages", listeVoyages);
+
+		return "index";
+	}
+	
+	@RequestMapping(value = "/agent/supprimVoyageLien/{pId}", method = RequestMethod.GET)
 	public String supprimVoyageLien(Model model, @PathVariable("pId") int id) {
 		
 		voyageService.deleteVoyage(id);
@@ -63,7 +80,7 @@ public class VoyageController {
 		List<Voyage> newListeVoyage = voyageService.getAllVoyages();
 		model.addAttribute("listeVoyages", newListeVoyage);
 		
-		return "accueilAgent";
+		return "voyagesAgent";
 	}
 
 }
