@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Formulaire modification voyage</title>
+<title>Formulaire modification client</title>
 <%@ include file="resourceIncludes.jsp"%>
 </head>
 <body>
@@ -98,7 +98,6 @@
 		</form:form>
 
 		<p style="color: red; text-align: center">${message}</p>
-
 
 	</div>
 

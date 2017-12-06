@@ -44,7 +44,7 @@
 						<td>${client.nom}</td>
 						<td>${client.adresse}</td>
 						<td>${client.tel}</td>
-						<td><a href="${pageContext.request.contextPath}/agent/delClientByLink/${client.id}">Supprimer</a>
+						<td><a href="${pageContext.request.contextPath}/agent/delClientByLink/${client.id}">Supprimer</a> | <a href="${pageContext.request.contextPath}/agent/updateClientByLink?pId=${client.id}">Modifier</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
