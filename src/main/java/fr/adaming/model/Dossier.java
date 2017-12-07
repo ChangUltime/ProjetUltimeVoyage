@@ -30,7 +30,7 @@ public class Dossier {
 	private int nbAccompagnants;
 
 	//Liaison UML en JAVA
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="voy_id", referencedColumnName="id_voy")
 	private Voyage voyage;
 	

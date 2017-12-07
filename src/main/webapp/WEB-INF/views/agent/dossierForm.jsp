@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,12 +19,19 @@
 </div>
 <div id="agentContent">
 
-	<form:form method="POST" action="soumettreForm" commandName="formAssurance">
+	<form:form method="POST" action="agent/dossier/ajout" commandName="dossierForm">
 		
 		<!-- path : relier le champ à un attribut de l'objet ModelAttribut -->
-		Id :<form:input path="id"/><form:errors path="id" cssStyle="color:red"/><br/>
-		<br/>
-		<input type="submit" value="Soumettre le formulaire">
+		
+		Prix Final: <form:input path="prixFinal"/>
+		
+		Date Paiement: <form:input path="datePaiement"/>
+		
+		Accompagnants: <form:input path="nbAccompagnants"/>
+		
+		Voyage: <form:select path="voyage" items="${voyages}"/>
+		
+		<input type="submit" value="Ajouter le Dossier">
 	</form:form>
 
 </div>

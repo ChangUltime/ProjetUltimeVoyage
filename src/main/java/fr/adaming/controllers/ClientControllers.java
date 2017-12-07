@@ -16,6 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.adaming.model.Civilite;
 import fr.adaming.model.Client;
+import fr.adaming.model.Formule;
+import fr.adaming.model.Hebergement;
 import fr.adaming.model.Voyage;
 import fr.adaming.service.IClientService;
 
@@ -32,14 +34,17 @@ public class ClientControllers {
 	}
 	
 	// ================= Ajout client =======================================
-	@RequestMapping(name="/addFormClient", method=RequestMethod.GET)
+	@RequestMapping(value="/addFormClient", method=RequestMethod.GET)
 	public String addFormClient(Model model){
 		model.addAttribute("clientAdd", new Client());
+		
+		List<Civilite> civilite = Arrays.asList(Civilite.values());
+		model.addAttribute("civilite", civilite);
 		
 		return "addClient";
 	}
 	
-	@RequestMapping(name="/addClient", method=RequestMethod.POST)
+	@RequestMapping(value="/addClient", method=RequestMethod.POST)
 	public String submitAddFormClient(RedirectAttributes redirectAttribute, Model model, @ModelAttribute("clientAdd") Client client){
 		
 		// On appelle la méthode service
@@ -52,7 +57,7 @@ public class ClientControllers {
 			return "clientsAgent";
 		}else{
 			redirectAttribute.addFlashAttribute("message", "Le client n'a pas été ajouté");
-			return "redirect:addClient";
+			return "redirect:addFormClient";
 		}
 	}
 	
@@ -72,15 +77,16 @@ public class ClientControllers {
 	public String updateFormClient(Model model) {
 
 		model.addAttribute("clientUpdate", new Client());
+		
+		List<Civilite> civilite = Arrays.asList(Civilite.values());
+		model.addAttribute("civilite", civilite);
+		
 		return "updateClient";
 	}
 
 	@RequestMapping(value = "/updateClient", method = RequestMethod.POST)
 	public String submitUpdateFormClient(RedirectAttributes redirectAttribute, Model model,
 			@ModelAttribute("clientUpdate") Client client) {
-
-		List<Civilite> civilite = Arrays.asList(Civilite.values());
-		model.addAttribute("civilite", civilite);
 		
 		// Appel de la méthode service
 		Client clientOut = clientService.updateClient(client);
@@ -127,5 +133,17 @@ public class ClientControllers {
 		model.addAttribute("clientList", liste);
 		
 		return "clientsAgent";
+	}
+	
+	@RequestMapping(value = "/updateClientByLink", method = RequestMethod.GET)
+	public String modifVoyageLien(Model model, @RequestParam("pId") int id) {
+
+		List<Civilite> civilite = Arrays.asList(Civilite.values());
+		model.addAttribute("civilite", civilite);
+	    
+		Client clientOut = clientService.getClientById(id);
+		model.addAttribute("clientUpdate", clientOut);
+
+		return "updateClient";
 	}
 }
