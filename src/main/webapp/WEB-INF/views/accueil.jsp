@@ -47,7 +47,7 @@
 						<h4 style="text-align: right; line-height: 5px"><del>${voyage.prixInitial} euros</del></h4>
 						<h2 style="text-align: right; color : red; line-height: 8px">${voyage.prixBase} EUROS</h2>
 						<p>
-							<a href="dossier/options" class="btn btn-warning" role="button">Reserver</a>
+							<a href="dossier/options/${voyage.id}" class="btn btn-warning" role="button">Reserver</a>
 							<a href="#" class="btn btn-default" role="button"
 								data-toggle="modal" data-target="#info${voyage.id}" data-backdrop="false">Infos</a>
 						</p>
