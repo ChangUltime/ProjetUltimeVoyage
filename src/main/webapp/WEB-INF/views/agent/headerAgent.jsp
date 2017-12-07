@@ -10,17 +10,13 @@
 		</div>
 		<ul class="nav navbar-nav">
 			<li class="active"><a
-				href="${pageContext.request.contextPath}/listeVoyage">Accueil</a></li>
+				href="${pageContext.request.contextPath}listeVoyage">Accueil</a></li>
+			<li><a href="${pageContext.request.contextPath}/agent/home">Tableau de Bord</a></li>
+			<li><a href="${pageContext.request.contextPath}/agent/voyages">Voyages</a></li>
+			<li><a href="${pageContext.request.contextPath}/agent/dossiers">Dossiers</a></li>
+			<li><a href="${pageContext.request.contextPath}/agent/listeClients">Voyageurs</a></li>
+			<li><a href="${pageContext.request.contextPath}/commonLogout">Logout</a></li>
 		</ul>
 	</div>
 </nav>
-
-<ul style="list-style: none;">
-	<li><a href="home">Home</a></li>
-	<li><a href="voyages">Voyages</a></li>
-	<li><a href="dossiers">Dossiers</a></li>
-	<li><a href="${pageContext.request.contextPath}/agent/listeClients">Voyageurs</a></li>
-	<li><a href="${pageContext.request.contextPath}/commonLogout">Logout</a></li>
-</ul>
-
 </html>
