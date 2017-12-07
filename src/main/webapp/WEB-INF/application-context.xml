@@ -41,18 +41,36 @@
 		<property name="persistenceUnitName" value="AgenceBoVayage"></property>
 		<property name="packagesToScan" value="fr.adaming.model"></property>
 		<property name="jpaProperties">
-            <props>
+			<props>
 				<prop key="hibernate.dialect">${hb.dialect}</prop>
 				<prop key="hibernate.show_sql">${hb.sql}</prop>
 				<prop key="hibernate.hbm2ddl.auto">${hb.hbm2ddl}</prop>
 			</props>
-    </property>
+		</property>
 	</bean>
 
 	<bean id="transactionManagerBean" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactoryBean"></property>
 	</bean>
 
+	<!-- Production implementation of the JavaMailSender interface, supporting 
+		both JavaMail MimeMessages and Spring SimpleMailMessages -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="agent.rainbowtravels@gmail.com" />
+		<property name="password" value="rainbowtravels90" />
+
+		<!-- The name of the property, following JavaBean naming conventions -->
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
 
 	<!-- Activation des annotations de transaction -->
 	<tx:annotation-driven transaction-manager="transactionManagerBean" />

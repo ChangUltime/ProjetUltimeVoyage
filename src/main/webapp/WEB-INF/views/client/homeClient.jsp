@@ -17,6 +17,9 @@
 	<%@ include file="headerClient.jsp" %>
 </div>
 <div id="clientContent">
+
+	<h2>Prochain voyage</h2>
+
 	<table class="table table-bordered">
 		<thead>
 			<tr>
@@ -30,6 +33,7 @@
 		
 		<tbody>
 			<c:forEach var="dossier" items="${prochainsDossiers}">
+			<!-- PROCHAINS DOSSIERS==DOSSIERS DONT LA DATE EST APRES LA DATE DU JOUR -->
 				<tr>
 					<td>${dossier.id}</td>
 					<td>${dossier.etat}</td>
@@ -40,6 +44,8 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	
+	<h2>Dossier en attente</h2>
 	
 	<table class="table table-bordered">
 		<thead>

@@ -55,9 +55,9 @@ public class DossierController {
 			List<Dossier> prochainsDossiers = new ArrayList<Dossier>();
 			List<Dossier> attenteDossiers = new ArrayList<Dossier>();
 			for (Dossier doss : listeDossiers) {
-				if (doss.getEtat() == Etat.Attente) {
+				if (doss.getEtat().equals(Etat.Attente)) {
 					attenteDossiers.add(doss);
-				} else if (doss.getEtat() == Etat.Accepte && doss.getVoyage().getDateDepart().after(new Date())) {
+				} else if (doss.getEtat().equals(Etat.Accepte) && doss.getVoyage().getDateDepart().after(new Date())) {
 					prochainsDossiers.add(doss);
 				}
 			}
