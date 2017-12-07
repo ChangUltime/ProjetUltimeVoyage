@@ -83,9 +83,9 @@ public class ClientControllers {
 
 			helper.setText(text, true);
 			mailSender.send(message);
-			status = "Confirmation email is sent to your address (" + email + ")";
+			status = "Confirmation email is sent to your address (" + client.getIdentifiant() + ")";
 		} catch (MessagingException e) {
-			status = "There was an error in email sending. Please check your email address: " + email;
+			status = "There was an error in email sending. Please check your email address: " + client.getIdentifiant();
 		}
 
 		model.addAttribute("message", status);
