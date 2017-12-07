@@ -20,6 +20,7 @@
 	<li><a href="voyages">Voyages</a></li>
 	<li><a href="dossiers">Dossiers</a></li>
 	<li><a href="${pageContext.request.contextPath}/agent/listeClients">Voyageurs</a></li>
+	<li><a href="${pageContext.request.contextPath}/commonLogout">Logout</a></li>
 </ul>
 
 </html>
