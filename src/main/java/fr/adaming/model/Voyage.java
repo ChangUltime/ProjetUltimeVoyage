@@ -15,55 +15,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-<<<<<<< HEAD
-@Entity
-@Table(name="voyages")
-public class Voyage {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_voy")
-	private int id;
-	
-	@Temporal(TemporalType.DATE)
-	private Date dateDepart;
-	
-	@Temporal(TemporalType.TIME)
-	private Date heureDepart;
-	
-	@Temporal(TemporalType.DATE)
-	private Date dateRetour;
-	
-	@Temporal(TemporalType.TIME)
-	private Date heureRetour;
-	
-	private Hebergement hebergement;
-	
-	private Formule formule;
-	
-	private String continent;
-	
-	private String pays;
-	
-	private String description;
-	
-	private double prixBase;
-	
-	private int places;
-	
-	private byte[] image;
-	
-	private byte[] image2;
-	
-	private byte[] image3;
-	
-	
-	//Liaison UML en JAVA
-	@OneToOne(mappedBy="voyage")
-	private Dossier dossier;
-=======
+
 import org.springframework.format.annotation.DateTimeFormat;
->>>>>>> branch 'master' of https://github.com/DenisKevin/ProjetUltimeVoyage.git
+
 
 @Entity
 @Table(name = "voyages")
@@ -113,7 +67,7 @@ public class Voyage {
 
 	public Voyage(Date dateDepart, Date heureDepart, Date dateRetour, Date heureRetour, Hebergement hebergement,
 			Formule formule, String continent, String pays, String description, double prixBase, int places,
-			byte[] image, byte[] image2, byte[] image3) {
+			byte[] image) {
 		super();
 		this.dateDepart = dateDepart;
 		this.heureDepart = heureDepart;
@@ -127,13 +81,12 @@ public class Voyage {
 		this.prixBase = prixBase;
 		this.places = places;
 		this.image = image;
-		this.image2 = image2;
-		this.image3 = image3;
+
 	}
 
 	public Voyage(int id, Date dateDepart, Date heureDepart, Date dateRetour, Date heureRetour, Hebergement hebergement,
 			Formule formule, String continent, String pays, String description, double prixBase, int places,
-			byte[] image, byte[] image2, byte[] image3) {
+			byte[] image) {
 		super();
 		this.id = id;
 		this.dateDepart = dateDepart;
@@ -148,8 +101,7 @@ public class Voyage {
 		this.prixBase = prixBase;
 		this.places = places;
 		this.image = image;
-		this.image2 = image2;
-		this.image3 = image3;
+
 	}
 
 	// Getters et setters
@@ -266,42 +218,8 @@ public class Voyage {
 	}
 
 	
-	public byte[] getImage2() {
-		return image2;
-	}
 
-
-	public void setImage2(byte[] image2) {
-		this.image2 = image2;
-	}
-
-
-	public byte[] getImage3() {
-		return image3;
-	}
-
-
-	public void setImage3(byte[] image3) {
-		this.image3 = image3;
-	}
-
-
-	@Override
-	public String toString() {
-		return "Voyage [id=" + id + ", dateDepart=" + dateDepart + ", heureDepart=" + heureDepart + ", dateRetour="
-				+ dateRetour + ", heureRetour=" + heureRetour + ", hebergement=" + hebergement + ", formule=" + formule
-				+ ", continent=" + continent + ", pays=" + pays + ", description=" + description + ", prixBase="
-<<<<<<< HEAD
-				+ prixBase + ", places=" + places + "]";
-=======
-				+ prixBase + ", places=" + places + ", image=" + Arrays.toString(image) + "]";
->>>>>>> branch 'master' of https://github.com/DenisKevin/ProjetUltimeVoyage.git
-	}
-
-<<<<<<< HEAD
 
 	
-	
-=======
->>>>>>> branch 'master' of https://github.com/DenisKevin/ProjetUltimeVoyage.git
 }
+

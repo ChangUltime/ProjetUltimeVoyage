@@ -45,8 +45,8 @@
 						<h5>${voyage.description}</h5>
 						<h4>A partir de ${voyage.prixBase} EUROS</h4>
 						<p>
-							<a href="dossier/options" class="btn btn-warning" role="button">Reserver</a> <a
-								href="#" class="btn btn-default" role="button"
+							<a href="dossier/options" class="btn btn-warning" role="button">Reserver</a>
+							<a href="#" class="btn btn-default" role="button"
 								data-toggle="modal" data-target="#info" data-backdrop="false">Infos</a>
 						</p>
 					</div>
@@ -62,16 +62,55 @@
 									aria-hidden="true">X</button>
 							</div>
 							<div class="modal-body">
-							<h2 style="color: #D60D6B; font-family: 'Lobster', cursive;">${voyage.pays}</h2>
-							<h5>${voyage.continent}</h5>
-							<h5>${voyage.formule}</h5>
-							<h5>${voyage.description}</h5>
-							<h4>A partir de ${voyage.prixBase} EUROS</h4>
-							<br/>
-							<h5>Nombre de places disponibles : ${voyage.places}</h5>
-							<h5>Date de départ : ${voyage.dateDepart}  Heure : ${voyage.heureDepart} </h5>
-							<h5>Date de retour : ${voyage.dateRetour} Heure : ${voyage.heureRetour} </h5>
-							<img src="${pageContext.request.contextPath}/photoProd?id=${voyage.id}"	alt="" width="300px" style="position:absolute; right:10px; top:20px">
+								<h2 style="color: #D60D6B; font-family: 'Lobster', cursive;">${voyage.pays}</h2>
+								<h5>${voyage.continent}</h5>
+								<h5>${voyage.formule}</h5>
+								<h5>${voyage.description}</h5>
+								<h4>A partir de ${voyage.prixBase} EUROS</h4>
+								<br />
+								<h5>Nombre de places disponibles : ${voyage.places}</h5>
+								<h5>Date de départ : ${voyage.dateDepart} Heure :
+									${voyage.heureDepart}</h5>
+								<h5>Date de retour : ${voyage.dateRetour} Heure :
+									${voyage.heureRetour}</h5>
+								<div id="myCarousel" class="carousel slide" data-ride="carousel"
+									width="300px"
+									style="position: absolute; right: 10px; top: 20px">
+									<!-- Indicators -->
+									<ol class="carousel-indicators">
+										<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+										<li data-target="#myCarousel" data-slide-to="1"></li>
+										<li data-target="#myCarousel" data-slide-to="2"></li>
+									</ol>
+
+									<!-- Wrapper for slides -->
+									<div class="carousel-inner">
+										<div class="item active">
+											<img
+												src="${pageContext.request.contextPath}/photoProd?id=${voyage.id}"
+												alt="">
+										</div>
+
+										<div class="item">
+											<img src="chicago.jpg" alt="Chicago">
+										</div>
+
+										<div class="item">
+											<img src="ny.jpg" alt="New York">
+										</div>
+									</div>
+
+									<!-- Left and right controls -->
+									<a class="left carousel-control" href="#myCarousel"
+										data-slide="prev"> <span
+										class="glyphicon glyphicon-chevron-left"></span> <span
+										class="sr-only">Previous</span>
+									</a> <a class="right carousel-control" href="#myCarousel"
+										data-slide="next"> <span
+										class="glyphicon glyphicon-chevron-right"></span> <span
+										class="sr-only">Next</span>
+									</a>
+								</div>
 							</div>
 						</div>
 					</div>
