@@ -9,6 +9,8 @@ public interface IClientService {
 	public List<Client> getAllClients();
 
 	public Client getClientById(int id);
+	
+	public Client getClientByIdentifiant(String identifiant);
 
 	public Client addClient(Client client);
 

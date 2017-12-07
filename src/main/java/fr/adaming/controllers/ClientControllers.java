@@ -17,6 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.adaming.model.Civilite;
@@ -34,7 +38,7 @@ import fr.adaming.model.Voyage;
 import fr.adaming.service.IClientService;
 
 @Controller
-@RequestMapping("/agent")
+@RequestMapping({"/agent","/client"})
 @Scope("")
 public class ClientControllers {
 
@@ -50,6 +54,21 @@ public class ClientControllers {
 
 	public void setMailSender(JavaMailSender mailSender) {
 		this.mailSender = mailSender;
+	}
+	
+	// Methode GetClient depuis client
+	
+	@RequestMapping(value="/infos",method = RequestMethod.GET)
+	public ModelAndView showClient(ModelAndView modelView){
+		// recuperer le client identifie depuis le securitycontext de spring security
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		// recuperation du client lui meme Ã  partir de l'identifiant
+		Client client = clientService.getClientByIdentifiant(username);
+		
+		modelView.addObject("sessionClient", client);
+		modelView.setViewName("client/infosClient");
+		return modelView;
 	}
 
 	// ================= Ajout client =======================================
@@ -70,7 +89,7 @@ public class ClientControllers {
 		// Essai envoi de mail
 		String status = null;
 
-		// On appelle la méthode service
+		// On appelle la mï¿½thode service
 		Client clientOut = clientService.addClient(client);
 
 		try {
@@ -89,14 +108,14 @@ public class ClientControllers {
 			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 			helper.setFrom("Administrator");
 			helper.setTo(client.getIdentifiant());
-			helper.setSubject("Confirmation de la création du compte");
+			helper.setSubject("Confirmation de la crï¿½ation du compte");
 
 			String text = "<a href=${pageContext.request.contextPath}><img src='resources/css/images/logo.png'></a>"
-					+ "Confirmation de la création d'un compte client :<br />" + client.getCivilite() + " "
+					+ "Confirmation de la crï¿½ation d'un compte client :<br />" + client.getCivilite() + " "
 					+ client.getNom() + "<br/>Identifiant : <b>" + client.getIdentifiant() + "</b><br />"
 					+ "Adresse : <b>" + client.getAdresse() + "</b><br/>Telephone : <b>" + client.getTel() + "</b>"
-							+ "<br/><br/>Toute l'équipe vous remercie pour votre confiance !"
-							+ "<br/>Bon voyage et à bientot sur RainbowTravels !";
+							+ "<br/><br/>Toute l'ï¿½quipe vous remercie pour votre confiance !"
+							+ "<br/>Bon voyage et ï¿½ bientot sur RainbowTravels !";
 
 			helper.setText(text, true);
 			mailSender.send(message);
@@ -113,7 +132,7 @@ public class ClientControllers {
 			model.addAttribute("clientList", liste);
 			return "clientsAgent";
 		} else {
-			redirectAttribute.addFlashAttribute("message", "Le client n'a pas été ajouté");
+			redirectAttribute.addFlashAttribute("message", "Le client n'a pas ï¿½tï¿½ ajoutï¿½");
 			return "redirect:addFormClient";
 		}
 	}
@@ -145,7 +164,7 @@ public class ClientControllers {
 	public String submitUpdateFormClient(RedirectAttributes redirectAttribute, Model model,
 			@ModelAttribute("clientUpdate") Client client) {
 
-		// Appel de la méthode service
+		// Appel de la mï¿½thode service
 		Client clientOut = clientService.updateClient(client);
 
 		if (clientOut.getId() == client.getId()) {
@@ -154,8 +173,8 @@ public class ClientControllers {
 
 			return "clientsAgent";
 		} else {
-			// Message d'erreur si le client n'a pas été modifié
-			redirectAttribute.addFlashAttribute("message", "Le client n'a pas été modifié");
+			// Message d'erreur si le client n'a pas ï¿½tï¿½ modifiï¿½
+			redirectAttribute.addFlashAttribute("message", "Le client n'a pas ï¿½tï¿½ modifiï¿½");
 			return "redirect:updateFormClient";
 		}
 	}
@@ -171,10 +190,10 @@ public class ClientControllers {
 
 		if (clientOut.getId() == id) {
 			model.addAttribute("client", clientOut);
-			redirAttr.addFlashAttribute("message", "Le client a été trouvé !");
+			redirAttr.addFlashAttribute("message", "Le client a ï¿½tï¿½ trouvï¿½ !");
 			return "clientsAgent";
 		} else {
-			redirAttr.addFlashAttribute("message", "Aucun client n'a été trouvé");
+			redirAttr.addFlashAttribute("message", "Aucun client n'a ï¿½tï¿½ trouvï¿½");
 			return "redirect:getClientById";
 		}
 	}

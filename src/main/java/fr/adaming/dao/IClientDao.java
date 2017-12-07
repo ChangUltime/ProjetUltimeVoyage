@@ -15,5 +15,7 @@ public interface IClientDao {
 	public Client updateClient(Client client);
 	
 	public void deleteClient(int id);
+
+	public Client getClientByIdentifiant(String identifiant);
 	
 }

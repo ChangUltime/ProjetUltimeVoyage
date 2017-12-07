@@ -45,4 +45,9 @@ public class ClientServiceImpl implements IClientService{
 		clientDao.deleteClient(id);
 	}
 
+	@Override
+	public Client getClientByIdentifiant(String identifiant) {
+		return clientDao.getClientByIdentifiant(identifiant);
+	}
+
 }

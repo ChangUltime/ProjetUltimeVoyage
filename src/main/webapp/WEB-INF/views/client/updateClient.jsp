@@ -11,7 +11,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Formulaire modification client</title>
-<%@ include file="resourceIncludes.jsp"%>
+<%@ include file="../resourceIncludes.jsp"%>
 </head>
 <body>
 

@@ -78,4 +78,13 @@ public class ClientDaoImpl implements IClientDao {
 		em.remove(clientDel);
 	}
 
+	@Override
+	public Client getClientByIdentifiant(String identifiant) {
+		String req = "FROM Client c where c.identifiant=:pId";
+		Query query = em.createQuery(req);
+		query.setParameter("pId", identifiant);
+		
+		return (Client) query.getSingleResult();
+	}
+
 }
