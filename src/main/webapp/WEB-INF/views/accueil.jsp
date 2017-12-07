@@ -45,9 +45,9 @@
 						<h5>${voyage.description}</h5>
 						<h4>A partir de ${voyage.prixBase} EUROS</h4>
 						<p>
-							<a href="#" class="btn btn-warning" role="button">Reserver</a> <a
+							<a href="dossier/options" class="btn btn-warning" role="button">Reserver</a> <a
 								href="#" class="btn btn-default" role="button"
-								data-toggle="modal" data-target="#info">Infos</a>
+								data-toggle="modal" data-target="#info" data-backdrop="false">Infos</a>
 						</p>
 					</div>
 				</div>
@@ -55,11 +55,24 @@
 					style="display: none; position: absolute;">
 					<div class="modal-dialog">
 						<div class="modal-content">
-							<div class="modal-header">
+							<div class="modal-header"
+								style="color: #D60D6B; font-family: 'Lobster', cursive;">
+								Informations concernant ce voyage :
 								<button type="button" class="close" data-dismiss="modal"
 									aria-hidden="true">X</button>
 							</div>
-							<div class="modal-body">blabla</div>
+							<div class="modal-body">
+							<h2 style="color: #D60D6B; font-family: 'Lobster', cursive;">${voyage.pays}</h2>
+							<h5>${voyage.continent}</h5>
+							<h5>${voyage.formule}</h5>
+							<h5>${voyage.description}</h5>
+							<h4>A partir de ${voyage.prixBase} EUROS</h4>
+							<br/>
+							<h5>Nombre de places disponibles : ${voyage.places}</h5>
+							<h5>Date de départ : ${voyage.dateDepart}  Heure : ${voyage.heureDepart} </h5>
+							<h5>Date de retour : ${voyage.dateRetour} Heure : ${voyage.heureRetour} </h5>
+							<img src="${pageContext.request.contextPath}/photoProd?id=${voyage.id}"	alt="" width="300px" style="position:absolute; right:10px; top:20px">
+							</div>
 						</div>
 					</div>
 				</div>

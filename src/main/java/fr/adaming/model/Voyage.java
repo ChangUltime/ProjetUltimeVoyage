@@ -50,6 +50,11 @@ public class Voyage {
 	
 	private byte[] image;
 	
+	private byte[] image2;
+	
+	private byte[] image3;
+	
+	
 	//Liaison UML en JAVA
 	@OneToOne(mappedBy="voyage")
 	private Dossier dossier;
@@ -62,7 +67,7 @@ public class Voyage {
 	
 	public Voyage(Date dateDepart, Date heureDepart, Date dateRetour, Date heureRetour, Hebergement hebergement,
 			Formule formule, String continent, String pays, String description, double prixBase, int places,
-			byte[] image) {
+			byte[] image, byte[] image2, byte[] image3) {
 		super();
 		this.dateDepart = dateDepart;
 		this.heureDepart = heureDepart;
@@ -76,12 +81,14 @@ public class Voyage {
 		this.prixBase = prixBase;
 		this.places = places;
 		this.image = image;
+		this.image2 = image2;
+		this.image3 = image3;
 	}
 
 
 	public Voyage(int id, Date dateDepart, Date heureDepart, Date dateRetour, Date heureRetour, Hebergement hebergement,
 			Formule formule, String continent, String pays, String description, double prixBase, int places,
-			byte[] image) {
+			byte[] image, byte[] image2, byte[] image3) {
 		super();
 		this.id = id;
 		this.dateDepart = dateDepart;
@@ -96,6 +103,8 @@ public class Voyage {
 		this.prixBase = prixBase;
 		this.places = places;
 		this.image = image;
+		this.image2 = image2;
+		this.image3 = image3;
 	}
 
 
@@ -216,13 +225,36 @@ public class Voyage {
 	}
 
 
+	
+	public byte[] getImage2() {
+		return image2;
+	}
+
+
+	public void setImage2(byte[] image2) {
+		this.image2 = image2;
+	}
+
+
+	public byte[] getImage3() {
+		return image3;
+	}
+
+
+	public void setImage3(byte[] image3) {
+		this.image3 = image3;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Voyage [id=" + id + ", dateDepart=" + dateDepart + ", heureDepart=" + heureDepart + ", dateRetour="
 				+ dateRetour + ", heureRetour=" + heureRetour + ", hebergement=" + hebergement + ", formule=" + formule
 				+ ", continent=" + continent + ", pays=" + pays + ", description=" + description + ", prixBase="
-				+ prixBase + ", places=" + places + ", image=" + Arrays.toString(image) + ", dossier=" + dossier + "]";
+				+ prixBase + ", places=" + places + "]";
 	}
 
+
+	
 	
 }
