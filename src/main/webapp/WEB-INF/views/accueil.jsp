@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -41,17 +42,18 @@
 						src="${pageContext.request.contextPath}/photoProd?id=${voyage.id}"
 						alt="" width="500px">
 					<div class="caption">
-						<h2 style="color: #D60D6B; font-family: 'Lobster', cursive;">${voyage.pays}</h2>
-						<h5>${voyage.description}</h5>
-						<h4>A partir de ${voyage.prixBase} EUROS</h4>
+						<h2 style="color: #D60D6B; font-family: 'Lobster', cursive; line-height: 8px"">${voyage.pays}</h2>
+						<h5 style="line-height: 25px; text-align: justify;">${voyage.description}</h5>
+						<h4 style="text-align: right; line-height: 5px"><del>${voyage.prixInitial} euros</del></h4>
+						<h2 style="text-align: right; color : red; line-height: 8px">${voyage.prixBase} EUROS</h2>
 						<p>
 							<a href="dossier/options" class="btn btn-warning" role="button">Reserver</a>
 							<a href="#" class="btn btn-default" role="button"
-								data-toggle="modal" data-target="#info" data-backdrop="false">Infos</a>
+								data-toggle="modal" data-target="#info${voyage.id}" data-backdrop="false">Infos</a>
 						</p>
 					</div>
 				</div>
-				<div class="modal-fade" id="info" tabindex="-1" role="dialog"
+				<div class="modal-fade" id="info${voyage.id}" tabindex="-1" role="dialog"
 					style="display: none; position: absolute;">
 					<div class="modal-dialog">
 						<div class="modal-content">
@@ -65,14 +67,17 @@
 								<h2 style="color: #D60D6B; font-family: 'Lobster', cursive;">${voyage.pays}</h2>
 								<h5>${voyage.continent}</h5>
 								<h5>${voyage.formule}</h5>
-								<h5>${voyage.description}</h5>
 								<h4>A partir de ${voyage.prixBase} EUROS</h4>
-								<br />
+								<br/>
+								<h5>${voyage.description}</h5>
 								<h5>Nombre de places disponibles : ${voyage.places}</h5>
-								<h5>Date de départ : ${voyage.dateDepart} Heure :
-									${voyage.heureDepart}</h5>
-								<h5>Date de retour : ${voyage.dateRetour} Heure :
-									${voyage.heureRetour}</h5>
+								<h5>Date de départ : <fmt:formatDate type="time" value="${voyage.dateDepart}"
+									pattern="dd/MM/yyyy" /> Heure :
+									<fmt:formatDate type="time" value="${voyage.heureDepart}"
+									pattern="HH:mm" /></h5>
+								<h5>Date de retour : <fmt:formatDate type="time" value="${voyage.dateRetour}"
+									pattern="dd/MM/yyyy" /> Heure :<fmt:formatDate type="time" value="${voyage.heureRetour}"
+									pattern="HH:mm" /></h5>
 								<div id="myCarousel" class="carousel slide" data-ride="carousel"
 									width="300px"
 									style="position: absolute; right: 10px; top: 20px">
@@ -88,15 +93,19 @@
 										<div class="item active">
 											<img
 												src="${pageContext.request.contextPath}/photoProd?id=${voyage.id}"
-												alt="">
+												alt="" width="300px">
 										</div>
 
 										<div class="item">
-											<img src="chicago.jpg" alt="Chicago">
+											<img
+												src="${pageContext.request.contextPath}/photoProd2?id=${voyage.id}"
+												alt="" width="300px">
 										</div>
 
 										<div class="item">
-											<img src="ny.jpg" alt="New York">
+											<img
+												src="${pageContext.request.contextPath}/photoProd3?id=${voyage.id}"
+												alt="" width="300px">
 										</div>
 									</div>
 

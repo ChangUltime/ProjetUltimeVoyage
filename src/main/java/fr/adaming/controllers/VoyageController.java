@@ -191,6 +191,26 @@ public class VoyageController {
 			return IOUtils.toByteArray(new ByteArrayInputStream(voy.getImage()));
 	}
 	
+	@RequestMapping(value = "/photoProd2", produces = MediaType.IMAGE_JPEG_VALUE)
+	@ResponseBody
+	public byte[] getPhoto2(Voyage voyage) throws IOException {
+		Voyage voy = voyageService.findVoyage(voyage.getId());
+		if (voy.getImage2() == null)
+			return new byte[0];
+		else
+			return IOUtils.toByteArray(new ByteArrayInputStream(voy.getImage2()));
+	}
+	
+	@RequestMapping(value = "/photoProd3", produces = MediaType.IMAGE_JPEG_VALUE)
+	@ResponseBody
+	public byte[] getPhoto3(Voyage voyage) throws IOException {
+		Voyage voy = voyageService.findVoyage(voyage.getId());
+		if (voy.getImage3() == null)
+			return new byte[0];
+		else
+			return IOUtils.toByteArray(new ByteArrayInputStream(voy.getImage3()));
+	}
+	
 	@RequestMapping(value = "/agent/formVoyageAdd", method = RequestMethod.GET)
 	public ModelAndView formVoyageAdd(Model model){
 		

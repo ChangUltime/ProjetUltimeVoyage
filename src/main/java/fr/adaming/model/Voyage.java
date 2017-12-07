@@ -51,10 +51,16 @@ public class Voyage {
 	private String description;
 
 	private double prixBase;
+	
+	private double prixInitial;
 
 	private int places;
 
 	private byte[] image;
+	
+	private byte[] image2;
+	
+	private byte[] image3;
 
 	// Liaison UML en JAVA
 	@OneToMany(mappedBy = "voyage")
@@ -65,9 +71,10 @@ public class Voyage {
 		super();
 	}
 
+
 	public Voyage(Date dateDepart, Date heureDepart, Date dateRetour, Date heureRetour, Hebergement hebergement,
-			Formule formule, String continent, String pays, String description, double prixBase, int places,
-			byte[] image) {
+			Formule formule, String continent, String pays, String description, double prixBase, double prixInitial,
+			int places, byte[] image, byte[] image2, byte[] image3) {
 		super();
 		this.dateDepart = dateDepart;
 		this.heureDepart = heureDepart;
@@ -79,14 +86,17 @@ public class Voyage {
 		this.pays = pays;
 		this.description = description;
 		this.prixBase = prixBase;
+		this.prixInitial = prixInitial;
 		this.places = places;
 		this.image = image;
-
+		this.image2 = image2;
+		this.image3 = image3;
 	}
 
+
 	public Voyage(int id, Date dateDepart, Date heureDepart, Date dateRetour, Date heureRetour, Hebergement hebergement,
-			Formule formule, String continent, String pays, String description, double prixBase, int places,
-			byte[] image) {
+			Formule formule, String continent, String pays, String description, double prixBase, double prixInitial,
+			int places, byte[] image, byte[] image2, byte[] image3) {
 		super();
 		this.id = id;
 		this.dateDepart = dateDepart;
@@ -99,10 +109,13 @@ public class Voyage {
 		this.pays = pays;
 		this.description = description;
 		this.prixBase = prixBase;
+		this.prixInitial = prixInitial;
 		this.places = places;
 		this.image = image;
-
+		this.image2 = image2;
+		this.image3 = image3;
 	}
+
 
 	// Getters et setters
 	public int getId() {
@@ -215,6 +228,32 @@ public class Voyage {
 
 	public void setImage(byte[] image) {
 		this.image = image;
+	}
+
+	public byte[] getImage2() {
+		return image2;
+	}
+
+	public void setImage2(byte[] image2) {
+		this.image2 = image2;
+	}
+
+	public byte[] getImage3() {
+		return image3;
+	}
+
+	public void setImage3(byte[] image3) {
+		this.image3 = image3;
+	}
+
+
+	public double getPrixInitial() {
+		return prixInitial;
+	}
+
+
+	public void setPrixInitial(double prixInitial) {
+		this.prixInitial = prixInitial;
 	}
 
 	
