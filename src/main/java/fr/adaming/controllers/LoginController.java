@@ -24,11 +24,11 @@ public class LoginController{
 	}
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
-	public ModelAndView logoutAccueil(ModelAndView modelView, HttpSession session){
+	public String logoutAccueil(HttpSession session){
 		
 		session.invalidate();
-		modelView.setViewName("accueil");
-		return modelView;
+
+		return "redirect:listeVoyage";
 	}
 	
 }

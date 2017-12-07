@@ -2,12 +2,13 @@
 
 body{
 	
+	overflow: scroll;
 	font-family: 'Varela Round', sans-serif;
 	font-size: 19px;
 	line-height: 1.42857143;
 	color: #333;
 	position: absolute;
-	background-image: url("images/fond.jpg");
+	background: url("images/fond.jpg") no-repeat center fixed;
 	background-size: cover;
 	margin: 0;
 	width: 100%;

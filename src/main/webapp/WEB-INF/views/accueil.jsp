@@ -12,7 +12,7 @@
 <title>Page d'accueil</title>
 </head>
 <body>
-	<div style="position: sticky; top: 0;">
+	<div style="position: sticky; top:0">
 		<div style="height: 110px; background-color: #D60D6B">
 			<a href="client/home"
 				style="color: white; position: absolute; right: 10px">Je suis
@@ -27,7 +27,7 @@
 			style="height: 50px; background-color: white; margin-bottom: 20px; display: flex">
 			<h3 style="margin: 10px; color: #D60D6B">Affiner votre recherche
 				:</h3>
-			<input type="text" id="searchVoyage" onkeyup="searchVoyagePays()" class="form-control" placeholder="Rechercher"
+			<input autocomplete="on" type="text" id="searchVoyage" onkeyup="searchVoyagePays()" class="form-control" placeholder="Rechercher"
 				style="width: 200px; position: relative; top: 6px">
 			<button id="croissant" onclick="orderedPrice()"
 				class="btn btn-warning"
