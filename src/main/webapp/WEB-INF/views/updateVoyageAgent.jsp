@@ -12,6 +12,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Formulaire modification voyage</title>
 <%@ include file="resourceIncludes.jsp"%>
+
+<script src='<c:url value="/resources/js/searchBar.js"/>'></script>
+
+<!-- Bootstrap Date-Picker Plugin -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
 </head>
 <body>
 
@@ -49,7 +56,6 @@
 				<form:errors path="pays" cssStyle="color: red" />
 			</div>
 		</div>
-
 				<div class="form-group">
 					<label for="inputDateD" class="col-sm-2 control-label">Date
 						de départ</label>
@@ -57,7 +63,7 @@
 						<fmt:formatDate value="${voyageUpdate.dateDepart}"
 		 					pattern="dd/MM/yyyy" var="myDate" /> 
 		 				<form:input type="text" path="dateDepart" class="form-control" 
-							id="inputDateD" placeholder="Date de départ" value="${myDate}" />
+							id="inputDateD" placeholder="Date de départ" value="${myDate}"/>
 		 				<form:errors path="dateDepart" cssStyle="color: red" /> 
 					</div>
 				</div>
@@ -101,7 +107,7 @@
 		<div class="form-group">
 			<label for="inputFormule" class="col-sm-2 control-label">Formule</label>
 			<div class="col-sm-7">
-				<form:select path="formule">
+				<form:select path="formule" items="${formule}">
 					<c:forEach items="${formule}" var="key">
 						<form:option value="${key}">${key}</form:option>
 					</c:forEach>
@@ -112,19 +118,28 @@
 		<div class="form-group">
 			<label for="inputHebergement" class="col-sm-2 control-label">Hébergement</label>
 			<div class="col-sm-7">
-				<form:select path="hebergement">
+				<form:select path="hebergement" items="${hebergement}">
 					<c:forEach items="${hebergement} " var="heb">
 						<form:option value="${heb}">${heb}</form:option>
 					</c:forEach>
 				</form:select>
 			</div>
 		</div>
+		
+		<div class="form-group">
+			<label for="inputPrixInit" class="col-sm-2 control-label">Prix initial</label>
+			<div class="col-sm-7">
+				<form:input path="prixInitial" class="form-control" id="inputPrixInit"
+					placeholder="Prix initial" />
+				<form:errors path="prixInitial" cssStyle="color: red" />
+			</div>
+		</div>
 
 		<div class="form-group">
-			<label for="inputPrix" class="col-sm-2 control-label">Prix</label>
+			<label for="inputPrix" class="col-sm-2 control-label">Prix proposé</label>
 			<div class="col-sm-7">
 				<form:input path="prixBase" class="form-control" id="inputPrix"
-					placeholder="Prix" />
+					placeholder="Prix proposé" />
 				<form:errors path="prixBase" cssStyle="color: red" />
 			</div>
 		</div>
