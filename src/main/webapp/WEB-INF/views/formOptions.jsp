@@ -42,23 +42,27 @@
 <body>
 
 
-	<form:form method="POST" action="formDossierOptions"
+	<form:form method="POST" action="${pageContext.request.contextPath}/formDossierOptions"
 		modelAttribute="dossierOptions">
 
 	Votre voyage :
 	<br/> 
-	<label> Départ <input type="text" value="${dossierOptions.voyage.dateDepart}" disabled> <br />
-			Retour <input type="text" value="${dossierOptions.voyage.dateRetour}" disabled>
+		<div style="visibility: hidden; display: none">
+		<form:input path="voyage.id"  type="text" value="${dossierOptions.voyage.id}" />
+		</div>
+	
+	<label> Départ <input type="text" value="${dossierOptions.voyage.dateDepart}" disabled/> <br />
+			Retour <input type="text" value="${dossierOptions.voyage.dateRetour}" disabled/>
 		</label>
 
 		<br />
 
-		<label> Destination <input type="text" value="${dossierOptions.voyage.pays}" disabled>
+		<label> Destination <input type="text" value="${dossierOptions.voyage.pays}" disabled/>
 		</label>
 
 		<br />
 
-		<label> Formule <input type="text" value="${dossierOptions.voyage.formule}" disabled>
+		<label> Formule <input type="text" value="${dossierOptions.voyage.formule}" disabled/>
 		</label>
 		<br />
 

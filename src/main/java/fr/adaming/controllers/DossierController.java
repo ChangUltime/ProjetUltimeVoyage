@@ -166,10 +166,40 @@ public class DossierController {
 	}
 	
 	@RequestMapping(value="/formDossierOptions", method = RequestMethod.POST)
-	public String soumettreFormDossier(ModelAndView modelView, @ModelAttribute("formOptions") Dossier dossier){
+	public String soumettreFormDossier(Model model, @ModelAttribute("dossierOptions") Dossier doss,  @ModelAttribute("formCompte") Client client){
+
 		
+		int id  = doss.getVoiture().getId() ; 
 		
-		return "affichageFormOptions" ; 
+		Voiture voit = voitureService.getVoituretById(id);
+		model.addAttribute("voiture",voit);
+
+		int id2 = doss.getAssurance().getId() ; 
+		Assurance assurance = assuranceService.getAssuranceById(id2);
+		model.addAttribute("assurance",assurance);
+
+		int id3 = doss.getVoyage().getId() ; 
+		Voyage voyage = voyageService.findVoyage(id3);
+		model.addAttribute("voyage",voyage);
+
+
+		model.addAttribute("formCompte",new Client());
+		return "compteForm" ; 
 	}
 	 
+	@RequestMapping(value="/dossier/compte", method = RequestMethod.GET)
+	public String afficheFormCompte(Model model, @ModelAttribute("dossierOptions") Dossier doss ){
+		
+		model.addAttribute("formCompte",new Client());
+		return "compteForm";
+	}
+	
+	
+	@RequestMapping(value="/dossierCompte", method = RequestMethod.POST)
+	public String soumettreFormCompte(Model model, @ModelAttribute("dossierOptions") Dossier doss,  @ModelAttribute("formCompte") Client client ){
+		
+		model.addAttribute("formCompte",client);
+		return "affichageFormulaireCompte";
+	}
+	
 }

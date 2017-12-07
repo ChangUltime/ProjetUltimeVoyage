@@ -8,17 +8,17 @@
 </head>
 <body>
 
-client.civilite : ${formCompte.civ }
+civilite : ${formCompte.civilite }
 <br/>
-client.nom : ${formCompte.nom}
+nom : ${formCompte.nom}
 <br/>
-client.adresse : ${formCompte.adresse}
+adresse : ${formCompte.adresse}
 <br/>
-client.tel : ${formCompte.tel}
+tel : ${formCompte.tel}
 <br/>
-client.identifiant : ${formCompte.user}
+identifiant : ${formCompte.identifiant}
 <br/>
-client.mdp : ${formCompte.mdp }
+mdp : ${formCompte.mdp }
 <br/>
 
 </body>

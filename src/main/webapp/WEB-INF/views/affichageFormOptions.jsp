@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -8,14 +8,15 @@
 </head>
 <body>
 	
-
-voyage.hebergement : ${formOptions.hebergement}
+voyage : ${voyage}
 <br/>
-voyage.voiture : ${formOptions.voiture.id}
+voyage.hebergement : ${dossierOptions.voyage.hebergement}
 <br/>
-assurance : ${formOptions.assurance.id}
+voiture : ${voiture}
 <br/>
-nbAccompagnants : ${formOptions.nbAccompagnants}
+assurance : ${assurance}
+<br/>
+nbAccompagnants : ${dossierOptions.nbAccompagnants}
 
 
 </body>
