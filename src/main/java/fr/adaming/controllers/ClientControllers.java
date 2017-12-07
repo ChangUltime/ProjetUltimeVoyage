@@ -34,7 +34,7 @@ public class ClientControllers {
 	}
 	
 	// ================= Ajout client =======================================
-	@RequestMapping(name="/addFormClient", method=RequestMethod.GET)
+	@RequestMapping(value="/addFormClient", method=RequestMethod.GET)
 	public String addFormClient(Model model){
 		model.addAttribute("clientAdd", new Client());
 		
@@ -44,7 +44,7 @@ public class ClientControllers {
 		return "addClient";
 	}
 	
-	@RequestMapping(name="/addClient", method=RequestMethod.POST)
+	@RequestMapping(value="/addClient", method=RequestMethod.POST)
 	public String submitAddFormClient(RedirectAttributes redirectAttribute, Model model, @ModelAttribute("clientAdd") Client client){
 		
 		// On appelle la méthode service
