@@ -55,7 +55,7 @@
 			<div class="form-group">
 				<label for="inputCivilite" class="col-sm-2 control-label">Civilite</label>
 				<div class="col-sm-7">
-					<form:select path="civilite">
+					<form:select path="civilite" items="${civilite}">
 						<c:forEach items="${civilite} " var="key">
 							<form:option value="${key}">${key}</form:option>
 						</c:forEach>

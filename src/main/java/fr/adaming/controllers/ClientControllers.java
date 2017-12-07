@@ -3,9 +3,15 @@ package fr.adaming.controllers;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -69,6 +75,17 @@ public class ClientControllers {
 
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
+			
+			Multipart multipart = new MimeMultipart();
+			MimeBodyPart messageBodyPart = new MimeBodyPart();
+			
+			DataSource source = new FileDataSource("C:/Users/inti0455/Downloads/a.png");
+			
+			messageBodyPart.setDataHandler(new DataHandler(source));
+			messageBodyPart.setFileName("nom de la PJ");
+			multipart.addBodyPart(messageBodyPart);
+			message.setContent(multipart);
+			
 			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 			helper.setFrom("Administrator");
 			helper.setTo(client.getIdentifiant());
