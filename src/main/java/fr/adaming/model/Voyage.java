@@ -256,6 +256,15 @@ public class Voyage {
 		this.prixInitial = prixInitial;
 	}
 
+
+	@Override
+	public String toString() {
+		return "Voyage [id=" + id + ", dateDepart=" + dateDepart + ", heureDepart=" + heureDepart + ", dateRetour="
+				+ dateRetour + ", heureRetour=" + heureRetour + ", hebergement=" + hebergement + ", formule=" + formule
+				+ ", continent=" + continent + ", pays=" + pays + ", description=" + description + ", prixBase="
+				+ prixBase + ", prixInitial=" + prixInitial + ", places=" + places + "]";
+	}
+
 	
 
 

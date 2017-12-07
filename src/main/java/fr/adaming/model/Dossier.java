@@ -42,6 +42,12 @@ public class Dossier {
 	@JoinColumn(name="ag_id", referencedColumnName="id_ag")
 	private Agent agent;
 	
+	@OneToOne
+//	@JoinColumn(name="v_id", referencedColumnName="id_v")
+	private Voiture voiture ; 
+	
+	@OneToOne
+	private Assurance assurance ; 
 	
 	//Constructeurs
 	public Dossier() {
@@ -128,6 +134,26 @@ public class Dossier {
 
 	public void setNbAccompagnants(int nbAccompagnants) {
 		this.nbAccompagnants = nbAccompagnants;
+	}
+
+
+	
+	public Voiture getVoiture() {
+		return voiture;
+	}
+
+	public void setVoiture(Voiture voiture) {
+		this.voiture = voiture;
+	}
+
+	
+	
+	public Assurance getAssurance() {
+		return assurance;
+	}
+
+	public void setAssurance(Assurance assurance) {
+		this.assurance = assurance;
 	}
 
 	@Override

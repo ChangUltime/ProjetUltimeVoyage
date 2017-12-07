@@ -28,10 +28,10 @@ public class Voiture {
 	
 	private double prixJour;
 
-	//Liaison UML en JAVA
-	@OneToOne
-	@JoinColumn(name="dossier_id",referencedColumnName="id_do")
-	private Dossier dossier;
+//	//Liaison UML en JAVA
+//	@OneToOne(mappedBy="voiture")
+//	@JoinColumn(name="dossier_id",referencedColumnName="id_do")
+//	private Dossier dossier;
 
 	//Constructeurs
 	public Voiture() {
@@ -107,18 +107,10 @@ public class Voiture {
 	}
 
 
-	public Dossier getDossier() {
-		return dossier;
-	}
-
-	public void setDossier(Dossier dossier) {
-		this.dossier = dossier;
-	}
-
 	@Override
 	public String toString() {
 		return "Voiture [id=" + id + ", modele=" + modele + ", nbPlace=" + nbPlace + ", prixJour=" + prixJour
-				+ ", dossier=" + dossier + "]";
+				 + "]";
 	}
 	
 	

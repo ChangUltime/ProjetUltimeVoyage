@@ -1,6 +1,7 @@
 package fr.adaming.controllers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -8,18 +9,26 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import fr.adaming.model.Agent;
+import fr.adaming.model.Assurance;
 import fr.adaming.model.Client;
 import fr.adaming.model.Dossier;
 import fr.adaming.model.Etat;
+import fr.adaming.model.Hebergement;
+import fr.adaming.model.Voiture;
 import fr.adaming.model.Voyage;
+import fr.adaming.service.IAssuranceService;
 import fr.adaming.service.IDossierService;
+import fr.adaming.service.IVoitureService;
 import fr.adaming.service.IVoyageService;
 
 @Controller
@@ -30,6 +39,12 @@ public class DossierController {
 	
 	@Autowired
 	private IVoyageService voyageService;
+	
+	@Autowired
+	private IVoitureService voitureService ; 
+	
+	@Autowired
+	private IAssuranceService assuranceService ; 
 
 	@RequestMapping(value = { "/client/dossiers" }, method = RequestMethod.GET)
 	public ModelAndView getDossiersClient(ModelAndView modelView, HttpSession session) {
@@ -55,9 +70,9 @@ public class DossierController {
 			List<Dossier> prochainsDossiers = new ArrayList<Dossier>();
 			List<Dossier> attenteDossiers = new ArrayList<Dossier>();
 			for (Dossier doss : listeDossiers) {
-				if (doss.getEtat().equals(Etat.Attente)) {
+				if (doss.getEtat() == Etat.Attente) {
 					attenteDossiers.add(doss);
-				} else if (doss.getEtat().equals(Etat.Accepte) && doss.getVoyage().getDateDepart().after(new Date())) {
+				} else if (doss.getEtat() == Etat.Accepte && doss.getVoyage().getDateDepart().after(new Date())) {
 					prochainsDossiers.add(doss);
 				}
 			}
@@ -113,4 +128,48 @@ public class DossierController {
 		return modelView;
 	}
 
+	@RequestMapping(value="/dossier/options/{pId}", method = RequestMethod.GET)
+	public String afficheFormDossier(Model model, @PathVariable("pId") int id ){
+		
+			
+			Voyage voyage = voyageService.findVoyage(id); 
+		
+			System.out.println(voyage);
+			
+			Dossier doss = new Dossier(); 
+			doss.setVoyage(voyage);
+		
+			System.out.println(doss);
+			
+			model.addAttribute("dossierOptions", doss);
+			
+			
+			List<Hebergement> listHebergement = Arrays.asList(Hebergement.values());
+		    model.addAttribute("listHebergement", listHebergement);
+		    
+		    List<Voiture> listeVoitures = voitureService.getAllVoitures();
+		    model.addAttribute("listeVoitures", listeVoitures);
+		    
+		    Voiture voiture = new Voiture() ; 
+		    model.addAttribute("voiture", voiture);
+		    
+		    List<Assurance> listeAssurances = assuranceService.getAllAssurance();
+		    model.addAttribute("listeAssurances", listeAssurances);
+		    
+		    for (Assurance assurance : listeAssurances) {
+				System.out.println(assurance);
+			}
+		    
+		    
+		    return "formOptions" ; 
+		    
+	}
+	
+	@RequestMapping(value="/formDossierOptions", method = RequestMethod.POST)
+	public String soumettreFormDossier(ModelAndView modelView, @ModelAttribute("formOptions") Dossier dossier){
+		
+		
+		return "affichageFormOptions" ; 
+	}
+	
 }
