@@ -27,7 +27,7 @@
 			style="height: 50px; background-color: white; margin-bottom: 20px; display: flex">
 			<h3 style="margin: 10px; color: #D60D6B">Affiner votre recherche
 				:</h3>
-			<input type="text" id="searchVoyage" onkeyup="searchByPays()" class="form-control" placeholder="Rechercher"
+			<input type="text" id="searchVoyage" onkeyup="searchVoyagePays()" class="form-control" placeholder="Rechercher"
 				style="width: 200px; position: relative; top: 6px">
 			<button id="croissant" onclick="orderedPrice()"
 				class="btn btn-warning"
@@ -45,14 +45,14 @@
 		<div id="voy"
 			style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around;">
 			<c:forEach var="voyage" items="${listeVoyages}">
-				<div class="thumbnail"
+				<div class="thumbnail filter ${voyage.pays}"
 					style="flex-basis: 28%; background-color: rgba(254, 254, 254, 0.85)">
 					<img
 						src="${pageContext.request.contextPath}/photoProd?id=${voyage.id}"
 						alt="" width="500px">
 					<div class="caption">
 						<h2
-							style="color: #D60D6B; font-family: 'Lobster', cursive; line-height: 8px"">${voyage.pays}</h2>
+							style="color: #D60D6B; font-family: 'Lobster', cursive; line-height: 8px"><span>${voyage.pays}</span></h2>
 						<h5 style="line-height: 25px; text-align: justify;">${voyage.description}</h5>
 						<h4 style="text-align: right; line-height: 5px">
 							<del>${voyage.prixInitial} euros</del>
