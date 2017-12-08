@@ -11,6 +11,11 @@
 <%@ include file="/views/resourceIncludes.jsp"%>
 </head>
 <body>
+<div id="agentHeader">
+		<%@ include file="headerAgent.jsp"%>
+	</div>
+	
+	<div style="position: absolute; width: 30%; height: 82%; left: 10%; top: 16%; text-align: center; background-color: rgba(255, 255, 255, 0.8); border: medium; border-color: #D60D6B; border-style: solid;">
 	<form:form method="POST" action="dossierCompte"
 		modelAttribute="formCompte">
 
@@ -31,29 +36,30 @@
 
 		<br />
 		
-		Nom :<form:input path="nom" />
+		Nom :<form:input class="form-control" path="nom" />
 		<form:errors path="nom" cssStyle="color:red" />
 		<br />
 		
-		Adresse :<form:input path="adresse" />
+		Adresse :<form:input class="form-control" path="adresse" />
 		<form:errors path="adresse" cssStyle="color:red" />
 		<br />
 		
-		Telephone :<form:input path="tel" />
+		Telephone :<form:input class="form-control" path="tel" />
 		<form:errors path="tel" cssStyle="color:red" />
 		<br />
 		
-		Identifiant : <form:input path="identifiant" />
+		Identifiant : <form:input class="form-control" path="identifiant" />
 		<form:errors path="identifiant" cssStyle="color:red" />
 		<br />
 		
-		Mot de passe<form:input path="mdp" />
+		Mot de passe<form:input  class="form-control" path="mdp" />
 		<form:errors path="mdp" cssStyle="color:red" />
 		<br />
 
 
 
-		<input type="submit" value="Passer au paiement">
+		<input style="margin: 20px" class="btn-warning" type="submit" value="Passer au paiement">
 	</form:form>
+	</div> 
 </body>
 </html>
