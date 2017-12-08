@@ -102,6 +102,9 @@ public class VoyageDaoImpl implements IVoyageDao {
 	public Voyage updateVoyage(Voyage v) {
 		Voyage vUp = em.find(Voyage.class, v.getId());
 
+		vUp.setImage(v.getImage());
+		vUp.setImage2(v.getImage2());
+		vUp.setImage3(v.getImage3());
 		vUp.setContinent(v.getContinent());
 		vUp.setDateDepart(v.getDateDepart());
 		vUp.setDateRetour(v.getDateRetour());

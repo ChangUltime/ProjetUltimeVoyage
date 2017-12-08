@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -157,9 +158,25 @@ public class VoyageController {
 	 * @return
 	 */
 	@RequestMapping(value = "/agent/modifVoyage", method = RequestMethod.POST)
-	public String soumettreVoyageUpdate(Model model, @ModelAttribute("voyageUpdate") Voyage v, RedirectAttributes ra) {
+	public String soumettreVoyageUpdate(Model model, @ModelAttribute("voyageUpdate") Voyage v, RedirectAttributes ra, MultipartFile file1, MultipartFile file2, MultipartFile file3) {
 
-		System.out.println(v);
+		try {
+			if (!file1.isEmpty()) {
+				v.setImage(file1.getBytes());
+			}
+			
+			if (!file2.isEmpty()) {
+				v.setImage2(file2.getBytes());
+			}
+			
+			if (!file3.isEmpty()) {
+				v.setImage3(file3.getBytes());
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		// Appel de la méthode Service
 		Voyage vOut = voyageService.updateVoyage(v);
 		
@@ -224,8 +241,25 @@ public class VoyageController {
 	}
 	
 	@RequestMapping(value = "/agent/ajouteVoyage", method = RequestMethod.POST)
-	public String soumettreVoyageAdd(Model model, @ModelAttribute("voyageAdd") Voyage v, RedirectAttributes ra) {
+	public String soumettreVoyageAdd(Model model, @ModelAttribute("voyageAdd") Voyage v, RedirectAttributes ra, MultipartFile file1, MultipartFile file2, MultipartFile file3) {
 	    
+		try {
+			if (!file1.isEmpty()) {
+				v.setImage(file1.getBytes());
+			}
+			
+			if (!file2.isEmpty()) {
+				v.setImage2(file2.getBytes());
+			}
+			
+			if (!file3.isEmpty()) {
+				v.setImage3(file3.getBytes());
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		// Appel de la méthode Service
 		Voyage vOut = voyageService.addVoyage(v);
 		

@@ -22,14 +22,35 @@
 	<div id="agentContent">
 
 		<form:form class="form-horizontal" method="POST"
-			modelAttribute="voyageAdd" action="ajouteVoyage">
+			modelAttribute="voyageAdd" action="ajouteVoyage" enctype="multipart/form-data">
+
+			<div class="form-group">
+				<label for="inputImage1" class="col-sm-2 control-label">Image</label>
+				<div class="col-sm-7">
+					<input id="inputImage1" type="file" name="file1" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="inputImage2" class="col-sm-2 control-label">Image</label>
+				<div class="col-sm-7">
+					<input type="file" name="file2" id="inputImage2" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="inputImage3" class="col-sm-2 control-label">Image</label>
+				<div class="col-sm-7">
+					<input type="file" name="file3" id="inputImage3" />
+				</div>
+			</div>
 
 			<div class="form-group">
 				<label for="inputContinent" class="col-sm-2 control-label">Continent</label>
 				<div class="col-sm-7">
 					<form:input path="continent" class="form-control"
 						id="inputContinent" placeholder="Continent" pattern="[a-zA-Z ]+"
-						title="Caractères autorisés : A-Z a-z" required="required"/>
+						title="Caractères autorisés : A-Z a-z" required="required" />
 				</div>
 			</div>
 
@@ -38,7 +59,7 @@
 				<div class="col-sm-7">
 					<form:input path="pays" class="form-control" id="inputPays"
 						placeholder="Pays" pattern="[a-zA-Z ]+"
-						title="Caractères autorisés : A-Z a-z" required="required"/>
+						title="Caractères autorisés : A-Z a-z" required="required" />
 				</div>
 			</div>
 
@@ -51,7 +72,7 @@
 					<form:input type="text" path="dateDepart" class="form-control"
 						id="inputDateD" placeholder="Date de départ" value="${myDate}"
 						pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}"
-						title="La date n'est pas valide" required="required"/>
+						title="La date n'est pas valide" required="required" />
 				</div>
 			</div>
 
@@ -62,7 +83,8 @@
 					<fmt:formatDate type="time" value="${voyageUpdate.heureDepart}"
 						pattern="HH:mm" var="myTime" />
 					<form:input type="time" path="heureDepart" class="form-control"
-						id="inputHeureD" placeholder="Heure de départ" value="${myTime}" required="required"/>
+						id="inputHeureD" placeholder="Heure de départ" value="${myTime}"
+						required="required" />
 				</div>
 			</div>
 
@@ -75,7 +97,7 @@
 					<form:input type="text" path="dateRetour" class="form-control"
 						id="inputDateD" placeholder="Date de Retour" value="${myDate}"
 						pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}"
-						title="La date n'est pas valide" required="required"/>
+						title="La date n'est pas valide" required="required" />
 				</div>
 			</div>
 
@@ -86,7 +108,8 @@
 					<fmt:formatDate type="time" value="${voyageUpdate.heureRetour}"
 						pattern="HH:mm" var="myTime" />
 					<form:input type="time" path="heureRetour" class="form-control"
-						id="inputHeureR" placeholder="Heure de retour" value="${myTime}" required="required"/>
+						id="inputHeureR" placeholder="Heure de retour" value="${myTime}"
+						required="required" />
 				</div>
 			</div>
 
@@ -118,7 +141,7 @@
 				<div class="col-sm-7">
 					<form:input path="prixInitial" class="form-control"
 						id="inputPrixInit" placeholder="Prix initial" pattern="[0-9]+"
-						title="Le prix n'est pas valide" required="required"/>
+						title="Le prix n'est pas valide" required="required" />
 				</div>
 			</div>
 
@@ -128,7 +151,7 @@
 				<div class="col-sm-7">
 					<form:input path="prixBase" class="form-control" id="inputPrixProp"
 						placeholder="Prix proposé" pattern="[0-9]+"
-						title="Le prix n'est pas valide" required="required"/>
+						title="Le prix n'est pas valide" required="required" />
 				</div>
 			</div>
 
@@ -138,7 +161,7 @@
 				<div class="col-sm-7">
 					<form:input path="places" class="form-control" id="inputPlaces"
 						placeholder="Nombre de places" pattern="[1-9]+"
-						title="Le nombre de places n'est pas valide" required="required"/>
+						title="Le nombre de places n'est pas valide" required="required" />
 				</div>
 			</div>
 
@@ -146,7 +169,7 @@
 				<label for="inputPlanning" class="col-sm-2 control-label">Planning</label>
 				<div class="col-sm-7">
 					<form:input path="description" class="form-control"
-						id="inputPlanning" placeholder="Planning" required="required"/>
+						id="inputPlanning" placeholder="Planning" required="required" />
 				</div>
 			</div>
 
