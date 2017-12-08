@@ -58,7 +58,9 @@
 
 			<input type="button" onclick="myFunction2()"
 				value="Imprimer/télécharger" id="btnPrint"
-				style="position: absolute; width: 20%; left: 40%"></input>
+				style="margin: 20px" class="btn-warning">
+				
+				</input>
 			<input style="margin: 20px" class="btn-warning" type="submit"
 				value="Passer au paiement">
 		</form:form>

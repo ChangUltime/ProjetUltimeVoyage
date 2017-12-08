@@ -19,5 +19,8 @@
 	<h3
 		style="margin: 10px; color: #D60D6B; background-color: rgba(255, 255, 255, 0.8); text-align: center">Un mail récapitulatif de votre voyage vous a été adréssé</h3>
 
+	<a href="${pageContext.request.contextPath}/listeVoyage" style="margin: 10px; color: #D60D6B; background-color: rgba(255, 255, 255, 0.8); text-align: center">Retour Accueil</a>
+	
+
 </body>
 </html>
