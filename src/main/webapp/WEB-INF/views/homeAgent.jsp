@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
-<title>Insert title here</title>
+<title>Home Agent</title>
 
 <%@ include file="resourceIncludes.jsp" %>
 
@@ -17,10 +17,7 @@
 	<%@ include file="headerAgent.jsp" %>
 </div>
 <div id="agentContent">
-La Base quoi.
 
-<a href="${pageContext.request.contextPath}/agent/formVoyageUpdate">Modifier Voyage</a></li>
-<a href="${pageContext.request.contextPath}/agent/formVoyageAdd">Ajouter Voyage</a></li>
 
 	<table>
 		<thead>

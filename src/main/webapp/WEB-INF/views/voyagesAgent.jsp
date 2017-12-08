@@ -15,8 +15,10 @@
 <script src='<c:url value="/resources/js/searchBar.js"/>'></script>
 
 <!-- Bootstrap Date-Picker Plugin -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 
 </head>
 <body>
@@ -24,7 +26,9 @@
 		<%@ include file="headerAgent.jsp"%>
 	</div>
 	<div id="agentContent">
-		Des Voyages
+		<a href="${pageContext.request.contextPath}/agent/formVoyageAdd" style="color: #D60D6B; margin: 20px; font-size: 25px">Ajouter
+			Voyage</a>
+		</li>
 
 		<div align="center">
 
@@ -38,34 +42,38 @@
 			<table class="table table-bordered" id="voyageTable">
 				<tr>
 					<th></th>
-					<th><input type="text" id="searchContinent" onkeyup="searchByContinent()" placeholder="Continent"></th>
-					<th><input type="text" id="searchPays" onkeyup="searchByPays()" placeholder="Pays"></th>
-					<th>Date de départ</th>
-					<th>Heure de départ</th>
-					<th>Date de retour</th>
-					<th>Heure de retour</th>
-					<th><input type="text" id="searchFormule" onkeyup="searchByFormule()" placeholder="Formule"></th>
-					<th><input type="text" id="searchHeb" onkeyup="searchByHeb()" placeholder="Hebergement"></th>
+					<th><input type="text" id="searchContinent"
+						onkeyup="searchByContinent()" placeholder="Continent" style="width: 120px"></th>
+					<th><input type="text" id="searchPays"
+						onkeyup="searchByPays()" placeholder="Pays" style="width: 120px"></th>
 					<th></th>
 					<th></th>
-					<th><input type="text" id="searchNbPlaces" onkeyup="searchByNbPlaces()" placeholder="Nombre de places"></th>
 					<th></th>
 					<th></th>
+					<th><input type="text" id="searchHeb" onkeyup="searchByHeb()"
+						placeholder="Hebergement"  style="width: 150px"></th>
+					<th></th>
+					<th></th>
+					<th><input type="text" id="searchNbPlaces"
+						onkeyup="searchByNbPlaces()" placeholder="Places" style="width: 100px"></th>
+					<th style="width: 150px"></th>
 				</tr>
-				<tr>
+				<tr style="color: #D60D6B">
 					<th>ID</th>
 					<th style="cursor: pointer" onclick="sortTable(1)">Continent</th>
 					<th style="cursor: pointer" onclick="sortTable(2)">Pays</th>
-					<th style="cursor: pointer" onclick="sortTable(3)">Date de départ</th>
-					<th style="cursor: pointer" onclick="sortTable(4)">Heure de départ</th>
-					<th style="cursor: pointer" onclick="sortTable(5)">Date de retour</th>
-					<th style="cursor: pointer" onclick="sortTable(6)">Heure de retour</th>
-					<th style="cursor: pointer" onclick="sortTable(7)">Formule</th>
+					<th style="cursor: pointer" onclick="sortTable(3)">Date de
+						départ</th>
+					<th style="cursor: pointer" onclick="sortTable(4)">Heure </th>
+					<th style="cursor: pointer" onclick="sortTable(5)">Date de
+						retour</th>
+					<th style="cursor: pointer" onclick="sortTable(6)">Heure </th>
 					<th style="cursor: pointer" onclick="sortTable(8)">Hébergement</th>
-					<th style="cursor: pointer" onclick="sortTableNumber(9)">Prix initial</th>
-					<th style="cursor: pointer" onclick="sortTableNumber(10)">Prix proposé</th>
-					<th style="cursor: pointer" onclick="sortTable(11)">Nombre de places</th>
-					<th>Planning</th>
+					<th style="cursor: pointer" onclick="sortTableNumber(9)">Prix
+						initial</th>
+					<th style="cursor: pointer" onclick="sortTableNumber(10)">Prix
+						proposé</th>
+					<th style="cursor: pointer" onclick="sortTable(11)">Places</th>
 					<th>Opérations</th>
 				</tr>
 
@@ -83,12 +91,12 @@
 									pattern="dd/MM/yyyy" /></td>
 							<td><fmt:formatDate type="time"
 									value="${voyage.heureRetour}" pattern="HH:mm" /></td>
-							<td>${voyage.formule}</td>
 							<td>${voyage.hebergement}</td>
-							<td><fmt:formatNumber type = "number" value = "${voyage.prixInitial}" /></td>
-							<td><fmt:formatNumber type = "number" value = "${voyage.prixBase}" /></td>
+							<td><fmt:formatNumber type="number"
+									value="${voyage.prixInitial}" /></td>
+							<td><fmt:formatNumber type="number"
+									value="${voyage.prixBase}" /></td>
 							<td>${voyage.places}</td>
-							<td>${voyage.description}</td>
 							<td><a
 								href="${pageContext.request.contextPath}/agent/supprimVoyageLien/${voyage.id}">Supprimer</a>
 								/ <a

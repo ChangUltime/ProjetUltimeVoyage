@@ -16,14 +16,14 @@ body{
 	
 }
 
-#agentHeader {
-	width:10%
-}
-
-#agentContent {
-	position: fixed;
-	left: 10%;
-	top : 5%
+.table{
+	
+	background-color: rgba(255, 255, 255, 0.8);
+	border: medium;
+	border-color: #D60D6B;
+	border-style: solid;
+	width: 98%;
+	
 }
 
 #clientHeader {

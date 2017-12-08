@@ -53,7 +53,7 @@
 					<div class="caption">
 						<h2
 							style="color: #D60D6B; font-family: 'Lobster', cursive; line-height: 8px">${voyage.pays}</h2>
-						<h5 style="line-height: 25px; text-align: justify;">${voyage.description}</h5>
+						<h5 style="line-height: 25px; text-align: justify; font-family: 'Varela Round', sans-serif; font-size: 16px">${voyage.description}</h5>
 						<h4 style="text-align: right; line-height: 5px">
 							<del>${voyage.prixInitial} euros</del>
 						</h4>
