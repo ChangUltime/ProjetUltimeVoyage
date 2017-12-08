@@ -12,6 +12,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <%@ include file="resourceIncludes.jsp"%>
+<script src='<c:url value="/resources/js/validationDate.js"/>'></script>
 </head>
 <body>
 
@@ -95,7 +96,7 @@
 					<fmt:formatDate value="${voyageUpdate.dateRetour}"
 						pattern="dd/MM/yyyy" var="myDate" />
 					<form:input type="text" path="dateRetour" class="form-control"
-						id="inputDateD" placeholder="Date de Retour" value="${myDate}"
+						id="inputDateR" placeholder="Date de Retour" value="${myDate}"
 						pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}"
 						title="La date n'est pas valide" required="required" />
 				</div>
@@ -174,7 +175,7 @@
 			</div>
 
 			<div class="col-sm-2">
-				<input type="submit" class="btn btn-primary" value="Ajouter" />
+				<input type="submit" class="btn btn-primary" value="Ajouter" onmouseover="compar()" />
 			</div>
 		</form:form>
 
