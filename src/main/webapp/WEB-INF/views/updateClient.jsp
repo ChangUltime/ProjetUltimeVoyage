@@ -28,8 +28,7 @@
 				<label for="inputId" class="col-sm-2 control-label">ID</label>
 				<div class="col-sm-7">
 					<form:input path="id" class="form-control" id="inputId"
-						placeholder="ID" />
-					<form:errors path="id" cssStyle="color: red" />
+						placeholder="ID" readonly="true" />
 				</div>
 			</div>
 
@@ -37,8 +36,9 @@
 				<label for="inputIdentifiant" class="col-sm-2 control-label">Identifiant</label>
 				<div class="col-sm-7">
 					<form:input path="identifiant" class="form-control"
-						id="inputIdentifiant" placeholder="Identifiant" />
-					<form:errors path="identifiant" cssStyle="color: red" />
+						id="inputIdentifiant" placeholder="Identifiant"
+						pattern="[a-z0-9._%+-]+@[a-z0-9.-]" title="Email invalide"
+						required="required" />
 				</div>
 			</div>
 
@@ -48,7 +48,6 @@
 				<div class="col-sm-7">
 					<form:input path="mdp" class="form-control" id="inputMdp"
 						placeholder="Entrez le nouveau mot de passe" />
-					<form:errors path="mdp" cssStyle="color: red" />
 				</div>
 			</div>
 
@@ -67,8 +66,8 @@
 				<label for="inputNom" class="col-sm-2 control-label">Nom</label>
 				<div class="col-sm-7">
 					<form:input path="nom" class="form-control" id="inputNom"
-						placeholder="Votre nom" />
-					<form:errors path="nom" cssStyle="color: red" />
+						placeholder="Votre nom" pattern="[a-zA-Z ]+"
+					title="Caractères autorisés : A-Z a-z" required="required"/>
 				</div>
 			</div>
 
@@ -76,8 +75,8 @@
 				<label for="inputAdresse" class="col-sm-2 control-label">Adresse</label>
 				<div class="col-sm-7">
 					<form:input path="adresse" class="form-control" id="inputAdresse"
-						placeholder="Entrez votre adresse" />
-					<form:errors path="adresse" cssStyle="color: red" />
+						placeholder="Entrez votre adresse" pattern="[a-zA-Z0-9 ]+"
+					title="Caractères autorisés : A-Z a-z" required="required"/>
 				</div>
 			</div>
 
@@ -87,8 +86,8 @@
 					de telephone</label>
 				<div class="col-sm-7">
 					<form:input path="tel" class="form-control" id="inputTel"
-						placeholder="Entrez numéro de telephone" />
-					<form:errors path="tel" cssStyle="color: red" />
+						placeholder="Entrez numéro de telephone" pattern="[0-9]{10}"
+					title="Numéro à 10 chiffres" required="required"/>
 				</div>
 			</div>
 
