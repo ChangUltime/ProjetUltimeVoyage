@@ -170,14 +170,19 @@ public class DossierController {
 
 		
 		int id  = doss.getVoiture().getId() ; 
+		if(id != 0) {
+			Voiture voit = voitureService.getVoituretById(id);
+			model.addAttribute("voiture",voit);
+		}
 		
-		Voiture voit = voitureService.getVoituretById(id);
-		model.addAttribute("voiture",voit);
-
+		
 		int id2 = doss.getAssurance().getId() ; 
-		Assurance assurance = assuranceService.getAssuranceById(id2);
-		model.addAttribute("assurance",assurance);
-
+		
+		if(id2 != 0){
+			Assurance assurance = assuranceService.getAssuranceById(id2);
+			model.addAttribute("assurance",assurance);
+		}
+		
 		int id3 = doss.getVoyage().getId() ; 
 		Voyage voyage = voyageService.findVoyage(id3);
 		model.addAttribute("voyage",voyage);

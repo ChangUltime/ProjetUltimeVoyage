@@ -86,6 +86,7 @@
 			<form:label path="voiture.id" class="col-sm-0 control-label" />
 			<div class="col-sm-4">
 				<form:select class="form-control" path="voiture.id">
+					<form:option value="0">Selectionner un véhicule</form:option>
 					<form:options items="${listeVoitures}" itemLabel="modele"
 						itemValue="id"></form:options>
 				</form:select>
