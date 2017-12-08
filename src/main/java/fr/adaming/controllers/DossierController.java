@@ -345,6 +345,7 @@ public class DossierController {
 		
 	
 		
+	
 		model.addAttribute("formCompte",client);
 		return "affichageFormulaireCompte";
 	}
