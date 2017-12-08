@@ -290,6 +290,25 @@ public class DossierController {
 //				dossGlobal.setAssurance(assurBasic);
 //		}
 		
+
+		Double prixFinal = 0.0 ; 
+		
+		if(dossGlobal.getVoiture()!=null){
+			prixFinal += dossGlobal.getVoiture().getPrixJour() ; 
+		}
+		
+		prixFinal += dossGlobal.getVoyage().getPrixBase() ; 
+		
+		if(dossGlobal.getAssurance()!=null){
+			prixFinal += dossGlobal.getAssurance().getPrix()  ; 
+		}
+		
+		prixFinal += dossGlobal.getVoyage().getPrixBase()*dossGlobal.getNbAccompagnants() ; 
+		
+		dossGlobal.setPrixFinal(prixFinal);
+		
+		
+		
 		System.out.println("3--------------------------------" + dossGlobal.getVoiture());
 		System.out.println("4------- " + dossGlobal.getVoyage().getPays());
 		clientService.addClient(client); 
@@ -324,9 +343,10 @@ public class DossierController {
 					+ "<br/> Depart : " + dossGlobal.getVoyage().getDateDepart() + "  Retour : " + dossGlobal.getVoyage().getDateRetour()
 					+ "<br/>  Formule : " + dossGlobal.getVoyage().getFormule() 
 					+ "<br/> Hebergement : " + dossGlobal.getVoyage().getHebergement()
-					+ "<br/>  Location d'un vehicule : " + dossGlobal.getVoiture().getModele() + " (" + dossGlobal.getVoiture().getPrixJour() + "�/Jour) "
-					+ "<br/>  Assurance : " + dossGlobal.getAssurance().getType() + " (" + dossGlobal.getAssurance().getPrix() + "�) "
+					+ "<br/>  Location d'un vehicule : " + dossGlobal.getVoiture().getModele() + " (" + dossGlobal.getVoiture().getPrixJour() + " euros) "
+					+ "<br/>  Assurance : " + dossGlobal.getAssurance().getType() + " (" + dossGlobal.getAssurance().getPrix() + " euros) "
 					+ "<br/>  Nombre d'accompagnants : " + dossGlobal.getNbAccompagnants() 
+					+ "<br/> Prix Total : " + dossGlobal.getPrixFinal()
 					+ "<br/>  Afin de finaliser, modifier et regler votre commande connectez vous a votre espace client."
 					+ "<br/>Bon voyage avec RainbowTravels !" ;
 
@@ -347,6 +367,9 @@ public class DossierController {
 		
 	
 		model.addAttribute("formCompte",client);
+		
+		dossGlobal = new Dossier();
+		
 		return "affichageFormulaireCompte";
 	}
 	
