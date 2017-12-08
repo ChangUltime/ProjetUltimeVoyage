@@ -169,16 +169,17 @@ public class DossierController {
 	public String soumettreFormDossier(Model model, @ModelAttribute("dossierOptions") Dossier doss,  @ModelAttribute("formCompte") Client client){
 
 		
-		int id  = doss.getVoiture().getId() ; 
-		if(id != 0) {
+	
+		if(doss.getVoiture() != null) {
+			int id  = doss.getVoiture().getId() ; 
 			Voiture voit = voitureService.getVoituretById(id);
 			model.addAttribute("voiture",voit);
 		}
 		
 		
-		int id2 = doss.getAssurance().getId() ; 
 		
-		if(id2 != 0){
+		if(doss.getAssurance() != null){
+			int id2 = doss.getAssurance().getId() ; 
 			Assurance assurance = assuranceService.getAssuranceById(id2);
 			model.addAttribute("assurance",assurance);
 		}
