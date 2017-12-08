@@ -28,7 +28,8 @@
 				<label for="inputContinent" class="col-sm-2 control-label">Continent</label>
 				<div class="col-sm-7">
 					<form:input path="continent" class="form-control"
-						id="inputContinent" placeholder="Continent" />
+						id="inputContinent" placeholder="Continent" pattern="[a-zA-Z ]+"
+						title="Caractères autorisés : A-Z a-z" required="required"/>
 				</div>
 			</div>
 
@@ -36,7 +37,8 @@
 				<label for="inputPays" class="col-sm-2 control-label">Pays</label>
 				<div class="col-sm-7">
 					<form:input path="pays" class="form-control" id="inputPays"
-						placeholder="Pays" />
+						placeholder="Pays" pattern="[a-zA-Z ]+"
+						title="Caractères autorisés : A-Z a-z" required="required"/>
 				</div>
 			</div>
 
@@ -47,22 +49,22 @@
 					<fmt:formatDate value="${voyageUpdate.dateDepart}"
 						pattern="dd/MM/yyyy" var="myDate" />
 					<form:input type="text" path="dateDepart" class="form-control"
-						id="inputDateD" placeholder="Date de départ" value="${myDate}" />
-					<form:errors path="dateDepart" cssStyle="color: red" />
+						id="inputDateD" placeholder="Date de départ" value="${myDate}"
+						pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}"
+						title="La date n'est pas valide" required="required"/>
 				</div>
 			</div>
 
-					<div class="form-group">
-						<label for="inputHeureD" class="col-sm-2 control-label">Heure
-							de départ</label>
-						<div class="col-sm-7">
-							<fmt:formatDate type="time" value="${voyageUpdate.heureDepart}"
-			 					pattern="HH:mm" var="myTime" />  
-			 				<form:input type="time" path="heureDepart" class="form-control"  
-			  					id="inputHeureD" placeholder="Heure de départ" value="${myTime}" />  
-			  				<form:errors path="heureDepart" cssStyle="color: red" />  
-						</div>
-					</div>
+			<div class="form-group">
+				<label for="inputHeureD" class="col-sm-2 control-label">Heure
+					de départ</label>
+				<div class="col-sm-7">
+					<fmt:formatDate type="time" value="${voyageUpdate.heureDepart}"
+						pattern="HH:mm" var="myTime" />
+					<form:input type="time" path="heureDepart" class="form-control"
+						id="inputHeureD" placeholder="Heure de départ" value="${myTime}" required="required"/>
+				</div>
+			</div>
 
 			<div class="form-group">
 				<label for="inputDateR" class="col-sm-2 control-label">Date
@@ -71,27 +73,27 @@
 					<fmt:formatDate value="${voyageUpdate.dateRetour}"
 						pattern="dd/MM/yyyy" var="myDate" />
 					<form:input type="text" path="dateRetour" class="form-control"
-						id="inputDateD" placeholder="Date de Retour" value="${myDate}" />
-					<form:errors path="dateRetour" cssStyle="color: red" />
+						id="inputDateD" placeholder="Date de Retour" value="${myDate}"
+						pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}"
+						title="La date n'est pas valide" required="required"/>
 				</div>
 			</div>
 
-							<div class="form-group">
-								<label for="inputHeureR" class="col-sm-2 control-label">Heure
-									de retour</label>
-								<div class="col-sm-7">
-									<fmt:formatDate type="time" value="${voyageUpdate.heureRetour}"
-			  					pattern="HH:mm" var="myTime" />  
-			  				<form:input type="time" path="heureRetour" class="form-control"  
-			 					id="inputHeureR" placeholder="Heure de retour" value="${myTime}" /> 
-			  				<form:errors path="heureRetour" cssStyle="color: red" />   
-								</div>
-							</div>
+			<div class="form-group">
+				<label for="inputHeureR" class="col-sm-2 control-label">Heure
+					de retour</label>
+				<div class="col-sm-7">
+					<fmt:formatDate type="time" value="${voyageUpdate.heureRetour}"
+						pattern="HH:mm" var="myTime" />
+					<form:input type="time" path="heureRetour" class="form-control"
+						id="inputHeureR" placeholder="Heure de retour" value="${myTime}" required="required"/>
+				</div>
+			</div>
 
 			<div class="form-group">
 				<label for="inputFormule" class="col-sm-2 control-label">Formule</label>
 				<div class="col-sm-7">
-					<form:select path="formule">
+					<form:select path="formule" items="${formule}">
 						<c:forEach items="${formule}" var="key">
 							<form:option value="${key}">${key}</form:option>
 						</c:forEach>
@@ -102,7 +104,7 @@
 			<div class="form-group">
 				<label for="inputHebergement" class="col-sm-2 control-label">Hébergement</label>
 				<div class="col-sm-7">
-					<form:select path="hebergement">
+					<form:select path="hebergement" items="${hebergement}">
 						<c:forEach items="${hebergement} " var="heb">
 							<form:option value="${heb}">${heb}</form:option>
 						</c:forEach>
@@ -111,11 +113,22 @@
 			</div>
 
 			<div class="form-group">
-				<label for="inputPrix" class="col-sm-2 control-label">Prix</label>
+				<label for="inputPrixInit" class="col-sm-2 control-label">Prix
+					initial</label>
 				<div class="col-sm-7">
-					<form:input path="prixBase" class="form-control" id="inputPrix"
-						placeholder="Prix" />
-					<form:errors path="prixBase" cssStyle="color: red" />
+					<form:input path="prixInitial" class="form-control"
+						id="inputPrixInit" placeholder="Prix initial" pattern="[0-9]+"
+						title="Le prix n'est pas valide" required="required"/>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="inputPrixProp" class="col-sm-2 control-label">Prix
+					proposé</label>
+				<div class="col-sm-7">
+					<form:input path="prixBase" class="form-control" id="inputPrixProp"
+						placeholder="Prix proposé" pattern="[0-9]+"
+						title="Le prix n'est pas valide" required="required"/>
 				</div>
 			</div>
 
@@ -124,8 +137,8 @@
 					de places</label>
 				<div class="col-sm-7">
 					<form:input path="places" class="form-control" id="inputPlaces"
-						placeholder="Nombre de places" />
-					<form:errors path="places" cssStyle="color: red" />
+						placeholder="Nombre de places" pattern="[1-9]+"
+						title="Le nombre de places n'est pas valide" required="required"/>
 				</div>
 			</div>
 
@@ -133,8 +146,7 @@
 				<label for="inputPlanning" class="col-sm-2 control-label">Planning</label>
 				<div class="col-sm-7">
 					<form:input path="description" class="form-control"
-						id="inputPlanning" placeholder="Planning" />
-					<form:errors path="description" cssStyle="color: red" />
+						id="inputPlanning" placeholder="Planning" required="required"/>
 				</div>
 			</div>
 
