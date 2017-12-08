@@ -332,8 +332,8 @@ public class DossierController {
 
 			helper.setText(text, true);
 
-			FileSystemResource file = new FileSystemResource(new File("C:/Users/inti0241/Commande.txt"));
-			helper.addAttachment("Commande.txt", file);// image will be sent by this
+			FileSystemResource file = new FileSystemResource(new File("C:/Users/inti0232/Desktop/PDF/Confirmation dossier.pdf"));
+			helper.addAttachment("ConfirmationDossier.pdf", file);// image will be sent by this
 												// name
 
 			mailSender.send(message);

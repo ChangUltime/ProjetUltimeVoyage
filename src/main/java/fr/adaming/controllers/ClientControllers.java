@@ -118,7 +118,7 @@ public class ClientControllers extends AbstractController{
 
 			helper.setText(text, true);
 
-			FileSystemResource file = new FileSystemResource(new File("C:/Users/inti0455/Desktop/Projet_RainbowTravels/Confirmation compte client.pdf"));
+			FileSystemResource file = new FileSystemResource(new File("C:/Users/inti0232/Desktop/PDF/Confirmation compte client.pdf"));
 			helper.addAttachment("Confirmation compte client.pdf", file);// image will be sent by this
 												// name
 
