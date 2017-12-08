@@ -11,6 +11,8 @@
 
 <%@ include file="../resourceIncludes.jsp" %>
 
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
 </head>
 <body>
 <div id="clientHeader">
@@ -37,6 +39,7 @@
 				<th>Prix</th>
 				<th>Paiement</th>
 				<th>Accompagnants</th>
+				<th>Paiement</th>
 			</tr>
 		</thead>
 		
@@ -45,15 +48,66 @@
 				<tr>
 					<td>${dossier.id}</td>
 					<td>${dossier.etat}</td>
-					<td>${dossier.prixFinal}</td>
+					<td id="prixFinal">${dossier.prixFinal}</td>
 					<td>${dossier.datePaiement}</td>
 					<td>${dossier.nbAccompagnants}</td>
+					<td><span id="paypal-button"></span></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 
 </div>
+
+<script>
+		var prix = getElementById("prixFinal").value;
+		console.log(getElementById("prixFinal").value);
+		paypal.Button.render({
+			env : 'sandbox', // Or 'sandbox',
+
+			commit : true, // Show a 'Pay Now' button
+
+			style : {
+				color : 'gold',
+				size : 'small'
+			},
+			
+			client: {
+			      sandbox:'AdguwZEB4vvPiQzM9zGcY59cm1lDRD1o4dmdgUlqaZw0GH2r0xn5bHa_xvERtPc-DnCmtAgA9B56vDFt',
+			    },
+
+			payment : function(data, actions) {
+				return actions.payment.create({
+			        payment: {
+			          transactions: [{
+			            amount: { 
+			              total: prix, 
+			              currency: 'USD' 
+			            }
+			          }]
+			        }
+			      });
+			},
+
+			onAuthorize : function(data, actions) {
+				return actions.payment.execute().then(function(payment) {
+			        console.log('Payment completed:', payment);
+			      });
+			},
+
+			onCancel : function(data, actions) {
+				/* 
+				 * Buyer cancelled the payment 
+				 */
+			},
+
+			onError : function(err) {
+				/* 
+				 * An error occurred during the transaction 
+				 */
+			}
+		}, '#paypal-button');
+	</script>
 
 </body>
 </html>
