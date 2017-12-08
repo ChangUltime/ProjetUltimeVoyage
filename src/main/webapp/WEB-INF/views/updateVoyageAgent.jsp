@@ -34,8 +34,7 @@
 			<label for="inputId" class="col-sm-2 control-label">ID</label>
 			<div class="col-sm-7">
 				<form:input path="id" class="form-control" id="inputId"
-					placeholder="ID" />
-				<form:errors path="id" cssStyle="color: red" />
+					placeholder="ID" readonly="true"/>
 			</div>
 		</div>
 
@@ -43,8 +42,8 @@
 			<label for="inputContinent" class="col-sm-2 control-label">Continent</label>
 			<div class="col-sm-7">
 				<form:input path="continent" class="form-control"
-					id="inputContinent" placeholder="Contient" />
-				<form:errors path="continent" cssStyle="color: red" />
+					id="inputContinent" placeholder="Contient" pattern="[a-zA-Z ]+"
+						title="Caractères autorisés : A-Z a-z" required="required"/>
 			</div>
 		</div>
 
@@ -52,8 +51,8 @@
 			<label for="inputPays" class="col-sm-2 control-label">Pays</label>
 			<div class="col-sm-7">
 				<form:input path="pays" class="form-control" id="inputPays"
-					placeholder="Pays" />
-				<form:errors path="pays" cssStyle="color: red" />
+					placeholder="Pays" pattern="[a-zA-Z ]+"
+						title="Caractères autorisés : A-Z a-z" required="required"/>
 			</div>
 		</div>
 				<div class="form-group">
@@ -63,8 +62,8 @@
 						<fmt:formatDate value="${voyageUpdate.dateDepart}"
 		 					pattern="dd/MM/yyyy" var="myDate" /> 
 		 				<form:input type="text" path="dateDepart" class="form-control" 
-							id="inputDateD" placeholder="Date de départ" value="${myDate}"/>
-		 				<form:errors path="dateDepart" cssStyle="color: red" /> 
+							id="inputDateD" placeholder="Date de départ" value="${myDate}" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}"
+						title="La date n'est pas valide" required="required"/>
 					</div>
 				</div>
 
@@ -87,8 +86,8 @@
 							<fmt:formatDate value="${voyageUpdate.dateRetour}"
 		 					pattern="dd/MM/yyyy" var="myDate" /> 
 		 				<form:input type="text" path="dateRetour" class="form-control" 
-							id="inputDateD" placeholder="Date de Retour" value="${myDate}" />
-		 				<form:errors path="dateRetour" cssStyle="color: red" /> 
+							id="inputDateD" placeholder="Date de Retour" value="${myDate}" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}"
+						title="La date n'est pas valide" required="required"/> 
 					</div>
 				</div>
 
@@ -131,7 +130,8 @@
 			<div class="col-sm-7">
 				<form:input path="prixInitial" class="form-control" id="inputPrixInit"
 					placeholder="Prix initial" />
-				<form:errors path="prixInitial" cssStyle="color: red" />
+				<form:errors path="prixInitial" cssStyle="color: red" pattern="[0-9]+"
+						title="Le prix n'est pas valide" required="required"/>
 			</div>
 		</div>
 
@@ -140,7 +140,8 @@
 			<div class="col-sm-7">
 				<form:input path="prixBase" class="form-control" id="inputPrix"
 					placeholder="Prix proposé" />
-				<form:errors path="prixBase" cssStyle="color: red" />
+				<form:errors path="prixBase" cssStyle="color: red" pattern="[0-9]+"
+						title="Le prix n'est pas valide" required="required"/>
 			</div>
 		</div>
 
@@ -150,7 +151,8 @@
 			<div class="col-sm-7">
 				<form:input path="places" class="form-control" id="inputPlaces"
 					placeholder="Nombre de places" />
-				<form:errors path="places" cssStyle="color: red" />
+				<form:errors path="places" cssStyle="color: red" pattern="[1-9]+"
+						title="Le nombre de places n'est pas valide" required="required"/>
 			</div>
 		</div>
 
