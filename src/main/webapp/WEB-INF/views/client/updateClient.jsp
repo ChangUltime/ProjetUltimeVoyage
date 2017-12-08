@@ -18,6 +18,7 @@
 	<div id="clientHeader">
 		<%@ include file="headerClient.jsp"%>
 	</div>
+	
 
 	<div id="clientContent">
 
@@ -90,7 +91,7 @@
 			</div>
 
 			<div class="col-sm-2">
-				<input type="submit" class="btn btn-primary" value="Modifier" />
+				<input type="submit" class="btn btn-warning" value="Modifier" />
 			</div>
 		</form:form>
 

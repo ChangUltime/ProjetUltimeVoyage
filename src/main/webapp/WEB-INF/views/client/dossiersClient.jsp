@@ -16,6 +16,18 @@
 <div id="clientHeader">
 	<%@ include file="headerClient.jsp" %>
 </div>
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<ul class="nav navbar-nav">
+			<li><a
+				href="${pageContext.request.contextPath}/listeVoyage">Accueil</a></li>
+			<li ><a href="${pageContext.request.contextPath}/client/home">Tableau de Bord</a></li>
+			<li><a href="${pageContext.request.contextPath}/client/infos">Infos</a></li>
+			<li class="active"><a href="${pageContext.request.contextPath}/client/dossiers">Dossiers</a></li>
+			<li><a href="${pageContext.request.contextPath}/commonLogout">Logout</a></li>
+		</ul>
+	</div>
+</nav>
 <div id="clientContent">
 	<table class="table table-bordered">
 		<thead>

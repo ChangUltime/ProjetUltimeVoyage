@@ -18,9 +18,20 @@
 	<div id="clientHeader">
 		<%@ include file="headerClient.jsp"%>
 	</div>
-
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<ul class="nav navbar-nav">
+			<li><a
+				href="${pageContext.request.contextPath}/listeVoyage">Accueil</a></li>
+			<li ><a href="${pageContext.request.contextPath}/client/home">Tableau de Bord</a></li>
+			<li  class="active"><a href="${pageContext.request.contextPath}/client/infos">Infos</a></li>
+			<li><a href="${pageContext.request.contextPath}/client/dossiers">Dossiers</a></li>
+			<li><a href="${pageContext.request.contextPath}/commonLogout">Logout</a></li>
+		</ul>
+	</div>
+</nav>
 	<div id="clientContent">
-	
+	<a href="${pageContext.request.contextPath}/client/goToModifClient" style="color: #D60D6B; margin: 20px; font-size: 25px">Modifier</a>
 		<table class="table table-bordered">
 			<thead>
 				<tr>
@@ -44,7 +55,7 @@
 					</tr>
 			</tbody>
 		</table>
-		 <a href="${pageContext.request.contextPath}/client/goToModifClient">Modifier</a>
+		 
 		
 	</div>
 

@@ -35,6 +35,8 @@ public class AgentController {
 		// TODO une methode getDossiersByEtat (afficher les en attente en page d'accueil)
 		// une methode getUpcomingVoyages (filtrage par date/nombre de jours)
 		modelView.setViewName("homeAgent");
+		List<Voyage> listeVoyages = voyageService.getAllVoyages();
+		modelView.addObject("listeVoyages", listeVoyages);
 		return modelView;
 	}
 	
