@@ -2,6 +2,7 @@ package fr.adaming.controllers;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +18,10 @@ public class LoginController{
 	}
 	
 	@RequestMapping(value="/loginEchec", method=RequestMethod.GET)
-	public ModelAndView retourLogin(ModelAndView modelView){
+	public ModelAndView retourLogin(ModelAndView modelView, HttpSession session){
+
+		session.invalidate();
+		
 		modelView.setViewName("loginPage");
 		modelView.addObject("erreur", true);
 		return modelView;
