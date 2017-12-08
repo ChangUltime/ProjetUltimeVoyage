@@ -128,56 +128,6 @@
 
 	</div>
 
-	<div id="paypal-button"></div>
-
-	<script>
-		paypal.Button.render({
-			env : 'sandbox', // Or 'sandbox',
-
-			commit : true, // Show a 'Pay Now' button
-
-			style : {
-				color : 'gold',
-				size : 'small'
-			},
-			
-			client: {
-			      sandbox:'AdguwZEB4vvPiQzM9zGcY59cm1lDRD1o4dmdgUlqaZw0GH2r0xn5bHa_xvERtPc-DnCmtAgA9B56vDFt',
-			    },
-
-			payment : function(data, actions) {
-				return actions.payment.create({
-			        payment: {
-			          transactions: [{
-			            amount: { 
-			              total: '1.00', 
-			              currency: 'USD' 
-			            }
-			          }]
-			        }
-			      });
-			},
-
-			onAuthorize : function(data, actions) {
-				return actions.payment.execute().then(function(payment) {
-			        console.log('Payment completed:', payment);
-			      });
-			},
-
-			onCancel : function(data, actions) {
-				/* 
-				 * Buyer cancelled the payment 
-				 */
-			},
-
-			onError : function(err) {
-				/* 
-				 * An error occurred during the transaction 
-				 */
-			}
-		}, '#paypal-button');
-	</script>
-
 
 </body>
 </html>

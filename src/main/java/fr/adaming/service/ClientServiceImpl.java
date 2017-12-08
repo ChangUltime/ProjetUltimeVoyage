@@ -32,12 +32,23 @@ public class ClientServiceImpl implements IClientService{
 
 	@Override
 	public Client addClient(Client client) {
-		return clientDao.addClient(client);
+		Client preexistingClient = getClientByIdentifiant(client.getIdentifiant());
+		if(preexistingClient == null){
+			return clientDao.addClient(client);
+		} else {
+			return preexistingClient;
+		}
 	}
 
 	@Override
 	public Client updateClient(Client client) {
-		return clientDao.updateClient(client);
+		Client preexistingClient = getClientByIdentifiant(client.getIdentifiant());
+		if(preexistingClient==null){
+			return clientDao.updateClient(client);
+		}
+		else {
+			return client;
+		}
 	}
 
 	@Override

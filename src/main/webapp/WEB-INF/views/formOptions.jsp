@@ -40,49 +40,59 @@
 
 </head>
 <body>
+	<div id="agentHeader">
+		<%@ include file="headerAgent.jsp"%>
+	</div>
 
-
-	<form:form method="POST" action="${pageContext.request.contextPath}/formDossierOptions"
+	<div style="position: absolute; left:10%; top:20%; width: 50%; background-color: rgba(255, 255, 255, 0.8);  border: medium; border-color: #D60D6B; border-style: solid;">
+	<form:form method="POST"
+		action="${pageContext.request.contextPath}/formDossierOptions"
 		modelAttribute="dossierOptions">
 
-	Votre voyage :
-	<br/> 
+	<h3 style="margin: 10px; color: #D60D6B">Votre voyage :</h3>
+	<br />
 		<div style="visibility: hidden; display: none">
-		<form:input path="voyage.id"  type="text" value="${dossierOptions.voyage.id}" />
+			<form:input path="voyage.id" type="text"
+				value="${dossierOptions.voyage.id}" />
 		</div>
-	
-	<label> Départ <input type="text" value="${dossierOptions.voyage.dateDepart}" disabled/> <br />
-			Retour <input type="text" value="${dossierOptions.voyage.dateRetour}" disabled/>
+
+		<label> Départ <input type="text"
+			value="${dossierOptions.voyage.dateDepart}" disabled /> <br />
+			Retour <input type="text" value="${dossierOptions.voyage.dateRetour}"
+			disabled />
 		</label>
 
 		<br />
 
-		<label> Destination <input type="text" value="${dossierOptions.voyage.pays}" disabled/>
+		<label> Destination <input type="text"
+			value="${dossierOptions.voyage.pays}" disabled />
 		</label>
 
 		<br />
 
-		<label> Formule <input type="text" value="${dossierOptions.voyage.formule}" disabled/>
+		<label> Formule <input type="text"
+			value="${dossierOptions.voyage.formule}" disabled />
 		</label>
 		<br />
 
-	<div class="form-group">
-				<label class="col-sm-2 control-label">Hebergement</label>
-				<div class="col-sm-7">
-					<form:select path="voyage.hebergement" items="${listHebergement}">
-						<c:forEach items="${listHebergement} " var="key">
-							<form:option value="${key}">${key}</form:option>
-						</c:forEach>
-					</form:select>
-				</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Hebergement</label>
+			<div class="col-sm-7">
+				<form:select path="voyage.hebergement" items="${listHebergement}">
+					<c:forEach items="${listHebergement} " var="key">
+						<form:option value="${key}">${key}</form:option>
+					</c:forEach>
+				</form:select>
 			</div>
+		</div>
 
 
-	<br/>
+		<br />
 	Souhaitez-vous louer un véhicule ?
 	<input onclick="car(this)" type="checkbox" id="choixCar" value="yes" />
 		<br />
-		<div class="form-group" id="choixVoiture"  style="visibility: hidden; display: none">
+		<div class="form-group" id="choixVoiture"
+			style="visibility: hidden; display: none">
 			<form:label path="voiture.id" class="col-sm-0 control-label" />
 			<div class="col-sm-4">
 				<form:select class="form-control" path="voiture.id">
@@ -96,7 +106,8 @@
 	<input onclick="assur(this)" type="checkbox" id="choixAssur"
 			value="yes" />
 		<br />
-		<div class="form-group" id="choixAssurance"  style="visibility: hidden; display: none">
+		<div class="form-group" id="choixAssurance"
+			style="visibility: hidden; display: none">
 			<form:label path="assurance.id" class="col-sm-0 control-label" />
 			<div class="col-sm-4">
 				<form:select class="form-control" path="assurance.id">
@@ -108,17 +119,18 @@
 
 
 
-	<br/>
+		<br />
 	Combien de personnes seront du voyage (hormis vous) ?
 	<form:input path="nbAccompagnants" />
 		<form:errors path="nbAccompagnants" cssStyle="color:red" />
 
 
-	<br/>
-	<input type="submit" value="Passer à l'étape suivante">
-	
+		<br />
+		<input class="btn-warning" type="submit" value="Passer à l'étape suivante" style="margin: 20px">
+
 
 
 	</form:form>
+	</div>
 </body>
 </html>

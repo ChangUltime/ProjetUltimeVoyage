@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -105,10 +106,16 @@ public class DossierController {
 
 	@RequestMapping(value = "/client/home", method = RequestMethod.GET)
 	public ModelAndView getHomepageClient(ModelAndView modelView, HttpSession sessions) {
-		Client sessionClient = (Client) sessions.getAttribute("sessionClient");
+		
+		Client authClient = clientService.getClientByIdentifiant(SecurityContextHolder.getContext().getAuthentication().getName());
+		
+		if (authClient != null){
+			System.out.println(authClient);
+			sessions.setAttribute("sessionClient", authClient);
+		}
 
-		if (sessionClient != null) {
-			List<Dossier> listeDossiers = dossierService.getAllDossierByClient(sessionClient);
+		if (authClient != null) {
+			List<Dossier> listeDossiers = dossierService.getAllDossierByClient(authClient);
 			List<Dossier> prochainsDossiers = new ArrayList<Dossier>();
 			List<Dossier> attenteDossiers = new ArrayList<Dossier>();
 			for (Dossier doss : listeDossiers) {
@@ -317,8 +324,8 @@ public class DossierController {
 					+ "<br/> Depart : " + dossGlobal.getVoyage().getDateDepart() + "  Retour : " + dossGlobal.getVoyage().getDateRetour()
 					+ "<br/>  Formule : " + dossGlobal.getVoyage().getFormule() 
 					+ "<br/> Hebergement : " + dossGlobal.getVoyage().getHebergement()
-					+ "<br/>  Location d'un vehicule : " + dossGlobal.getVoiture().getModele() + " (" + dossGlobal.getVoiture().getPrixJour() + "€/Jour) "
-					+ "<br/>  Assurance : " + dossGlobal.getAssurance().getType() + " (" + dossGlobal.getAssurance().getPrix() + "€) "
+					+ "<br/>  Location d'un vehicule : " + dossGlobal.getVoiture().getModele() + " (" + dossGlobal.getVoiture().getPrixJour() + "ï¿½/Jour) "
+					+ "<br/>  Assurance : " + dossGlobal.getAssurance().getType() + " (" + dossGlobal.getAssurance().getPrix() + "ï¿½) "
 					+ "<br/>  Nombre d'accompagnants : " + dossGlobal.getNbAccompagnants() 
 					+ "<br/>  Afin de finaliser, modifier et regler votre commande connectez vous a votre espace client."
 					+ "<br/>Bon voyage avec RainbowTravels !" ;

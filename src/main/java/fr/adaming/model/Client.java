@@ -141,8 +141,7 @@ public class Client {
 	@Override
 	public String toString() {
 		return "Client [id=" + id + ", identifiant=" + identifiant + ", mdp=" + mdp + ", civilite=" + civilite
-				+ ", nom=" + nom + ", adresse=" + adresse + ", tel=" + tel + ", listeDossiers=" + listeDossiers
-				+ ", listeAccompagnants=" + listeAccompagnants + "]";
+				+ ", nom=" + nom + ", adresse=" + adresse + ", tel=" + tel +"]";
 	}
 
 }

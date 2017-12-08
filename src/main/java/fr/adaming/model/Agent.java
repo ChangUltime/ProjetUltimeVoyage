@@ -80,8 +80,7 @@ public class Agent {
 
 	@Override
 	public String toString() {
-		return "Agent [id=" + id + ", identifiant=" + identifiant + ", mdp=" + mdp + ", listeDossiers=" + listeDossiers
-				+ "]";
+		return "Agent [id=" + id + ", identifiant=" + identifiant + ", mdp=" + mdp + "]";
 	}
 	
 	

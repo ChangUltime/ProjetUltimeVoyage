@@ -51,7 +51,7 @@
 					<td id="prixFinal">${dossier.prixFinal}</td>
 					<td>${dossier.datePaiement}</td>
 					<td>${dossier.nbAccompagnants}</td>
-					<td><span id="paypal-button"></span></td>
+					<td><div id="paypal-button"></div></td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -60,8 +60,9 @@
 </div>
 
 <script>
-		var prix = getElementById("prixFinal").value;
-		console.log(getElementById("prixFinal").value);
+
+		var prix = document.getElementById("prixFinal").innerHTML;
+		console.log(document.getElementById("prixFinal").innerHTML);
 		paypal.Button.render({
 			env : 'sandbox', // Or 'sandbox',
 
