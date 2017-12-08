@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.AbstractController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.adaming.model.Civilite;
@@ -33,9 +34,9 @@ import fr.adaming.model.Client;
 import fr.adaming.service.IClientService;
 
 @Controller
-@RequestMapping({"/agent","/client"})
+@RequestMapping({ "/agent", "/client" })
 @Scope("")
-public class ClientControllers {
+public class ClientControllers extends AbstractController{
 
 	@Autowired
 	IClientService clientService;
@@ -50,21 +51,22 @@ public class ClientControllers {
 	public void setMailSender(JavaMailSender mailSender) {
 		this.mailSender = mailSender;
 	}
-	
+
 	// Methode GetClient depuis client
-	 	
- 	@RequestMapping(value="/infos",method = RequestMethod.GET)
- 	public ModelAndView showClient(ModelAndView modelView){
- 		// recuperer le client identifie depuis le securitycontext de spring security
- 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
- 		String username = auth.getName();
- 		// recuperation du client lui meme à partir de l'identifiant
- 		Client client = clientService.getClientByIdentifiant(username);
- 		
- 		modelView.addObject("sessionClient", client);
- 		modelView.setViewName("client/infosClient");
- 		return modelView;
- 	}
+
+	@RequestMapping(value = "/infos", method = RequestMethod.GET)
+	public ModelAndView showClient(ModelAndView modelView) {
+		// recuperer le client identifie depuis le securitycontext de spring
+		// security
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		// recuperation du client lui meme à partir de l'identifiant
+		Client client = clientService.getClientByIdentifiant(username);
+
+		modelView.addObject("sessionClient", client);
+		modelView.setViewName("client/infosClient");
+		return modelView;
+	}
 
 	// ================= Ajout client =======================================
 	@RequestMapping(value = "/addFormClient", method = RequestMethod.GET)
@@ -116,8 +118,8 @@ public class ClientControllers {
 
 			helper.setText(text, true);
 
-			FileSystemResource file = new FileSystemResource(new File("C:/Users/inti0455/Downloads/a.txt"));
-			helper.addAttachment("a.txt", file);// image will be sent by this
+			FileSystemResource file = new FileSystemResource(new File("C:/Users/inti0455/Desktop/Projet_RainbowTravels/Confirmation compte client.pdf"));
+			helper.addAttachment("Confirmation compte client.pdf", file);// image will be sent by this
 												// name
 
 			mailSender.send(message);
@@ -181,30 +183,32 @@ public class ClientControllers {
 		}
 	}
 
-	@RequestMapping(value="/goToModifClient", method=RequestMethod.GET)
-	public ModelAndView modifClientForm(ModelAndView modelView){
- 		// recuperer le client identifie depuis le securitycontext de spring security
- 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
- 		String username = auth.getName();
- 		// recuperation du client lui meme à partir de l'identifiant
- 		Client client = clientService.getClientByIdentifiant(username);
-		modelView.addObject("clientUpdate",client);
-		
+	@RequestMapping(value = "/goToModifClient", method = RequestMethod.GET)
+	public ModelAndView modifClientForm(ModelAndView modelView) {
+		// recuperer le client identifie depuis le securitycontext de spring
+		// security
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		// recuperation du client lui meme à partir de l'identifiant
+		Client client = clientService.getClientByIdentifiant(username);
+		modelView.addObject("clientUpdate", client);
+
 		List<Civilite> civilite = Arrays.asList(Civilite.values());
 		modelView.addObject("civilites", civilite);
 		modelView.setViewName("client/updateClient");
 		return modelView;
 	}
-	
-	@RequestMapping(value="/modifClient",method=RequestMethod.POST)
-	public ModelAndView submitModifClientForm(ModelAndView modelView, @ModelAttribute("clientUpdate") Client modClient){		
+
+	@RequestMapping(value = "/modifClient", method = RequestMethod.POST)
+	public ModelAndView submitModifClientForm(ModelAndView modelView,
+			@ModelAttribute("clientUpdate") Client modClient) {
 		clientService.updateClient(modClient);
-		
+
 		modelView.addObject("sessionClient", modClient);
- 		modelView.setViewName("client/infosClient");
+		modelView.setViewName("client/infosClient");
 		return modelView;
 	}
-	
+
 	// @RequestMapping(value = "/getClientById", method = RequestMethod.GET)
 	// public String formGetById(Model model) {
 	// return "getClientById";
@@ -247,13 +251,20 @@ public class ClientControllers {
 
 		return "updateClient";
 	}
-	
-	@RequestMapping(value = "/generatePdf", method = RequestMethod.GET)
-	 public ModelAndView generatePdf(@RequestBody Client client) throws Exception {
-	  System.out.println("Calling generatePdf()...");
-	  
-	  ModelAndView modelAndView = new ModelAndView("pdfView", "command", client);
-	  
-	  return modelAndView;
-	 }
+
+	@RequestMapping(value = "/generate/pdf.htm", method = RequestMethod.GET)
+	public ModelAndView generatePdf(HttpServletRequest request, HttpServletResponse response,
+			@RequestBody Client client) throws Exception {
+		System.out.println("Calling generatePdf()...");
+
+		ModelAndView modelAndView = new ModelAndView("pdfView", "command", client);
+
+		return modelAndView;
+	}
+
+	@Override
+	protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
