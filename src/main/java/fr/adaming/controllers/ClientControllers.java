@@ -1,29 +1,24 @@
 package fr.adaming.controllers;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
 import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,13 +27,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.adaming.model.Civilite;
 import fr.adaming.model.Client;
-import fr.adaming.model.Formule;
-import fr.adaming.model.Hebergement;
-import fr.adaming.model.Voyage;
 import fr.adaming.service.IClientService;
 
 @Controller
-@RequestMapping({"/agent","/client"})
+@RequestMapping("/agent")
 @Scope("")
 public class ClientControllers {
 
@@ -54,21 +46,6 @@ public class ClientControllers {
 
 	public void setMailSender(JavaMailSender mailSender) {
 		this.mailSender = mailSender;
-	}
-	
-	// Methode GetClient depuis client
-	
-	@RequestMapping(value="/infos",method = RequestMethod.GET)
-	public ModelAndView showClient(ModelAndView modelView){
-		// recuperer le client identifie depuis le securitycontext de spring security
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String username = auth.getName();
-		// recuperation du client lui meme Ã  partir de l'identifiant
-		Client client = clientService.getClientByIdentifiant(username);
-		
-		modelView.addObject("sessionClient", client);
-		modelView.setViewName("client/infosClient");
-		return modelView;
 	}
 
 	// ================= Ajout client =======================================
@@ -89,35 +66,42 @@ public class ClientControllers {
 		// Essai envoi de mail
 		String status = null;
 
-		// On appelle la mï¿½thode service
+		// On appelle la méthode service
 		Client clientOut = clientService.addClient(client);
 
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
-			
-			Multipart multipart = new MimeMultipart();
-			MimeBodyPart messageBodyPart = new MimeBodyPart();
-			
-			DataSource source = new FileDataSource("C:/Users/inti0455/Downloads/a.png");
-			
-			messageBodyPart.setDataHandler(new DataHandler(source));
-			messageBodyPart.setFileName("nom de la PJ");
-			multipart.addBodyPart(messageBodyPart);
-			message.setContent(multipart);
-			
+
+			// Multipart multipart = new MimeMultipart();
+			// MimeBodyPart messageBodyPart = new MimeBodyPart();
+			//
+			//
+			// DataSource source = new
+			// FileDataSource("C:/Users/inti0455/Downloads/a.txt");
+			//
+			// messageBodyPart.setDataHandler(new DataHandler(source));
+			// messageBodyPart.setFileName("nom de la PJ");
+			// multipart.addBodyPart(messageBodyPart);
+			// message.setContent(multipart);
+
 			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 			helper.setFrom("Administrator");
 			helper.setTo(client.getIdentifiant());
-			helper.setSubject("Confirmation de la crï¿½ation du compte");
+			helper.setSubject("Confirmation de la création du compte");
 
 			String text = "<a href=${pageContext.request.contextPath}><img src='resources/css/images/logo.png'></a>"
-					+ "Confirmation de la crï¿½ation d'un compte client :<br />" + client.getCivilite() + " "
+					+ "Confirmation de la création d'un compte client :<br />" + client.getCivilite() + " "
 					+ client.getNom() + "<br/>Identifiant : <b>" + client.getIdentifiant() + "</b><br />"
 					+ "Adresse : <b>" + client.getAdresse() + "</b><br/>Telephone : <b>" + client.getTel() + "</b>"
-							+ "<br/><br/>Toute l'ï¿½quipe vous remercie pour votre confiance !"
-							+ "<br/>Bon voyage et ï¿½ bientot sur RainbowTravels !";
+					+ "<br/><br/>Toute l'équipe vous remercie pour votre confiance !"
+					+ "<br/>Bon voyage et à bientot sur RainbowTravels !";
 
 			helper.setText(text, true);
+
+			FileSystemResource file = new FileSystemResource(new File("C:/Users/inti0455/Downloads/a.txt"));
+			helper.addAttachment("a.txt", file);// image will be sent by this
+												// name
+
 			mailSender.send(message);
 			status = "Confirmation email is sent to your address (" + client.getIdentifiant() + ")";
 		} catch (MessagingException e) {
@@ -132,7 +116,7 @@ public class ClientControllers {
 			model.addAttribute("clientList", liste);
 			return "clientsAgent";
 		} else {
-			redirectAttribute.addFlashAttribute("message", "Le client n'a pas ï¿½tï¿½ ajoutï¿½");
+			redirectAttribute.addFlashAttribute("message", "Le client n'a pas été ajouté");
 			return "redirect:addFormClient";
 		}
 	}
@@ -164,7 +148,7 @@ public class ClientControllers {
 	public String submitUpdateFormClient(RedirectAttributes redirectAttribute, Model model,
 			@ModelAttribute("clientUpdate") Client client) {
 
-		// Appel de la mï¿½thode service
+		// Appel de la méthode service
 		Client clientOut = clientService.updateClient(client);
 
 		if (clientOut.getId() == client.getId()) {
@@ -173,8 +157,8 @@ public class ClientControllers {
 
 			return "clientsAgent";
 		} else {
-			// Message d'erreur si le client n'a pas ï¿½tï¿½ modifiï¿½
-			redirectAttribute.addFlashAttribute("message", "Le client n'a pas ï¿½tï¿½ modifiï¿½");
+			// Message d'erreur si le client n'a pas été modifié
+			redirectAttribute.addFlashAttribute("message", "Le client n'a pas été modifié");
 			return "redirect:updateFormClient";
 		}
 	}
@@ -190,10 +174,10 @@ public class ClientControllers {
 
 		if (clientOut.getId() == id) {
 			model.addAttribute("client", clientOut);
-			redirAttr.addFlashAttribute("message", "Le client a ï¿½tï¿½ trouvï¿½ !");
+			redirAttr.addFlashAttribute("message", "Le client a été trouvé !");
 			return "clientsAgent";
 		} else {
-			redirAttr.addFlashAttribute("message", "Aucun client n'a ï¿½tï¿½ trouvï¿½");
+			redirAttr.addFlashAttribute("message", "Aucun client n'a été trouvé");
 			return "redirect:getClientById";
 		}
 	}
@@ -221,4 +205,13 @@ public class ClientControllers {
 
 		return "updateClient";
 	}
+	
+	@RequestMapping(value = "/generatePdf", method = RequestMethod.GET)
+	 public ModelAndView generatePdf(@RequestBody Client client) throws Exception {
+	  System.out.println("Calling generatePdf()...");
+	  
+	  ModelAndView modelAndView = new ModelAndView("pdfView", "command", client);
+	  
+	  return modelAndView;
+	 }
 }
