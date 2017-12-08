@@ -34,7 +34,7 @@ public class ClientServiceImpl implements IClientService{
 	public Client addClient(Client client) {
 		Client preexistingClient = getClientByIdentifiant(client.getIdentifiant());
 		if(preexistingClient == null){
-			return clientDao.updateClient(client);
+			return clientDao.addClient(client);
 		} else {
 			return preexistingClient;
 		}
