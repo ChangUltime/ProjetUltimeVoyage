@@ -22,7 +22,7 @@
 	<div id="clientContent">
 
 		<form:form class="form-horizontal" method="POST"
-			modelAttribute="clientUpdate" action="updateClient">
+			modelAttribute="clientUpdate" action="modifClient">
 
 			<div class="form-group">
 				<label for="inputId" class="col-sm-2 control-label">ID</label>
@@ -55,10 +55,7 @@
 			<div class="form-group">
 				<label for="inputCivilite" class="col-sm-2 control-label">Civilite</label>
 				<div class="col-sm-7">
-					<form:select path="civilite">
-						<c:forEach items="${civilite} " var="key">
-							<form:option value="${key}">${key}</form:option>
-						</c:forEach>
+					<form:select path="civilite" items="${civilites}">
 					</form:select>
 				</div>
 			</div>

@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Formulaire modification client</title>
+<title>Infos Client</title>
 <%@ include file="../resourceIncludes.jsp"%>
 </head>
 <body>
@@ -44,7 +44,7 @@
 					</tr>
 			</tbody>
 		</table>
-	
+		 <a href="${pageContext.request.contextPath}/client/goToModifClient">Modifier</a>
 		
 	</div>
 

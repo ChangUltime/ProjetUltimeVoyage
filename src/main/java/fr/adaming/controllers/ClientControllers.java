@@ -14,8 +14,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,7 +33,7 @@ import fr.adaming.model.Client;
 import fr.adaming.service.IClientService;
 
 @Controller
-@RequestMapping("/agent")
+@RequestMapping({"/agent","/client"})
 @Scope("")
 public class ClientControllers {
 
@@ -47,6 +50,21 @@ public class ClientControllers {
 	public void setMailSender(JavaMailSender mailSender) {
 		this.mailSender = mailSender;
 	}
+	
+	// Methode GetClient depuis client
+	 	
+ 	@RequestMapping(value="/infos",method = RequestMethod.GET)
+ 	public ModelAndView showClient(ModelAndView modelView){
+ 		// recuperer le client identifie depuis le securitycontext de spring security
+ 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+ 		String username = auth.getName();
+ 		// recuperation du client lui meme Ã  partir de l'identifiant
+ 		Client client = clientService.getClientByIdentifiant(username);
+ 		
+ 		modelView.addObject("sessionClient", client);
+ 		modelView.setViewName("client/infosClient");
+ 		return modelView;
+ 	}
 
 	// ================= Ajout client =======================================
 	@RequestMapping(value = "/addFormClient", method = RequestMethod.GET)
@@ -66,7 +84,7 @@ public class ClientControllers {
 		// Essai envoi de mail
 		String status = null;
 
-		// On appelle la méthode service
+		// On appelle la mï¿½thode service
 		Client clientOut = clientService.addClient(client);
 
 		try {
@@ -87,14 +105,14 @@ public class ClientControllers {
 			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 			helper.setFrom("Administrator");
 			helper.setTo(client.getIdentifiant());
-			helper.setSubject("Confirmation de la création du compte");
+			helper.setSubject("Confirmation de la crï¿½ation du compte");
 
 			String text = "<a href=${pageContext.request.contextPath}><img src='resources/css/images/logo.png'></a>"
-					+ "Confirmation de la création d'un compte client :<br />" + client.getCivilite() + " "
+					+ "Confirmation de la crï¿½ation d'un compte client :<br />" + client.getCivilite() + " "
 					+ client.getNom() + "<br/>Identifiant : <b>" + client.getIdentifiant() + "</b><br />"
 					+ "Adresse : <b>" + client.getAdresse() + "</b><br/>Telephone : <b>" + client.getTel() + "</b>"
-					+ "<br/><br/>Toute l'équipe vous remercie pour votre confiance !"
-					+ "<br/>Bon voyage et à bientot sur RainbowTravels !";
+					+ "<br/><br/>Toute l'ï¿½quipe vous remercie pour votre confiance !"
+					+ "<br/>Bon voyage et ï¿½ bientot sur RainbowTravels !";
 
 			helper.setText(text, true);
 
@@ -116,7 +134,7 @@ public class ClientControllers {
 			model.addAttribute("clientList", liste);
 			return "clientsAgent";
 		} else {
-			redirectAttribute.addFlashAttribute("message", "Le client n'a pas été ajouté");
+			redirectAttribute.addFlashAttribute("message", "Le client n'a pas ï¿½tï¿½ ajoutï¿½");
 			return "redirect:addFormClient";
 		}
 	}
@@ -148,7 +166,7 @@ public class ClientControllers {
 	public String submitUpdateFormClient(RedirectAttributes redirectAttribute, Model model,
 			@ModelAttribute("clientUpdate") Client client) {
 
-		// Appel de la méthode service
+		// Appel de la mï¿½thode service
 		Client clientOut = clientService.updateClient(client);
 
 		if (clientOut.getId() == client.getId()) {
@@ -157,12 +175,36 @@ public class ClientControllers {
 
 			return "clientsAgent";
 		} else {
-			// Message d'erreur si le client n'a pas été modifié
-			redirectAttribute.addFlashAttribute("message", "Le client n'a pas été modifié");
+			// Message d'erreur si le client n'a pas ï¿½tï¿½ modifiï¿½
+			redirectAttribute.addFlashAttribute("message", "Le client n'a pas ï¿½tï¿½ modifiï¿½");
 			return "redirect:updateFormClient";
 		}
 	}
 
+	@RequestMapping(value="/goToModifClient", method=RequestMethod.GET)
+	public ModelAndView modifClientForm(ModelAndView modelView){
+ 		// recuperer le client identifie depuis le securitycontext de spring security
+ 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+ 		String username = auth.getName();
+ 		// recuperation du client lui meme Ã  partir de l'identifiant
+ 		Client client = clientService.getClientByIdentifiant(username);
+		modelView.addObject("clientUpdate",client);
+		
+		List<Civilite> civilite = Arrays.asList(Civilite.values());
+		modelView.addObject("civilites", civilite);
+		modelView.setViewName("client/updateClient");
+		return modelView;
+	}
+	
+	@RequestMapping(value="/modifClient",method=RequestMethod.POST)
+	public ModelAndView submitModifClientForm(ModelAndView modelView, @ModelAttribute("clientUpdate") Client modClient){		
+		clientService.updateClient(modClient);
+		
+		modelView.addObject("sessionClient", modClient);
+ 		modelView.setViewName("client/infosClient");
+		return modelView;
+	}
+	
 	// @RequestMapping(value = "/getClientById", method = RequestMethod.GET)
 	// public String formGetById(Model model) {
 	// return "getClientById";
@@ -174,10 +216,10 @@ public class ClientControllers {
 
 		if (clientOut.getId() == id) {
 			model.addAttribute("client", clientOut);
-			redirAttr.addFlashAttribute("message", "Le client a été trouvé !");
+			redirAttr.addFlashAttribute("message", "Le client a ï¿½tï¿½ trouvï¿½ !");
 			return "clientsAgent";
 		} else {
-			redirAttr.addFlashAttribute("message", "Aucun client n'a été trouvé");
+			redirAttr.addFlashAttribute("message", "Aucun client n'a ï¿½tï¿½ trouvï¿½");
 			return "redirect:getClientById";
 		}
 	}
