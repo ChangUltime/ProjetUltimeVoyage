@@ -1,13 +1,19 @@
 package fr.adaming.controllers;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +33,7 @@ import fr.adaming.model.Hebergement;
 import fr.adaming.model.Voiture;
 import fr.adaming.model.Voyage;
 import fr.adaming.service.IAssuranceService;
+import fr.adaming.service.IClientService;
 import fr.adaming.service.IDossierService;
 import fr.adaming.service.IVoitureService;
 import fr.adaming.service.IVoyageService;
@@ -45,6 +52,40 @@ public class DossierController {
 	
 	@Autowired
 	private IAssuranceService assuranceService ; 
+	
+	@Autowired
+	private IClientService clientService ; 
+
+	
+	@Autowired
+	private JavaMailSender mailSender;
+	
+	
+	private Dossier dossGlobal = new Dossier(); 
+	
+	public void setDossierService(IDossierService dossierService) {
+		this.dossierService = dossierService;
+	}
+
+	public void setVoyageService(IVoyageService voyageService) {
+		this.voyageService = voyageService;
+	}
+
+	public void setVoitureService(IVoitureService voitureService) {
+		this.voitureService = voitureService;
+	}
+
+	public void setAssuranceService(IAssuranceService assuranceService) {
+		this.assuranceService = assuranceService;
+	}
+
+	public void setClientService(IClientService clientService) {
+		this.clientService = clientService;
+	}
+
+	public void setMailSender(JavaMailSender mailSender) {
+		this.mailSender = mailSender;
+	}
 
 	@RequestMapping(value = { "/client/dossiers" }, method = RequestMethod.GET)
 	public ModelAndView getDossiersClient(ModelAndView modelView, HttpSession session) {
@@ -160,6 +201,7 @@ public class DossierController {
 				System.out.println(assurance);
 			}
 		    
+		    dossGlobal = doss ; 
 		    
 		    return "formOptions" ; 
 		    
@@ -174,6 +216,8 @@ public class DossierController {
 			int id  = doss.getVoiture().getId() ; 
 			Voiture voit = voitureService.getVoituretById(id);
 			model.addAttribute("voiture",voit);
+			doss.setVoiture(voit);
+			dossGlobal.setVoiture(voit);
 		}
 		
 		
@@ -182,20 +226,31 @@ public class DossierController {
 			int id2 = doss.getAssurance().getId() ; 
 			Assurance assurance = assuranceService.getAssuranceById(id2);
 			model.addAttribute("assurance",assurance);
+			doss.setAssurance(assurance);
+			dossGlobal.setAssurance(assurance);
 		}
+		
+		
 		
 		int id3 = doss.getVoyage().getId() ; 
 		Voyage voyage = voyageService.findVoyage(id3);
 		model.addAttribute("voyage",voyage);
+		doss.setVoyage(voyage);
+		dossGlobal.setVoyage(voyage);
+		System.out.println("1--------------------------------" + dossGlobal.getVoyage());
 
-
+		int id4 = doss.getNbAccompagnants() ; 
+		dossGlobal.setNbAccompagnants(id4);
+		
+		
 		model.addAttribute("formCompte",new Client());
 		return "compteForm" ; 
 	}
 	 
 	@RequestMapping(value="/dossier/compte", method = RequestMethod.GET)
 	public String afficheFormCompte(Model model, @ModelAttribute("dossierOptions") Dossier doss ){
-		
+		System.out.println("2--------------------------------" + dossGlobal.getVoyage());
+		model.addAttribute("dossierOptions", doss);
 		model.addAttribute("formCompte",new Client());
 		return "compteForm";
 	}
@@ -203,6 +258,57 @@ public class DossierController {
 	
 	@RequestMapping(value="/dossierCompte", method = RequestMethod.POST)
 	public String soumettreFormCompte(Model model, @ModelAttribute("dossierOptions") Dossier doss,  @ModelAttribute("formCompte") Client client ){
+		System.out.println("3--------------------------------" + dossGlobal.getVoyage());
+		System.out.println("4------- " + dossGlobal.getVoyage().getPays());
+		clientService.addClient(client); 
+		doss.setClient(client);
+		dossGlobal.setClient(client);
+		dossierService.addDossier(dossGlobal);
+		
+	//	model.addAttribute("dossierOptions", doss);
+		// Essai envoi de mail
+		String status = null;
+		
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+
+
+			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+			helper.setFrom("Administrator");
+			helper.setTo(client.getIdentifiant());
+			helper.setSubject("Creation de votre compte et recapitulatif de votre commande");
+
+			String text = "<a href=${pageContext.request.contextPath}><img src='resources/css/images/logo.png'></a>"
+					+ "Confirmation de la creation d'un compte client :<br />" + client.getCivilite() + " "
+					+ client.getNom() + "<br/>Identifiant : <b>" + client.getIdentifiant() + "</b><br />"
+					+ "Adresse : <b>" + client.getAdresse() + "</b><br/>Telephone : <b>" + client.getTel() + "</b><br/> Mot de passe : "
+					+ client.getMdp() 
+					+ "<br/><br/>Toute l'equipe vous remercie pour votre confiance !"		
+					+ "<br/><br/><br/> <b>Votre voyage</b>"
+					+ "<br/> Destination : " + dossGlobal.getVoyage().getPays()
+					+ "<br/> Depart : " + dossGlobal.getVoyage().getDateDepart() + "  Retour : " + dossGlobal.getVoyage().getDateRetour()
+					+ "<br/>  Formule : " + dossGlobal.getVoyage().getFormule() 
+					+ "<br/> Hebergement : " + dossGlobal.getVoyage().getHebergement()
+					+ "<br/>  Location d'un vehicule : " + dossGlobal.getVoiture().getModele() + " (" + dossGlobal.getVoiture().getPrixJour() + "€/Jour) "
+					+ "<br/>  Assurance : " + dossGlobal.getAssurance().getType() + " (" + dossGlobal.getAssurance().getPrix() + "€) "
+					+ "<br/>  Nombre d'accompagnants : " + dossGlobal.getNbAccompagnants() 
+					+ "<br/>  Afin de finaliser, modifier et regler votre commande connectez vous a votre espace client."
+					+ "<br/>Bon voyage avec RainbowTravels !" ;
+
+			helper.setText(text, true);
+
+			FileSystemResource file = new FileSystemResource(new File("C:/Users/inti0241/Commande.txt"));
+			helper.addAttachment("Commande.txt", file);// image will be sent by this
+												// name
+
+			mailSender.send(message);
+			status = "Confirmation email is sent to your address (" + client.getIdentifiant() + ")";
+		} catch (MessagingException e) {
+			status = "There was an error in email sending. Please check your email address: " + client.getIdentifiant();
+		}
+	
+		
+	
 		
 		model.addAttribute("formCompte",client);
 		return "affichageFormulaireCompte";
