@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,16 +51,16 @@
 		modelAttribute="dossierOptions">
 
 	<h3 style="margin: 10px; color: #D60D6B">Votre voyage :</h3>
-	<br />
+	
 		<div style="visibility: hidden; display: none">
 			<form:input path="voyage.id" type="text"
 				value="${dossierOptions.voyage.id}" />
 		</div>
 
-		<label> Départ <input type="text"
-			value="${dossierOptions.voyage.dateDepart}" disabled /> <br />
-			Retour <input type="text" value="${dossierOptions.voyage.dateRetour}"
-			disabled />
+		<label> Départ <fmt:formatDate type="time" pattern="dd/MM/yyyy"
+			value="${dossierOptions.voyage.dateDepart}" /> <br />
+			Retour <fmt:formatDate type="time" pattern="dd/MM/yyyy" value="${dossierOptions.voyage.dateRetour}"
+			/>
 		</label>
 
 		<br />
