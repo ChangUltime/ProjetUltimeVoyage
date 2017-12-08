@@ -115,7 +115,6 @@ public class DossierController {
 
 		if (authClient != null) {
 			List<Dossier> listeDossiers = dossierService.getAllDossierByClient(authClient);
-			System.out.println(listeDossiers);
 			List<Dossier> prochainsDossiers = new ArrayList<Dossier>();
 			List<Dossier> attenteDossiers = new ArrayList<Dossier>();
 			for (Dossier doss : listeDossiers) {
