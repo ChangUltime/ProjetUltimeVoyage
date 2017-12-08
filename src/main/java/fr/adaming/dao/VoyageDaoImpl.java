@@ -115,6 +115,7 @@ public class VoyageDaoImpl implements IVoyageDao {
 		vUp.setFormule(v.getFormule());
 		vUp.setHebergement(v.getHebergement());
 		vUp.setPays(v.getPays());
+		vUp.setPrixBase(v.getPrixInitial());
 		vUp.setPrixBase(v.getPrixBase());
 		vUp.setPlaces(v.getPlaces());
 
