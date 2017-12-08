@@ -84,7 +84,7 @@
 			</div>
 
 			<div class="col-sm-2">
-				<input type="submit" class="btn btn-primary" value="Ajouter" />
+				<input type="submit" class="btn btn-warning" value="Ajouter" />
 			</div>
 		</form:form>
 		

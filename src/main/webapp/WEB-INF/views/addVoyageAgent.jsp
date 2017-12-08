@@ -175,7 +175,7 @@
 			</div>
 
 			<div class="col-sm-2">
-				<input type="submit" class="btn btn-primary" value="Ajouter" onmouseover="compar()" />
+				<input type="submit" class="btn btn-warning" value="Ajouter" onmouseover="compar()" />
 			</div>
 		</form:form>
 

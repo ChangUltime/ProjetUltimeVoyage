@@ -16,13 +16,25 @@
 	<div id="agentHeader">
 		<%@ include file="headerAgent.jsp"%>
 	</div>
-	<div id="agentContent" align="center">
-		
-		<h1>Liste clients</h1>
-		
-		<a href="${pageContext.request.contextPath}/agent/updateFormClient">Modif</a>
-		<a href="${pageContext.request.contextPath}/agent/addFormClient">Ajouter</a>
-		
+	<nav class="navbar navbar-inverse">
+		<div>
+			<ul class="nav navbar-nav">
+				<li><a href="${pageContext.request.contextPath}/listeVoyage">Accueil</a></li>
+				
+				<li><a href="${pageContext.request.contextPath}/agent/voyages">Voyages</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/agent/dossiers">Dossiers</a></li>
+				<li  class="active"><a
+					href="${pageContext.request.contextPath}/agent/listeClients">Voyageurs</a></li>
+				<li><a href="${pageContext.request.contextPath}/commonLogout">Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div id="agentContent">
+
+		<a href="${pageContext.request.contextPath}/agent/addFormClient" style="color: #D60D6B; margin: 20px; font-size: 25px">Ajouter Client</a>
+		<a href="${pageContext.request.contextPath}/agent/updateFormClient" style="color: #D60D6B; margin: 20px; font-size: 25px">Modifier Client</a>
+
 		<table class="table table-bordered">
 			<thead>
 				<tr>
@@ -44,7 +56,10 @@
 						<td>${client.nom}</td>
 						<td>${client.adresse}</td>
 						<td>${client.tel}</td>
-						<td><a href="${pageContext.request.contextPath}/agent/delClientByLink/${client.id}">Supprimer</a> | <a href="${pageContext.request.contextPath}/agent/updateClientByLink?pId=${client.id}">Modifier</a></td>
+						<td><a
+							href="${pageContext.request.contextPath}/agent/delClientByLink/${client.id}">Supprimer</a>
+							| <a
+							href="${pageContext.request.contextPath}/agent/updateClientByLink?pId=${client.id}">Modifier</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -16,8 +16,22 @@
 <div id="agentHeader">
 	<%@ include file="headerAgent.jsp" %>
 </div>
+<nav class="navbar navbar-inverse">
+	<div>
+		<ul class="nav navbar-nav">
+			<li><a
+				href="${pageContext.request.contextPath}/listeVoyage">Accueil</a></li>
+			
+			<li><a href="${pageContext.request.contextPath}/agent/voyages">Voyages</a></li>
+			<li class="active"><a href="${pageContext.request.contextPath}/agent/dossiers">Dossiers</a></li>
+			<li><a
+				href="${pageContext.request.contextPath}/agent/listeClients">Voyageurs</a></li>
+			<li><a href="${pageContext.request.contextPath}/commonLogout">Logout</a></li>
+		</ul>
+	</div>
+</nav>
 <div id="agentContent">
-Des Dossiers
+
 		<table class="table table-bordered">
 		<thead>
 			<tr>
@@ -41,7 +55,7 @@ Des Dossiers
 			</c:forEach>
 		</tbody>
 	</table>
-<a href="dossiers/ajout">Nouveau Dossier</a>
+
 </div>
 
 </body>
