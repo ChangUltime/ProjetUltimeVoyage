@@ -84,7 +84,11 @@ public class ClientDaoImpl implements IClientDao {
 		Query query = em.createQuery(req);
 		query.setParameter("pId", identifiant);
 		
-		return (Client) query.getSingleResult();
+		try {
+			return (Client) query.getSingleResult();
+		} catch (Exception ex){
+			return null;
+		}
 	}
 
 }
