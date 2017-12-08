@@ -32,6 +32,7 @@ import fr.adaming.model.Etat;
 import fr.adaming.model.Hebergement;
 import fr.adaming.model.Voiture;
 import fr.adaming.model.Voyage;
+import fr.adaming.model.typeA;
 import fr.adaming.service.IAssuranceService;
 import fr.adaming.service.IClientService;
 import fr.adaming.service.IDossierService;
@@ -187,12 +188,18 @@ public class DossierController {
 			
 			List<Hebergement> listHebergement = Arrays.asList(Hebergement.values());
 		    model.addAttribute("listHebergement", listHebergement);
+	
+		    
 		    
 		    List<Voiture> listeVoitures = voitureService.getAllVoitures();
 		    model.addAttribute("listeVoitures", listeVoitures);
 		    
 		    Voiture voiture = new Voiture() ; 
 		    model.addAttribute("voiture", voiture);
+	
+			
+			System.out.println("10--------------------------------" + dossGlobal.getVoiture());
+
 		    
 		    List<Assurance> listeAssurances = assuranceService.getAllAssurance();
 		    model.addAttribute("listeAssurances", listeAssurances);
@@ -212,6 +219,8 @@ public class DossierController {
 
 		
 	
+		
+		
 		if(doss.getVoiture() != null) {
 			int id  = doss.getVoiture().getId() ; 
 			Voiture voit = voitureService.getVoituretById(id);
@@ -221,6 +230,7 @@ public class DossierController {
 		}
 		
 		
+	
 		
 		if(doss.getAssurance() != null){
 			int id2 = doss.getAssurance().getId() ; 
@@ -258,12 +268,30 @@ public class DossierController {
 	
 	@RequestMapping(value="/dossierCompte", method = RequestMethod.POST)
 	public String soumettreFormCompte(Model model, @ModelAttribute("dossierOptions") Dossier doss,  @ModelAttribute("formCompte") Client client ){
-		System.out.println("3--------------------------------" + dossGlobal.getVoyage());
+		
+//		
+//		if(dossGlobal.getVoiture()==null){
+//		    
+//				Voiture voitureBasic = new Voiture();
+//				voitureBasic.setModele("Aucune");
+//				voitureBasic.setPrixJour(0);
+//				dossGlobal.setVoiture(voitureBasic);
+//		}
+//		
+//		if(dossGlobal.getAssurance()==null){
+//				Assurance assurBasic = new Assurance(0,typeA.annulation); 
+//				dossGlobal.setAssurance(assurBasic);
+//		}
+		
+		System.out.println("3--------------------------------" + dossGlobal.getVoiture());
 		System.out.println("4------- " + dossGlobal.getVoyage().getPays());
 		clientService.addClient(client); 
 		doss.setClient(client);
 		dossGlobal.setClient(client);
 		dossierService.addDossier(dossGlobal);
+		
+		
+		
 		
 	//	model.addAttribute("dossierOptions", doss);
 		// Essai envoi de mail
